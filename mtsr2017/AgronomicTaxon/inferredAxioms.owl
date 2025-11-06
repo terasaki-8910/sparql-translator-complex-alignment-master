@@ -1,0 +1,1008 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/irit-ut2j/ontologies/2017/5/untitled-ontology-1#"
+     xml:base="http://www.semanticweb.org/irit-ut2j/ontologies/2017/5/untitled-ontology-1"
+     xmlns:core="http://ontology.irstea.fr/agronomictaxon/core#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/irit-ut2j/ontologies/2017/5/untitled-ontology-1"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://ontology.irstea.fr/AgronomicTaxon#memberScheme -->
+
+    <owl:ObjectProperty rdf:about="http://ontology.irstea.fr/AgronomicTaxon#memberScheme">
+        <rdfs:domain rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#hasClass -->
+
+    <owl:ObjectProperty rdf:about="http://ontology.irstea.fr/agronomictaxon/core#hasClass">
+        <rdfs:subPropertyOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasHigherRank"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasLowerRank"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+        <owl:inverseOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#includesOrder"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#OrderRank"/>
+        <rdfs:range rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#ClassRank"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#hasFamily -->
+
+    <owl:ObjectProperty rdf:about="http://ontology.irstea.fr/agronomictaxon/core#hasFamily">
+        <rdfs:subPropertyOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasHigherRank"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasLowerRank"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+        <owl:inverseOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#includesGenus"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#GenusRank"/>
+        <rdfs:range rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#FamilyRank"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#hasGenus -->
+
+    <owl:ObjectProperty rdf:about="http://ontology.irstea.fr/agronomictaxon/core#hasGenus">
+        <rdfs:subPropertyOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasHigherRank"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasLowerRank"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+        <owl:inverseOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#includesSpecies"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#SpecyRank"/>
+        <rdfs:range rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#GenusRank"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#hasHigherRank -->
+
+    <owl:ObjectProperty rdf:about="http://ontology.irstea.fr/agronomictaxon/core#hasHigherRank">
+        <owl:inverseOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasLowerRank"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#Taxon"/>
+        <rdfs:range rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#Taxon"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#hasKingdom -->
+
+    <owl:ObjectProperty rdf:about="http://ontology.irstea.fr/agronomictaxon/core#hasKingdom">
+        <rdfs:subPropertyOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasHigherRank"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasLowerRank"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+        <owl:inverseOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#includesPhylum"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#PhylumRank"/>
+        <rdfs:range rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#KingdomRank"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#hasLowerRank -->
+
+    <owl:ObjectProperty rdf:about="http://ontology.irstea.fr/agronomictaxon/core#hasLowerRank">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#Taxon"/>
+        <rdfs:range rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#Taxon"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#hasOrder -->
+
+    <owl:ObjectProperty rdf:about="http://ontology.irstea.fr/agronomictaxon/core#hasOrder">
+        <rdfs:subPropertyOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasHigherRank"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasLowerRank"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+        <owl:inverseOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#includesFamily"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#FamilyRank"/>
+        <rdfs:range rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#OrderRank"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#hasPhylum -->
+
+    <owl:ObjectProperty rdf:about="http://ontology.irstea.fr/agronomictaxon/core#hasPhylum">
+        <rdfs:subPropertyOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasHigherRank"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasLowerRank"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+        <owl:inverseOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#includesClass"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#ClassRank"/>
+        <rdfs:range rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#PhylumRank"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#hasSpecies -->
+
+    <owl:ObjectProperty rdf:about="http://ontology.irstea.fr/agronomictaxon/core#hasSpecies">
+        <rdfs:subPropertyOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasHigherRank"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasLowerRank"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+        <owl:inverseOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#includesVariety"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#VarietyRank"/>
+        <rdfs:range rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#SpecyRank"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#includesClass -->
+
+    <owl:ObjectProperty rdf:about="http://ontology.irstea.fr/agronomictaxon/core#includesClass">
+        <rdfs:subPropertyOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasLowerRank"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasHigherRank"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#PhylumRank"/>
+        <rdfs:range rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#ClassRank"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#includesFamily -->
+
+    <owl:ObjectProperty rdf:about="http://ontology.irstea.fr/agronomictaxon/core#includesFamily">
+        <rdfs:subPropertyOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasLowerRank"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasHigherRank"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#OrderRank"/>
+        <rdfs:range rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#FamilyRank"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#includesGenus -->
+
+    <owl:ObjectProperty rdf:about="http://ontology.irstea.fr/agronomictaxon/core#includesGenus">
+        <rdfs:subPropertyOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasLowerRank"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasHigherRank"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#FamilyRank"/>
+        <rdfs:range rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#GenusRank"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#includesOrder -->
+
+    <owl:ObjectProperty rdf:about="http://ontology.irstea.fr/agronomictaxon/core#includesOrder">
+        <rdfs:subPropertyOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasLowerRank"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasHigherRank"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#ClassRank"/>
+        <rdfs:range rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#OrderRank"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#includesPhylum -->
+
+    <owl:ObjectProperty rdf:about="http://ontology.irstea.fr/agronomictaxon/core#includesPhylum">
+        <rdfs:subPropertyOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasLowerRank"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasHigherRank"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#KingdomRank"/>
+        <rdfs:range rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#PhylumRank"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#includesSpecies -->
+
+    <owl:ObjectProperty rdf:about="http://ontology.irstea.fr/agronomictaxon/core#includesSpecies">
+        <rdfs:subPropertyOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasLowerRank"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasHigherRank"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#GenusRank"/>
+        <rdfs:range rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#SpecyRank"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#includesVariety -->
+
+    <owl:ObjectProperty rdf:about="http://ontology.irstea.fr/agronomictaxon/core#includesVariety">
+        <rdfs:subPropertyOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasLowerRank"/>
+        <rdfs:subPropertyOf>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasHigherRank"/>
+            </rdf:Description>
+        </rdfs:subPropertyOf>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#SpecyRank"/>
+        <rdfs:range rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#VarietyRank"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#inScheme -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/2004/02/skos/core#inScheme">
+        <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#altScientificName -->
+
+    <owl:DatatypeProperty rdf:about="http://ontology.irstea.fr/agronomictaxon/core#altScientificName">
+        <rdfs:subPropertyOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasScientificName"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#altVernacularName -->
+
+    <owl:DatatypeProperty rdf:about="http://ontology.irstea.fr/agronomictaxon/core#altVernacularName">
+        <rdfs:subPropertyOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasVernacularName"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#hasScientificName -->
+
+    <rdf:Description rdf:about="http://ontology.irstea.fr/agronomictaxon/core#hasScientificName"/>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#hasVernacularName -->
+
+    <rdf:Description rdf:about="http://ontology.irstea.fr/agronomictaxon/core#hasVernacularName"/>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#prefScientificName -->
+
+    <owl:DatatypeProperty rdf:about="http://ontology.irstea.fr/agronomictaxon/core#prefScientificName">
+        <rdfs:subPropertyOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasScientificName"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#prefVernacularName -->
+
+    <owl:DatatypeProperty rdf:about="http://ontology.irstea.fr/agronomictaxon/core#prefVernacularName">
+        <rdfs:subPropertyOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#hasVernacularName"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#ClassRank -->
+
+    <owl:Class rdf:about="http://ontology.irstea.fr/agronomictaxon/core#ClassRank">
+        <rdfs:subClassOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#Taxon"/>
+    </owl:Class>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#FamilyRank -->
+
+    <owl:Class rdf:about="http://ontology.irstea.fr/agronomictaxon/core#FamilyRank">
+        <rdfs:subClassOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#Taxon"/>
+    </owl:Class>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#GenusRank -->
+
+    <owl:Class rdf:about="http://ontology.irstea.fr/agronomictaxon/core#GenusRank">
+        <rdfs:subClassOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#Taxon"/>
+    </owl:Class>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#KingdomRank -->
+
+    <owl:Class rdf:about="http://ontology.irstea.fr/agronomictaxon/core#KingdomRank">
+        <rdfs:subClassOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#Taxon"/>
+    </owl:Class>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#OrderRank -->
+
+    <owl:Class rdf:about="http://ontology.irstea.fr/agronomictaxon/core#OrderRank">
+        <rdfs:subClassOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#Taxon"/>
+    </owl:Class>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#PhylumRank -->
+
+    <owl:Class rdf:about="http://ontology.irstea.fr/agronomictaxon/core#PhylumRank">
+        <rdfs:subClassOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#Taxon"/>
+    </owl:Class>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#SpecyRank -->
+
+    <owl:Class rdf:about="http://ontology.irstea.fr/agronomictaxon/core#SpecyRank">
+        <rdfs:subClassOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#Taxon"/>
+    </owl:Class>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#Taxon -->
+
+    <owl:Class rdf:about="http://ontology.irstea.fr/agronomictaxon/core#Taxon">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#Taxonomy -->
+
+    <owl:Class rdf:about="http://ontology.irstea.fr/agronomictaxon/core#Taxonomy">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+    </owl:Class>
+    
+
+
+    <!-- http://ontology.irstea.fr/agronomictaxon/core#VarietyRank -->
+
+    <owl:Class rdf:about="http://ontology.irstea.fr/agronomictaxon/core#VarietyRank">
+        <rdfs:subClassOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#Taxon"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#Concept -->
+
+    <owl:Class rdf:about="http://www.w3.org/2004/02/skos/core#Concept"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#ConceptScheme -->
+
+    <owl:Class rdf:about="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubClassRank -->
+
+    <owl:Class rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubClassRank">
+        <rdfs:subClassOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#Taxon"/>
+    </owl:Class>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubKingdomRank -->
+
+    <owl:Class rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubKingdomRank">
+        <rdfs:subClassOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#Taxon"/>
+    </owl:Class>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubSpecyRank -->
+
+    <owl:Class rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubSpecyRank">
+        <rdfs:subClassOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#Taxon"/>
+    </owl:Class>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SuperOrderRank -->
+
+    <owl:Class rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SuperOrderRank">
+        <rdfs:subClassOf rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#Taxon"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#equisetopsida -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#equisetopsida">
+        <rdf:type rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#ClassRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#magnoliophyta"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#magnoliidae"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:prefScientificName xml:lang="lat">Equisetopsida</core:prefScientificName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard">
+        <rdf:type rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#Taxonomy"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#lilianae -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#lilianae">
+        <rdf:type rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SuperOrderRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#magnoliidae"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#poales"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Monocotyledoneae</core:altScientificName>
+        <core:prefScientificName xml:lang="lat">Lilianae</core:prefScientificName>
+        <core:prefVernacularName xml:lang="en">monocots</core:prefVernacularName>
+        <core:prefVernacularName xml:lang="fr">monocotylédones</core:prefVernacularName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#magnoliidae -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#magnoliidae">
+        <rdf:type rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubClassRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#equisetopsida"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#lilianae"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:prefScientificName xml:lang="lat">Magnoliidae</core:prefScientificName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#magnoliophyta -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#magnoliophyta">
+        <rdf:type rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#PhylumRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#viridaeplantae"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#equisetopsida"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Angiospermae</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Tracheophyta</core:altScientificName>
+        <core:prefScientificName xml:lang="lat">Magnoliophyta</core:prefScientificName>
+        <core:prefVernacularName xml:lang="fr">Angiosperms</core:prefVernacularName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#plantae -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#plantae">
+        <rdf:type rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#KingdomRank"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#viridaeplantae"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:prefScientificName xml:lang="lat">Plantae</core:prefScientificName>
+        <core:prefVernacularName xml:lang="fr">plantes</core:prefVernacularName>
+        <core:prefVernacularName xml:lang="en">plants</core:prefVernacularName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#poaceae -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#poaceae">
+        <rdf:type rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#FamilyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#poales"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Gramineae</core:altScientificName>
+        <core:prefScientificName xml:lang="lat">Poaceae</core:prefScientificName>
+        <core:prefVernacularName xml:lang="fr">graminées</core:prefVernacularName>
+        <core:prefVernacularName xml:lang="en">grasses</core:prefVernacularName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#poales -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#poales">
+        <rdf:type rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#OrderRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#lilianae"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#poaceae"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:prefScientificName xml:lang="lat">Poales</core:prefScientificName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum">
+        <rdf:type rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#GenusRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#poaceae"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_ispahanicum"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_monococcum"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_timopheevii"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_urartu"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:prefScientificName xml:lang="lat">Triticum</core:prefScientificName>
+        <core:prefVernacularName xml:lang="en">wheat</core:prefVernacularName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum">
+        <rdf:type rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#SpecyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum_subsp_aestivum"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum_subsp_compactum"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum_subsp_macha"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum_subsp_spelta"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum_subsp_vavilovii"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Triticum sphaerococcum</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum sphaerococcum Percival</core:altScientificName>
+        <core:prefScientificName>Triticum aestivum</core:prefScientificName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum_subsp_aestivum -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum_subsp_aestivum">
+        <rdf:type rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubSpecyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName>Triticum aestivum</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum aestivum L.</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum vulgare</core:altScientificName>
+        <core:altVernacularName xml:lang="en">Canadian hard winter wheat</core:altVernacularName>
+        <core:altVernacularName xml:lang="fr">blé barbu</core:altVernacularName>
+        <core:altVernacularName xml:lang="fr">blé ordinaire</core:altVernacularName>
+        <core:altVernacularName xml:lang="fr">blé tendre</core:altVernacularName>
+        <core:altVernacularName xml:lang="en">common wheat</core:altVernacularName>
+        <core:prefScientificName>Triticum aestivum subsp aestivum</core:prefScientificName>
+        <core:prefVernacularName xml:lang="en">Bread wheat</core:prefVernacularName>
+        <core:prefVernacularName xml:lang="fr">froment</core:prefVernacularName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum_subsp_compactum -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum_subsp_compactum">
+        <rdf:type rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubSpecyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Triticum aestivum subsp. compactum (Host) Mackey</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum compactum</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum compactum Host</core:altScientificName>
+        <core:prefScientificName xml:lang="lat">Triticum aestivum subsp compactum</core:prefScientificName>
+        <core:prefVernacularName xml:lang="fr">blé hérisson</core:prefVernacularName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum_subsp_macha -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum_subsp_macha">
+        <rdf:type rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubSpecyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Triticum aestivum subsp. macha (Dekapr. &amp; A.M.Menabde) Mackey</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum macha</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum macha Dekapr. &amp; Menabde</core:altScientificName>
+        <core:prefScientificName xml:lang="lat">Triticum aestivum subsp. macha</core:prefScientificName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum_subsp_spelta -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum_subsp_spelta">
+        <rdf:type rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubSpecyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Triticum aestivum subsp. spelta (L.) Thell.</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum spelta</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum spelta L.</core:altScientificName>
+        <core:altVernacularName xml:lang="fr">blé des Gaulois</core:altVernacularName>
+        <core:altVernacularName xml:lang="fr">grand épeautre</core:altVernacularName>
+        <core:prefScientificName xml:lang="lat">Triticum aestivum subsp spelta</core:prefScientificName>
+        <core:prefVernacularName xml:lang="en">spelt</core:prefVernacularName>
+        <core:prefVernacularName xml:lang="fr">épeautre</core:prefVernacularName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum_subsp_vavilovii -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum_subsp_vavilovii">
+        <rdf:type rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubSpecyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Triticum aestivum subsp. vavilovii (Tumanian) A.Love, nom. illeg.</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum vavilovi</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum vavilovii</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum vavilovii (Tumanian) Jakubz.</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum vavilovii Jakubz.</core:altScientificName>
+        <core:prefScientificName xml:lang="lat">Vavilov&apos;s wheat</core:prefScientificName>
+        <core:prefVernacularName xml:lang="en"></core:prefVernacularName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_ispahanicum -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_ispahanicum">
+        <rdf:type rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#SpecyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Triticum ispahanicum Heslot</core:altScientificName>
+        <core:prefScientificName xml:lang="lat">Triticum ispahanicum</core:prefScientificName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_monococcum -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_monococcum">
+        <rdf:type rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#SpecyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_monococcum_subsp_aegilopoides"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_monococcum_subsp_monococcum"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:prefScientificName xml:lang="lat">Triticum monococcum</core:prefScientificName>
+        <core:prefVernacularName xml:lang="en">einkorn</core:prefVernacularName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_monococcum_subsp_aegilopoides -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_monococcum_subsp_aegilopoides">
+        <rdf:type rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubSpecyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_monococcum"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Triticum boeoticum</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum boeoticum Boiss.</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum monococcum subsp. aegilopoides (Link) Thell.</core:altScientificName>
+        <core:prefScientificName xml:lang="lat">Triticum monococcum subsp. aegilopoides</core:prefScientificName>
+        <core:prefVernacularName xml:lang="fr">engrain sauvage</core:prefVernacularName>
+        <core:prefVernacularName xml:lang="en">wild einkorn</core:prefVernacularName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_monococcum_subsp_monococcum -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_monococcum_subsp_monococcum">
+        <rdf:type rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubSpecyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_monococcum"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altVernacularName xml:lang="fr">blé-riz</core:altVernacularName>
+        <core:altVernacularName xml:lang="fr">petit épeautre</core:altVernacularName>
+        <core:prefScientificName xml:lang="lat">Triticum monococcum subsp. monococcum</core:prefScientificName>
+        <core:prefVernacularName xml:lang="fr">engrain</core:prefVernacularName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_timopheevii -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_timopheevii">
+        <rdf:type rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#SpecyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_timopheevii_subsp_armeniacum"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_timopheevii_subsp_timopheevii"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Triticum timopheevii (Zhuk.) Zhuk.</core:altScientificName>
+        <core:altVernacularName xml:lang="en">Timopheev&apos;s wheat</core:altVernacularName>
+        <core:altVernacularName xml:lang="en">Zanduri wheat</core:altVernacularName>
+        <core:prefScientificName xml:lang="lat">Triticum timopheevii</core:prefScientificName>
+        <core:prefVernacularName xml:lang="en">sanduri wheat</core:prefVernacularName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_timopheevii_subsp_armeniacum -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_timopheevii_subsp_armeniacum">
+        <rdf:type rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubSpecyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_timopheevii"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Triticum araraticum</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum araraticum Jakubz.</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum armeniacum</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum armeniacum (Jakubz.) Makush.</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum timopheevii subsp. armeniacum (Jakubz.) Slageren</core:altScientificName>
+        <core:prefScientificName xml:lang="lat">Triticum timopheevii subsp. armeniacum</core:prefScientificName>
+        <core:prefVernacularName xml:lang="en">Armenian wild emmer</core:prefVernacularName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_timopheevii_subsp_timopheevii -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_timopheevii_subsp_timopheevii">
+        <rdf:type rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubSpecyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_timopheevii"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Triticum militinae</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum militinae Zhuk. &amp; Migush.</core:altScientificName>
+        <core:prefScientificName xml:lang="lat">Triticum timopheevii subsp. timopheevii</core:prefScientificName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum">
+        <rdf:type rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#SpecyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_carthlicum"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_dicoccoides"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_dicoccon"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_durum"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_paleocolchicum"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_polonicum"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_turanicum"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_turgidum"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Triticum aethiopicum</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum aethiopicum Jakubz.</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum turgidum L.</core:altScientificName>
+        <core:prefScientificName xml:lang="lat">Triticum turgidum</core:prefScientificName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_carthlicum -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_carthlicum">
+        <rdf:type rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubSpecyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Triticum carthlicum</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum carthlicum Nevski</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum turgidum subsp. carthlicum (Nevski) A.Love &amp; D.Love</core:altScientificName>
+        <core:prefScientificName xml:lang="lat">Triticum turgidum subsp. carthlicum</core:prefScientificName>
+        <core:prefVernacularName xml:lang="en">Persian black wheat</core:prefVernacularName>
+        <core:prefVernacularName xml:lang="fr">blé de Perse</core:prefVernacularName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_dicoccoides -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_dicoccoides">
+        <rdf:type rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubSpecyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Triticum dicoccoides</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum dicoccoides (Koern. ex Asch. &amp; Graebn.) Schweinf.</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum turgidum subsp. dicoccoides (Koern. ex Asch. &amp; Graebn.) Thell.</core:altScientificName>
+        <core:prefScientificName xml:lang="lat">Triticum turgidum subsp. dicoccoides</core:prefScientificName>
+        <core:prefVernacularName xml:lang="fr">amidonnier sauvage</core:prefVernacularName>
+        <core:prefVernacularName xml:lang="en">wild emmer wheat</core:prefVernacularName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_dicoccon -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_dicoccon">
+        <rdf:type rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubSpecyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Triticum dicoccon</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum dicoccon Schrank ex Schuebl.</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum dicoccum</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum turgidum subsp. diccocum</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum turgidum subsp. dicoccon (Schrank ex Schuebl.) Thell.</core:altScientificName>
+        <core:altScientificName>Triticum turgidum subsp. dicoccum</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum turgidum subsp. dicoccum</core:altScientificName>
+        <core:altVernacularName xml:lang="fr">épeautre de Tartarie</core:altVernacularName>
+        <core:prefScientificName xml:lang="lat">Triticum turgidum subsp. dicoccon</core:prefScientificName>
+        <core:prefVernacularName xml:lang="fr">amidonnier</core:prefVernacularName>
+        <core:prefVernacularName xml:lang="en">cultivated emmer wheat</core:prefVernacularName>
+        <core:prefVernacularName xml:lang="en">emmer</core:prefVernacularName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_durum -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_durum">
+        <rdf:type rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubSpecyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Triticum durum</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum durum Desf.</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum turgidum subsp. durum (Desf.) Husn.</core:altScientificName>
+        <core:altVernacularName xml:lang="fr">blé d&apos;Afrique</core:altVernacularName>
+        <core:altVernacularName xml:lang="en">pasta wheat</core:altVernacularName>
+        <core:prefScientificName xml:lang="lat">Triticum turgidum subsp durum</core:prefScientificName>
+        <core:prefVernacularName xml:lang="fr">blé dur</core:prefVernacularName>
+        <core:prefVernacularName xml:lang="en">durum wheat</core:prefVernacularName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_paleocolchicum -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_paleocolchicum">
+        <rdf:type rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubSpecyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Triticum karamyschevii Nevski</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum paleocolchicum</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum paleocolchicum Menabde</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum turgidum subsp. paleocolchicum A.Love &amp; D.Love</core:altScientificName>
+        <core:prefScientificName xml:lang="lat">Triticum turgidum subsp. paleocolchicum</core:prefScientificName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_polonicum -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_polonicum">
+        <rdf:type rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubSpecyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Triticum polonicum</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum polonicum L.</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum turgidum subsp. polonicum (L.) Thell.</core:altScientificName>
+        <core:prefScientificName xml:lang="lat">Triticum turgidum subsp. polonicum</core:prefScientificName>
+        <core:prefVernacularName xml:lang="fr">blé de Pologne</core:prefVernacularName>
+        <core:prefVernacularName xml:lang="en">polish wheat</core:prefVernacularName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_turanicum -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_turanicum">
+        <rdf:type rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubSpecyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Triticum turanicum</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum turanicum Jakubz.</core:altScientificName>
+        <core:altScientificName xml:lang="lat">Triticum turgidum subsp. turanicum (Jakubz.) A.Love &amp; D.Love</core:altScientificName>
+        <core:prefScientificName xml:lang="lat">Triticum turgidum subsp. turanicum</core:prefScientificName>
+        <core:prefVernacularName xml:lang="fr">blé de Khorasan</core:prefVernacularName>
+        <core:prefVernacularName xml:lang="fr">kamut</core:prefVernacularName>
+        <core:prefVernacularName xml:lang="en">oriental wheat</core:prefVernacularName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_turgidum -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum_subsp_turgidum">
+        <rdf:type rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubSpecyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Triticum turgidum</core:altScientificName>
+        <core:altVernacularName xml:lang="fr">gros blé</core:altVernacularName>
+        <core:prefScientificName xml:lang="lat">Triticum turgidum subsp. turgidum</core:prefScientificName>
+        <core:prefVernacularName xml:lang="fr">blé poulard</core:prefVernacularName>
+        <core:prefVernacularName xml:lang="en">poulard wheat</core:prefVernacularName>
+        <core:prefVernacularName xml:lang="en">rivet wheat</core:prefVernacularName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_urartu -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_urartu">
+        <rdf:type rdf:resource="http://ontology.irstea.fr/agronomictaxon/core#SpecyRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Triticum urartu Tumanian ex Gandilyan</core:altScientificName>
+        <core:prefScientificName xml:lang="lat">Triticum urartu</core:prefScientificName>
+        <core:prefVernacularName xml:lang="en">red wild einkorn</core:prefVernacularName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#viridaeplantae -->
+
+    <owl:NamedIndividual rdf:about="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#viridaeplantae">
+        <rdf:type rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#SubKingdomRank"/>
+        <core:hasHigherRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#plantae"/>
+        <core:hasLowerRank rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#magnoliophyta"/>
+        <skos:inScheme rdf:resource="urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#goldStandard"/>
+        <core:altScientificName xml:lang="lat">Viridiplantae</core:altScientificName>
+        <core:prefScientificName xml:lang="lat">Viridaeplantae</core:prefScientificName>
+        <core:prefVernacularName xml:lang="en">green plants</core:prefVernacularName>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.2.6.20160910-2108) https://github.com/owlcs/owlapi -->
+

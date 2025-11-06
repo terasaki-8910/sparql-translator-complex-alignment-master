@@ -1,0 +1,6 @@
+"rank"
+"http://dbpedia.org/ontology/Eukaryote"
+"http://dbpedia.org/ontology/Eukaryote"
+
+
+Because (dbr:Wheat rdf:type dbo:Eukaryote) and (dbo:Eukaryote rdfs:subclassOf dbo:Species).

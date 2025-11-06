@@ -1,0 +1,5 @@
+No results because problem in the TaxRef vocabulary on the endpoint: 
+triticum hasRank txrfrk:kingdom BUT txrf:kingdom IS NOT a txrfrk:TaxonomicRank.
+En enlevant la contrainte sur TaxonomicRank, on trouve:
+http://taxref.mnhn.fr/lod/taxon/187079/10.0 which is the Plantae taxon
+

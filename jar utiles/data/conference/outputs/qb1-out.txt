@@ -1,0 +1,10 @@
+PREFIX : <http://ekaw#> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+
+SELECT ?reviewer WHERE {
+?paper <http://cmt#readByReviewer> ?reviewer. 
+?paper rdf:type <http://cmt#Paper>. 
+?paper <http://cmt#hasDecision> ?variable_temp0. 
+?variable_temp0 rdf:type <http://cmt#Acceptance>. 
+
+}

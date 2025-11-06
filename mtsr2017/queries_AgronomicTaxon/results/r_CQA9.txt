@@ -1,0 +1,7 @@
+ "specy" ,
+ "urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_aestivum" ,
+ "urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_ispahanicum" ,
+ "urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_monococcum" ,
+ "urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_timopheevii" ,
+ "urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_turgidum" ,
+ "urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#triticum_urartu" ,

@@ -1,0 +1,24 @@
+PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+
+select ?parent where {
+?taxon rdfs:label ?label.
+?parent rdf:type dbo:Species.
+?taxon rdf:type dbo:Species.
+{?taxon dbo:kingdom ?parent. }UNION
+{?taxon dbo:phylum ?parent. }UNION
+{?taxon dbo:classis ?parent. }UNION
+{?taxon dbo:order ?parent. }UNION
+{?taxon dbo:family ?parent. }UNION
+{?taxon dbo:genus ?parent. }
+
+?parent a dbo:Species.
+?variable_temp0 dbo:kingdom ?parent.
+
+
+filter (regex(?label, "^wheat$", "i")).
+}

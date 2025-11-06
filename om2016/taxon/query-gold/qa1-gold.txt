@@ -1,0 +1,12 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX irstea: <http://ontology.irstea.fr/AgronomicTaxon#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT DISTINCT ?x
+ WHERE {
+    ?x rdf:type dbo:Species.
+    ?y rdf:type dbo:Species.
+	?x dbo:genus ?y.
+}

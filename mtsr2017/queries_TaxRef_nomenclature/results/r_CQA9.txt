@@ -1,0 +1,5 @@
+specy	lspecy
+http://taxref.mnhn.fr/lod/name/127738	"Triticum goiranicum"
+http://taxref.mnhn.fr/lod/name/127692	"Triticum aestivum"
+http://taxref.mnhn.fr/lod/name/127827	"Triticum turgidum"
+http://taxref.mnhn.fr/lod/name/127771	"Triticum monococcum"

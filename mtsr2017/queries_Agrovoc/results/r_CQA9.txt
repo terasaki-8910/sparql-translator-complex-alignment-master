@@ -1,0 +1,11 @@
+specy,ls
+"<http://aims.fao.org/aos/agrovoc/c_7958>","Triticum turgidum"
+"<http://aims.fao.org/aos/agrovoc/c_7952>","Triticum boeoticum"
+"<http://aims.fao.org/aos/agrovoc/c_7953>","Triticum dicoccoides"
+"<http://aims.fao.org/aos/agrovoc/c_7956>","Triticum monococcum"
+"<http://aims.fao.org/aos/agrovoc/c_7951>","Triticum aestivum"
+"<http://aims.fao.org/aos/agrovoc/c_7957>","Triticum spelta"
+"<http://aims.fao.org/aos/agrovoc/c_7954>","Triticum dicoccum"
+"<http://aims.fao.org/aos/agrovoc/c_7955>","Triticum durum"
+
+Had to change the "wheat" filter to "triticum"

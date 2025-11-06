@@ -1,0 +1,36 @@
+2025-11-06 03:02:40,166 [INFO] alignment_parser: Cell 要素数: 31
+2025-11-06 03:02:40,167 [INFO] alignment_parser: 抽出されたルール数: 31
+2025-11-06 03:02:40,168 [INFO] query_rewriter: 適用されたルール総数: 3
+2025-11-06 03:02:40,170 [INFO] alignment_parser: Cell 要素数: 31
+2025-11-06 03:02:40,170 [INFO] alignment_parser: 抽出されたルール数: 31
+2025-11-06 03:02:40,170 [INFO] query_rewriter: 適用されたルール総数: 2
+2025-11-06 03:02:40,173 [INFO] alignment_parser: Cell 要素数: 31
+2025-11-06 03:02:40,173 [INFO] alignment_parser: 抽出されたルール数: 31
+2025-11-06 03:02:40,173 [INFO] query_rewriter: 適用されたルール総数: 3
+2025-11-06 03:02:40,175 [INFO] alignment_parser: Cell 要素数: 31
+2025-11-06 03:02:40,175 [INFO] alignment_parser: 抽出されたルール数: 31
+2025-11-06 03:02:40,175 [INFO] query_rewriter: 適用されたルール総数: 3
+2025-11-06 03:02:40,177 [INFO] alignment_parser: Cell 要素数: 31
+2025-11-06 03:02:40,177 [INFO] alignment_parser: 抽出されたルール数: 31
+2025-11-06 03:02:40,178 [INFO] query_rewriter: 適用されたルール総数: 3
+2025-11-06 03:02:40,179 [INFO] alignment_parser: Cell 要素数: 31
+2025-11-06 03:02:40,180 [INFO] alignment_parser: 抽出されたルール数: 31
+2025-11-06 03:02:40,180 [INFO] query_rewriter: 適用されたルール総数: 2
+2025-11-06 03:08:56,107 [INFO] alignment_parser: Cell 要素数: 31
+2025-11-06 03:08:56,108 [INFO] alignment_parser: 抽出されたルール数: 31
+2025-11-06 03:08:56,110 [INFO] query_rewriter: 適用されたルール総数: 3
+2025-11-06 03:08:56,112 [INFO] alignment_parser: Cell 要素数: 31
+2025-11-06 03:08:56,112 [INFO] alignment_parser: 抽出されたルール数: 31
+2025-11-06 03:08:56,113 [INFO] query_rewriter: 適用されたルール総数: 2
+2025-11-06 03:08:56,114 [INFO] alignment_parser: Cell 要素数: 31
+2025-11-06 03:08:56,115 [INFO] alignment_parser: 抽出されたルール数: 31
+2025-11-06 03:08:56,115 [INFO] query_rewriter: 適用されたルール総数: 3
+2025-11-06 03:08:56,116 [INFO] alignment_parser: Cell 要素数: 31
+2025-11-06 03:08:56,117 [INFO] alignment_parser: 抽出されたルール数: 31
+2025-11-06 03:08:56,117 [INFO] query_rewriter: 適用されたルール総数: 3
+2025-11-06 03:08:56,119 [INFO] alignment_parser: Cell 要素数: 31
+2025-11-06 03:08:56,120 [INFO] alignment_parser: 抽出されたルール数: 31
+2025-11-06 03:08:56,120 [INFO] query_rewriter: 適用されたルール総数: 3
+2025-11-06 03:08:56,121 [INFO] alignment_parser: Cell 要素数: 31
+2025-11-06 03:08:56,122 [INFO] alignment_parser: 抽出されたルール数: 31
+2025-11-06 03:08:56,122 [INFO] query_rewriter: 適用されたルール総数: 2

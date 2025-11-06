@@ -1,0 +1,8 @@
+PREFIX :<http://confOf#>
+
+SELECT ?person WHERE
+{
+     	?person :earlyRegistration false.
+     	?person :writes ?poster.
+     	?poster a :Poster.
+}

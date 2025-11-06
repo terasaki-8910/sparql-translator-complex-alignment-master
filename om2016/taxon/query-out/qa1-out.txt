@@ -1,0 +1,21 @@
+PREFIX irstea: <http://ontology.irstea.fr/AgronomicTaxon#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+
+
+SELECT DISTINCT ?x
+ WHERE {
+	?x rdf:type dbo:Species. 
+{SELECT 	?x (COUNT(?variable_temp0) AS ?compte_var_temp0)
+WHERE{ 
+	?x dbo:genus ?variable_temp0. 
+?variable_temp0 rdf:type dbo:Species. 
+}
+GROUP BY (	?x)
+}
+FILTER(?compte_var_temp0 > 0).
+
+
+}

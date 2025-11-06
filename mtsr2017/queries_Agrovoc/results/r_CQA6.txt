@@ -1,0 +1,4 @@
+commonName
+Triticum
+
+No vernacular names in Agrovoc, subsumption relation in alignment

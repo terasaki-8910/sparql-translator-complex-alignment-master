@@ -1,0 +1,22 @@
+http://irstea-dbpedia/alignment/Kingdom
+http://irstea-dbpedia/alignment/Classis
+http://irstea-dbpedia/alignment/Variety
+http://irstea-dbpedia/alignment/Phylum
+http://irstea-dbpedia/alignment/Order
+http://irstea-dbpedia/alignment/hasHigherRank
+http://irstea-dbpedia/alignment/Taxon
+http://irstea-dbpedia/alignment/Genus
+http://ontology.irstea.fr/AgronomicTaxon#SpecyRank in query as object
+PREFIX irstea: <http://ontology.irstea.fr/AgronomicTaxon#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+
+
+SELECT DISTINCT ?x
+ WHERE {
+        ?x rdf:type dbo:Species. 
+        ?x dbo:genus ?variable_temp0. 
+
+}

@@ -1,0 +1,5 @@
+commonName
+Triticum
+
+prefVernacularName is a subrelation of prefLabel.
+No distinction made between vernacular and scientific name

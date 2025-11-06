@@ -1,0 +1,31 @@
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX agronto: <http://aims.fao.org/aos/agrontology#>
+PREFIX agrovoc: <http://aims.fao.org/aos/agrovoc/>
+
+
+select distinct ?specy where {
+?specy rdf:type dbo:Species.
+?taxon rdfs:label ?label.
+?specy rdf:type dbo:Species.
+?taxon rdf:type dbo:Species.
+{?specy dbo:kingdom ?taxon.
+}UNION
+{?specy dbo:phylum ?taxon.
+}UNION
+{?specy dbo:classis ?taxon.
+}UNION
+{?specy dbo:order ?taxon.
+}UNION
+{?specy dbo:family ?taxon.
+}UNION
+{?specy dbo:genus ?taxon.
+}
+
+filter (regex(?label, "^triticum$","i")).
+}

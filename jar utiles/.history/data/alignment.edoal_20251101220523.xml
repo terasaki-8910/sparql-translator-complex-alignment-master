@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns="http://knowledgeweb.semanticweb.org/heterogeneity/alignment"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:align="http://knowledgeweb.semanticweb.org/heterogeneity/alignment"
+         xmlns:edoal="http://ns.inria.org/edoal/1.0/"
+         
+         xmlns:jps="https://jpsearch.go.jp/term/property#"
+         xmlns:type="https://jpsearch.go.jp/term/type/"
+         xmlns:schema="http://schema.org/"
+         xmlns:tgt="http://benchmark.example.org/term/property#"
+         xmlns:ttype="http://benchmark.example.org/term/type/"
+         xmlns:role="http://benchmark.example.org/role/">
+<Alignment>
+  <level>2EDOAL</level>
+  <type>??</type>
+
+  <onto1>
+    <Ontology rdf:about="https://jpsearch.go.jp/term/">
+      <location>https://jpsearch.go.jp/term/jps.ttl</location>
+    </Ontology>
+  </onto1>
+  <onto2>
+    <Ontology rdf:about="http://benchmark.example.org/term/">
+      <location>http://benchmark.example.org/target_schema.ttl</location>
+    </Ontology>
+  </onto2>
+
+  <map>
+    <Cell>
+      <entity1 rdf:resource="https://jpsearch.go.jp/term/type/Place"/>
+      <entity2 rdf:resource="http://benchmark.example.org/term/type/Place"/>
+      <relation>=</relation>
+      <measure rdf:datatype="xsd:float">1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource="https://jpsearch.go.jp/term/type/Century"/>
+      <entity2 rdf:resource="http://benchmark.example.org/term/type/Century"/>
+      <relation>=</relation>
+      <measure rdf:datatype="xsd:float">1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource="http://schema.org/CreativeWork"/>
+      <entity2 rdf:resource="http://benchmark.example.org/term/type/Work"/>
+      <relation>&lt;</relation> <measure rdf:datatype="xsd:float">1.0</measure>
+    </Cell>
+  </map>
+
+  <map>
+    <Cell>
+      <entity1 rdf:resource="https://jpsearch.go.jp/term/type/Time"/>
+      <entity2>
+        <edoal:Class>
+          <edoal:Or>
+            <edoal:Class rdf:about="http://benchmark.example.org/term/type/Era"/>
+            <edoal:Class rdf:about="http://benchmark.example.org/term/type/Century"/>
+          </edoal:Or>
+        </edoal:Class>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype="xsd:float">1.0</measure>
+    </Cell>
+  </map>
+
+  <map>
+    <Cell>
+      <entity1 rdf:resource="https://jpsearch.go.jp/term/type/HistoricalEra"/>
+      <entity2 rdf:resource="http://benchmark.example.org/term/type/Era"/>
+      <relation>=</relation>
+      <measure rdf:datatype="xsd:float">1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource="https://jpsearch.go.jp/term/type/CalendarEra"/>
+      <entity2 rdf:resource="http://benchmark.example.org/term/type/Era"/>
+      <relation>=</relation>
+      <measure rdf:datatype="xsd:float">0.9</measure> </Cell>
+  </map>
+
+  <map>
+    <Cell>
+      <entity1 rdf:resource="https://jpsearch.go.jp/term/type/Person"/>
+      <entity2>
+        <edoal:Class>
+          <edoal:And>
+            <edoal:Class rdf:about="http://benchmark.example.org/term/type/Agent"/>
+            <edoal:PropertyRestriction>
+              <edoal:onProperty rdf:resource="http://schema.org/gender"/>
+              <edoal:someValuesFrom>
+                <edoal:Class>
+                  <edoal:Or>
+                    <edoal:Class rdf:about="http://schema.org/Male"/>
+                    <edoal:Class rdf:about="http://schema.org/Female"/>
+                  </edoal:Or>
+                </edoal:Class>
+              </edoal:someValuesFrom>
+            </edoal:PropertyRestriction>
+          </edoal:And>
+        </edoal:Class>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype="xsd:float">1.0</measure>
+    </Cell>
+  </map>
+
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Property>
+          <edoal:compose>
+            <edoal:Property rdf:about="https://jpsearch.go.jp/term/property#agential"/>
+            <edoal:PropertyRestriction>
+              <edoal:onProperty rdf:resource="https://jpsearch.go.jp/term/property#relationType"/>
+              <edoal:hasValue rdf:resource="http://benchmark.example.org/role/author"/>
+            </edoal:PropertyRestriction>
+            <edoal:Property rdf:about="https://jpsearch.go.jp/term/property#value"/>
+          </edoal:compose>
+        </edoal:Property>
+      </entity1>
+      <entity2 rdf:resource="http://benchmark.example.org/term/property#author"/>
+      <relation>=</relation>
+      <measure rdf:datatype="xsd:float">1.0</measure>
+    </Cell>
+  </map>
+
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Property>
+          <edoal:compose>
+            <edoal:Property rdf:about="https://jpsearch.go.jp/term/property#agential"/>
+            <edoal:PropertyRestriction>
+              <edoal:onProperty rdf:resource="https://jpsearch.go.jp/term/property#relationType"/>
+              <edoal:hasValue rdf:resource="http://benchmark.example.org/role/publisher"/>
+            </edoal:PropertyRestriction>
+            <edoal:Property rdf:about="https://jpsearch.go.jp/term/property#value"/>
+          </edoal:compose>
+        </edoal:Property>
+      </entity1>
+      <entity2 rdf:resource="http://benchmark.example.org/term/property#publisher"/>
+      <relation>=</relation>
+      <measure rdf:datatype="xsd:float">1.0</measure>
+    </Cell>
+  </map>
+
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Property>
+          <edoal:compose>
+            <edoal:Property rdf:about="https://jpsearch.go.jp/term/property#spatial"/>
+            <edoal:Property rdf:about="https://jpsearch.go.jp/term/property#value"/>
+          </edoal:compose>
+        </edoal:Property>
+      </entity1>
+      <entity2 rdf:resource="http://benchmark.example.org/term/property#placeOfCreation"/>
+      <relation>=</relation>
+      <measure rdf:datatype="xsd:float">1.0</measure>
+    </Cell>
+  </map>
+
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Property>
+          <edoal:compose>
+            <edoal:Property rdf:about="https://jpsearch.go.jp/term/property#temporal"/>
+            <edoal:Property rdf:about="https://jpsearch.go.jp/term/property#value"/>
+            <edoal:Property rdf:about="https://jpsearch.go.jp/term/property#start"/>
+          </edoal:compose>
+        </edoal:Property>
+      </entity1>
+      <entity2>
+        <edoal:Relation>
+          <edoal:domain rdf:resource="http://benchmark.example.org/term/property#dateCreated"/>
+          <edoal:transformation>
+            <edoal:Function>
+              <edoal:operator rdf:resource="http://www.w3.org/2001/XMLSchema#gYear"/>
+              <edoal:arguments rdf:datatype="xsd:string">value</edoal:arguments>
+            </edoal:Function>
+          </edoal:transformation>
+        </edoal:Relation>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype="xsd:float">0.8</measure> </Cell>
+  </map>
+
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Property>
+          <edoal:compose>
+            <edoal:Property rdf:about="https://jpsearch.go.jp/term/property#partOf"/>
+            <edoal:Property rdf:about="https://jpsearch.go.jp/term/property#source"/>
+          </edoal:compose>
+        </edoal:Property>
+      </entity1>
+      <entity2>
+        <edoal:Property>
+          <edoal:Inverse>
+            <edoal:Property rdf:about="http://benchmark.example.org/term/property#hasPart"/>
+          </edoal:Inverse>
+        </edoal:Property>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype="xsd:float">1.0</measure>
+    </Cell>
+  </map>
+
+</Alignment>
+</rdf:RDF>
