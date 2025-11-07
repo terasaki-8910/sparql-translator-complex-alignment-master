@@ -1,0 +1,1066 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<!DOCTYPE RDF [
+
+<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+<!ENTITY agronto "http://aims.fao.org/aos/agrontology#">
+<!ENTITY agrovoc "http://aims.fao.org/aos/agrovoc/">
+<!ENTITY irstea "http://ontology.irstea.fr/agronomictaxon/core#">
+<!ENTITY proton "http://proton.semanticweb.org/">
+<!ENTITY edoal "http://ns.inria.org/edoal/1.0/#">
+<!ENTITY skosxl "http://www.w3.org/2008/05/skos-xl#">]>
+<!-- JE2010: With the "#" in the end, this is parsed (by the RDF parser...)
+without it, this is not! -->
+<rdf:RDF xml:base="http://irstea-agrovoc/alignment/" 
+  xmlns="http://knowledgeweb.semanticweb.org/heterogeneity/alignment#" 
+  xmlns:agronto="http://aims.fao.org/aos/agrontology#" 
+  xmlns:agrovoc="http://aims.fao.org/aos/agrovoc/" 
+  xmlns:align="http://knowledgeweb.semanticweb.org/heterogeneity/alignment#" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:edoal="http://ns.inria.org/edoal/1.0/#" 
+  xmlns:irstea="http://ontology.irstea.fr/agronomictaxon/core#" 
+  xmlns:proton="http://proton.semanticweb.org/" 
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+  xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <Alignment rdf:about="http://irstea-agrovoc/alignment/">
+    <xml>yes</xml>
+    <dc:creator>http://www.irit.fr/recherches/MELODI/ontologies/contributors#thieblin</dc:creator>
+    <dc:date>2017/06/13</dc:date>
+    <method>manual</method>
+    <purpose>query-rewriting</purpose>
+    <level>2EDOAL</level>
+    <type>**</type>
+    <onto1>
+      <Ontology rdf:about="http://ontology.irstea.fr/agronomictaxon/core#">
+        <formalism>
+          <Formalism align:name="owl" align:uri="http://www.w3.org/TR/owl-guide/"/>
+        </formalism>
+      </Ontology>
+    </onto1>
+    <onto2>
+      <Ontology rdf:about="http://aims.fao.org/aos/agrontology#">
+        <formalism>
+          <Formalism align:name="owl" align:uri="http://www.w3.org/TR/owl-guide/"/>
+        </formalism>
+      </Ontology>
+    </onto2>
+    <!-- Classes -->
+    <map>
+      <Cell rdf:about="Taxon">
+        <entity1>
+          <edoal:Class rdf:about="&irstea;Taxon"/>
+        </entity1>
+        <entity2>
+          <edoal:AttributeDomainRestriction>
+            <edoal:onAttribute>
+              <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+            </edoal:onAttribute>
+            <edoal:class>
+              <edoal:AttributeValueRestriction>
+                <edoal:onAttribute>
+                  <edoal:Relation rdf:about="&skos;broader"/>
+                </edoal:onAttribute>
+                <edoal:comparator rdf:resource="&edoal;equals"/>
+                <edoal:value>
+                  <edoal:Instance rdf:about="&agrovoc;c_7624"/>
+                </edoal:value>
+              </edoal:AttributeValueRestriction>
+            </edoal:class>
+          </edoal:AttributeDomainRestriction>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="Kingdom">
+        <entity1>
+          <edoal:Class rdf:about="&irstea;KingdomRank"/>
+        </entity1>
+        <entity2>
+          <edoal:AttributeValueRestriction>
+            <edoal:onAttribute>
+              <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+            </edoal:onAttribute>
+            <edoal:comparator rdf:resource="&edoal;equals"/>
+            <edoal:value>
+              <edoal:Instance rdf:about="&agrovoc;c_330934"/>
+            </edoal:value>
+          </edoal:AttributeValueRestriction>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="Phylum">
+        <entity1>
+          <edoal:Class rdf:about="&irstea;PhylumRank"/>
+        </entity1>
+        <entity2>
+          <edoal:AttributeValueRestriction>
+            <edoal:onAttribute>
+              <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+            </edoal:onAttribute>
+            <edoal:comparator rdf:resource="&edoal;equals"/>
+            <edoal:value>
+              <edoal:Instance rdf:about="&agrovoc;c_330949"/>
+            </edoal:value>
+          </edoal:AttributeValueRestriction>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="Classis">
+        <entity1>
+          <edoal:Class rdf:about="&irstea;ClassRank"/>
+        </entity1>
+        <entity2>
+          <edoal:AttributeValueRestriction>
+            <edoal:onAttribute>
+              <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+            </edoal:onAttribute>
+            <edoal:comparator rdf:resource="&edoal;equals"/>
+            <edoal:value>
+              <edoal:Instance rdf:about="&agrovoc;c_330935"/>
+            </edoal:value>
+          </edoal:AttributeValueRestriction>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="Order">
+        <entity1>
+          <edoal:Class rdf:about="&irstea;OrderRank"/>
+        </entity1>
+        <entity2>
+          <edoal:AttributeValueRestriction>
+            <edoal:onAttribute>
+              <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+            </edoal:onAttribute>
+            <edoal:comparator rdf:resource="&edoal;equals"/>
+            <edoal:value>
+              <edoal:Instance rdf:about="&agrovoc;c_330936"/>
+            </edoal:value>
+          </edoal:AttributeValueRestriction>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="Family">
+        <entity1>
+          <edoal:Class rdf:about="&irstea;FamilyRank"/>
+        </entity1>
+        <entity2>
+          <edoal:AttributeValueRestriction>
+            <edoal:onAttribute>
+              <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+            </edoal:onAttribute>
+            <edoal:comparator rdf:resource="&edoal;equals"/>
+            <edoal:value>
+              <edoal:Instance rdf:about="&agrovoc;c_330937"/>
+            </edoal:value>
+          </edoal:AttributeValueRestriction>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="Genus">
+        <entity1>
+          <edoal:Class rdf:about="&irstea;GenusRank"/>
+        </entity1>
+        <entity2>
+          <edoal:AttributeValueRestriction>
+            <edoal:onAttribute>
+              <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+            </edoal:onAttribute>
+            <edoal:comparator rdf:resource="&edoal;equals"/>
+            <edoal:value>
+              <edoal:Instance rdf:about="&agrovoc;c_11125"/>
+            </edoal:value>
+          </edoal:AttributeValueRestriction>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="Species">
+        <entity1>
+          <edoal:Class rdf:about="&irstea;SpecyRank"/>
+        </entity1>
+        <entity2>
+          <edoal:AttributeValueRestriction>
+            <edoal:onAttribute>
+              <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+            </edoal:onAttribute>
+            <edoal:comparator rdf:resource="&edoal;equals"/>
+            <edoal:value>
+              <edoal:Instance rdf:about="&agrovoc;c_331243"/>
+            </edoal:value>
+          </edoal:AttributeValueRestriction>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="Variety">
+        <entity1>
+          <edoal:Class rdf:about="&irstea;VarietyRank"/>
+        </entity1>
+        <entity2>
+          <edoal:AttributeValueRestriction>
+            <edoal:onAttribute>
+              <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+            </edoal:onAttribute>
+            <edoal:comparator rdf:resource="&edoal;equals"/>
+            <edoal:value>
+              <edoal:Instance rdf:about="&agrovoc;c_1423211760123"/>
+            </edoal:value>
+          </edoal:AttributeValueRestriction>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+    <!-- Relations -->
+    <map>
+      <Cell rdf:about="hasHigherRank">
+        <entity1>
+          <edoal:Relation rdf:about="&irstea;hasHigherRank"/>
+        </entity1>
+        <entity2>
+          <edoal:Relation>
+            <edoal:transitive>
+              <edoal:Relation rdf:about="&skos;broader"/>
+            </edoal:transitive>
+          </edoal:Relation>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>SubsumedBy</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="hasLowerRank">
+        <entity1>
+          <edoal:Relation rdf:about="&irstea;hasLowerRank"/>
+        </entity1>
+        <entity2>
+          <edoal:Relation>
+            <edoal:transitive>
+              <edoal:Relation rdf:about="&skos;narrower"/>
+            </edoal:transitive>
+          </edoal:Relation>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>SubsumedBy</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="phylumHasKingdom">
+        <entity1>
+          <edoal:Relation rdf:about="&irstea;hasKingdom"/>
+        </entity1>
+        <entity2>
+          <edoal:Relation>
+            <edoal:and rdf:parseType="Collection">
+              <edoal:Relation>
+                <edoal:transitive>
+                  <edoal:Relation rdf:about="&skos;broader"/>
+                </edoal:transitive>
+              </edoal:Relation>
+              <edoal:RelationCoDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_330934"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationCoDomainRestriction>
+              <edoal:RelationDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_330949"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationDomainRestriction>
+            </edoal:and>
+          </edoal:Relation>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="classHasPhylum">
+        <entity1>
+          <edoal:Relation rdf:about="&irstea;hasPhylum"/>
+        </entity1>
+        <entity2>
+          <edoal:Relation>
+            <edoal:and rdf:parseType="Collection">
+              <edoal:Relation>
+                <edoal:transitive>
+                  <edoal:Relation rdf:about="&skos;broader"/>
+                </edoal:transitive>
+              </edoal:Relation>
+              <edoal:RelationCoDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_330949"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationCoDomainRestriction>
+              <edoal:RelationDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_330935"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationDomainRestriction>
+            </edoal:and>
+          </edoal:Relation>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="orderHasClass">
+        <entity1>
+          <edoal:Relation rdf:about="&irstea;hasClass"/>
+        </entity1>
+        <entity2>
+          <edoal:Relation>
+            <edoal:and rdf:parseType="Collection">
+              <edoal:Relation>
+                <edoal:transitive>
+                  <edoal:Relation rdf:about="&skos;broader"/>
+                </edoal:transitive>
+              </edoal:Relation>
+              <edoal:RelationCoDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_330935"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationCoDomainRestriction>
+              <edoal:RelationDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_330936"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationDomainRestriction>
+            </edoal:and>
+          </edoal:Relation>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="familyHasOrder">
+        <entity1>
+          <edoal:Relation rdf:about="&irstea;hasOrder"/>
+        </entity1>
+        <entity2>
+          <edoal:Relation>
+            <edoal:and rdf:parseType="Collection">
+              <edoal:Relation>
+                <edoal:transitive>
+                  <edoal:Relation rdf:about="&skos;broader"/>
+                </edoal:transitive>
+              </edoal:Relation>
+              <edoal:RelationCoDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_330936"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationCoDomainRestriction>
+              <edoal:RelationDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_330937"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationDomainRestriction>
+            </edoal:and>
+          </edoal:Relation>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="genusHasFamily">
+        <entity1>
+          <edoal:Relation rdf:about="&irstea;hasFamily"/>
+        </entity1>
+        <entity2>
+          <edoal:Relation>
+            <edoal:and rdf:parseType="Collection">
+              <edoal:Relation>
+                <edoal:transitive>
+                  <edoal:Relation rdf:about="&skos;broader"/>
+                </edoal:transitive>
+              </edoal:Relation>
+              <edoal:RelationCoDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_330937"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationCoDomainRestriction>
+              <edoal:RelationDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_11125"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationDomainRestriction>
+            </edoal:and>
+          </edoal:Relation>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="speciesHasGenus">
+        <entity1>
+          <edoal:Relation rdf:about="&irstea;hasGenus"/>
+        </entity1>
+        <entity2>
+          <edoal:Relation>
+            <edoal:and rdf:parseType="Collection">
+              <edoal:Relation>
+                <edoal:transitive>
+                  <edoal:Relation rdf:about="&skos;broader"/>
+                </edoal:transitive>
+              </edoal:Relation>
+              <edoal:RelationCoDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_11125"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationCoDomainRestriction>
+              <edoal:RelationDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_331243"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationDomainRestriction>
+            </edoal:and>
+          </edoal:Relation>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="varietyHasSpecies">
+        <entity1>
+          <edoal:Relation rdf:about="&irstea;hasSpecies"/>
+        </entity1>
+        <entity2>
+          <edoal:Relation>
+            <edoal:and rdf:parseType="Collection">
+              <edoal:Relation>
+                <edoal:transitive>
+                  <edoal:Relation rdf:about="&skos;broader"/>
+                </edoal:transitive>
+              </edoal:Relation>
+              <edoal:RelationCoDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_331243"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationCoDomainRestriction>
+              <edoal:RelationDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_1423211760123"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationDomainRestriction>
+            </edoal:and>
+          </edoal:Relation>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="kingdomIncludesPhylum">
+        <entity1>
+          <edoal:Relation rdf:about="&irstea;includesPhylum"/>
+        </entity1>
+        <entity2>
+          <edoal:Relation>
+            <edoal:and rdf:parseType="Collection">
+              <edoal:Relation>
+                <edoal:transitive>
+                  <edoal:Relation rdf:about="&skos;narrower"/>
+                </edoal:transitive>
+              </edoal:Relation>
+              <edoal:RelationCoDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_330949"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationCoDomainRestriction>
+              <edoal:RelationDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_330934"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationDomainRestriction>
+            </edoal:and>
+          </edoal:Relation>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="phylumIncludesClass">
+        <entity1>
+          <edoal:Relation rdf:about="&irstea;includesClass"/>
+        </entity1>
+        <entity2>
+          <edoal:Relation>
+            <edoal:and rdf:parseType="Collection">
+              <edoal:Relation>
+                <edoal:transitive>
+                  <edoal:Relation rdf:about="&skos;narrower"/>
+                </edoal:transitive>
+              </edoal:Relation>
+              <edoal:RelationCoDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_330935"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationCoDomainRestriction>
+              <edoal:RelationDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_330949"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationDomainRestriction>
+            </edoal:and>
+          </edoal:Relation>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="classIncludesOrder">
+        <entity1>
+          <edoal:Relation rdf:about="&irstea;includesOrder"/>
+        </entity1>
+        <entity2>
+          <edoal:Relation>
+            <edoal:and rdf:parseType="Collection">
+              <edoal:Relation>
+                <edoal:transitive>
+                  <edoal:Relation rdf:about="&skos;narrower"/>
+                </edoal:transitive>
+              </edoal:Relation>
+              <edoal:RelationCoDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_330936"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationCoDomainRestriction>
+              <edoal:RelationDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_330935"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationDomainRestriction>
+            </edoal:and>
+          </edoal:Relation>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="orderIncludesFamily">
+        <entity1>
+          <edoal:Relation rdf:about="&irstea;includesFamily"/>
+        </entity1>
+        <entity2>
+          <edoal:Relation>
+            <edoal:and rdf:parseType="Collection">
+              <edoal:Relation>
+                <edoal:transitive>
+                  <edoal:Relation rdf:about="&skos;narrower"/>
+                </edoal:transitive>
+              </edoal:Relation>
+              <edoal:RelationCoDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_330937"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationCoDomainRestriction>
+              <edoal:RelationDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_330936"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationDomainRestriction>
+            </edoal:and>
+          </edoal:Relation>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="familyIncludesGenus">
+        <entity1>
+          <edoal:Relation rdf:about="&irstea;includesGenus"/>
+        </entity1>
+        <entity2>
+          <edoal:Relation>
+            <edoal:and rdf:parseType="Collection">
+              <edoal:Relation>
+                <edoal:transitive>
+                  <edoal:Relation rdf:about="&skos;narrower"/>
+                </edoal:transitive>
+              </edoal:Relation>
+              <edoal:RelationCoDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_11125"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationCoDomainRestriction>
+              <edoal:RelationDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_330937"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationDomainRestriction>
+            </edoal:and>
+          </edoal:Relation>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="genusIncludesSpecies">
+        <entity1>
+          <edoal:Relation rdf:about="&irstea;includesSpecies"/>
+        </entity1>
+        <entity2>
+          <edoal:Relation>
+            <edoal:and rdf:parseType="Collection">
+              <edoal:Relation>
+                <edoal:transitive>
+                  <edoal:Relation rdf:about="&skos;narrower"/>
+                </edoal:transitive>
+              </edoal:Relation>
+              <edoal:RelationCoDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_331243"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationCoDomainRestriction>
+              <edoal:RelationDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_11125"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationDomainRestriction>
+            </edoal:and>
+          </edoal:Relation>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="speciesIncludesVariety">
+        <entity1>
+          <edoal:Relation rdf:about="&irstea;includesVariety"/>
+        </entity1>
+        <entity2>
+          <edoal:Relation>
+            <edoal:and rdf:parseType="Collection">
+              <edoal:Relation>
+                <edoal:transitive>
+                  <edoal:Relation rdf:about="&skos;narrower"/>
+                </edoal:transitive>
+              </edoal:Relation>
+              <edoal:RelationCoDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_1423211760123"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationCoDomainRestriction>
+              <edoal:RelationDomainRestriction>
+                <edoal:class>
+                  <edoal:AttributeValueRestriction>
+                    <edoal:onAttribute>
+                      <edoal:Relation rdf:about="&agronto;hasTaxonomicRank"/>
+                    </edoal:onAttribute>
+                    <edoal:comparator rdf:resource="&edoal;equals"/>
+                    <edoal:value>
+                      <edoal:Instance rdf:about="&agrovoc;c_331243"/>
+                    </edoal:value>
+                  </edoal:AttributeValueRestriction>
+                </edoal:class>
+              </edoal:RelationDomainRestriction>
+            </edoal:and>
+          </edoal:Relation>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+    <!-- Properties -->
+    <map>
+      <Cell rdf:about="hasScientificName">
+        <entity1>
+          <edoal:Property rdf:about="&irstea;hasScientificName"/>
+        </entity1>
+        <entity2>
+          <edoal:Property>
+            <edoal:or rdf:parseType="Collection">
+              <edoal:Property rdf:about="&skos;prefLabel"/>
+              <edoal:Property>
+                <edoal:compose rdf:parseType="Collection">
+                  <edoal:Relation rdf:about="&skosxl;prefLabel"/>
+                  <edoal:Property rdf:about="&skosxl;literalForm"/>
+                </edoal:compose>
+              </edoal:Property>
+              <edoal:Property rdf:about="&skos;altLabel"/>
+              <edoal:Property>
+                <edoal:compose rdf:parseType="Collection">
+                  <edoal:Relation rdf:about="&skosxl;altLabel"/>
+                  <edoal:Property rdf:about="&skosxl;literalForm"/>
+                </edoal:compose>
+              </edoal:Property>
+              <edoal:Property rdf:about="&skos;altLabel"/>
+            </edoal:or>
+          </edoal:Property>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>SubsumedBy</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="altScientificName">
+        <entity1>
+          <edoal:Property rdf:about="&irstea;altScientificName"/>
+        </entity1>
+        <entity2>
+          <edoal:Property>
+            <edoal:or rdf:parseType="Collection">
+              <edoal:Property rdf:about="&skos;altLabel"/>
+              <edoal:Property>
+                <edoal:compose rdf:parseType="Collection">
+                  <edoal:Relation rdf:about="&skosxl;altLabel"/>
+                  <edoal:Property rdf:about="&skosxl;literalForm"/>
+                </edoal:compose>
+              </edoal:Property>
+            </edoal:or>
+          </edoal:Property>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>SubsumedBy</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="altVernacularName">
+        <entity1>
+          <edoal:Property rdf:about="&irstea;altVernacularName"/>
+        </entity1>
+        <entity2>
+          <edoal:Property>
+            <edoal:or rdf:parseType="Collection">
+              <edoal:Property rdf:about="&skos;altLabel"/>
+              <edoal:Property>
+                <edoal:compose rdf:parseType="Collection">
+                  <edoal:Relation rdf:about="&skosxl;altLabel"/>
+                  <edoal:Property rdf:about="&skosxl;literalForm"/>
+                </edoal:compose>
+              </edoal:Property>
+            </edoal:or>
+          </edoal:Property>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>SubsumedBy</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="hasVernacularName">
+        <entity1>
+          <edoal:Property rdf:about="&irstea;hasVernacularName"/>
+        </entity1>
+        <entity2>
+          <edoal:Property>
+            <edoal:or rdf:parseType="Collection">
+              <edoal:Property rdf:about="&skos;prefLabel"/>
+              <edoal:Property>
+                <edoal:compose rdf:parseType="Collection">
+                  <edoal:Relation rdf:about="&skosxl;prefLabel"/>
+                  <edoal:Property rdf:about="&skosxl;literalForm"/>
+                </edoal:compose>
+              </edoal:Property>
+              <edoal:Property rdf:about="&skos;altLabel"/>
+              <edoal:Property>
+                <edoal:compose rdf:parseType="Collection">
+                  <edoal:Relation rdf:about="&skosxl;altLabel"/>
+                  <edoal:Property rdf:about="&skosxl;literalForm"/>
+                </edoal:compose>
+              </edoal:Property>
+              <edoal:Property rdf:about="&skos;altLabel"/>
+            </edoal:or>
+          </edoal:Property>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>SubsumedBy</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="prefScientificName">
+        <entity1>
+          <edoal:Property rdf:about="&irstea;prefScientificName"/>
+        </entity1>
+        <entity2>
+          <edoal:Property>
+            <edoal:or rdf:parseType="Collection">
+              <edoal:Property rdf:about="&skos;prefLabel"/>
+              <edoal:Property>
+                <edoal:compose rdf:parseType="Collection">
+                  <edoal:Relation rdf:about="&skosxl;prefLabel"/>
+                  <edoal:Property rdf:about="&skosxl;literalForm"/>
+                </edoal:compose>
+              </edoal:Property>
+            </edoal:or>
+          </edoal:Property>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>SubsumedBy</relation>
+      </Cell>
+    </map>
+    <map>
+      <Cell rdf:about="prefVernacularName">
+        <entity1>
+          <edoal:Property rdf:about="&irstea;prefVernacularName"/>
+        </entity1>
+        <entity2>
+          <edoal:Property>
+            <edoal:or rdf:parseType="Collection">
+              <edoal:Property rdf:about="&skos;prefLabel"/>
+              <edoal:Property>
+                <edoal:compose rdf:parseType="Collection">
+                  <edoal:Relation rdf:about="&skosxl;prefLabel"/>
+                  <edoal:Property rdf:about="&skosxl;literalForm"/>
+                </edoal:compose>
+              </edoal:Property>
+            </edoal:or>
+          </edoal:Property>
+        </entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>SubsumedBy</relation>
+      </Cell>
+    </map>
+  </Alignment>
+</rdf:RDF>

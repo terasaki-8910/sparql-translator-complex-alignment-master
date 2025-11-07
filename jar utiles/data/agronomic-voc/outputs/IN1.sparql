@@ -10,11 +10,11 @@ PREFIX agrovoc: <http://aims.fao.org/aos/agrovoc/>
 
 
 select ?rank where {
-{?taxon skos:prefLabel ?label. }UNION
-{?taxon skosxl:prefLabel ?var_temp0.
-?var_temp0 skosxl:literalForm ?label.
-}
-?taxon a ?rank.
-?rank rdfs:subClassOf skos:Concept.
-filter (regex(?label, "^triticum$","i")).
+    {?taxon skos:prefLabel ?label. }UNION
+    {?taxon skosxl:prefLabel ?var_temp0.
+    ?var_temp0 skosxl:literalForm ?label.
+    }
+    ?taxon a ?rank.
+    ?rank rdfs:subClassOf skos:Concept.
+    filter (regex(?label, "^triticum$","i")).
 }

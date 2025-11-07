@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE rdf:RDF [
+<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+<!ENTITY dbo "http://dbpedia.org/ontology/">
+<!ENTITY irstea "http://ontology.irstea.fr/AgronomicTaxon#">
+<!ENTITY proton "http://proton.semanticweb.org/">
+<!ENTITY edoal "http://ns.inria.org/edoal/1.0/#">
+]>
+
+<!-- JE2010: With the "#" in the end, this is parsed (by the RDF parser...)
+    without it, this is not! -->
+<rdf:RDF xmlns="http://knowledgeweb.semanticweb.org/heterogeneity/alignment#" 
+	 xml:base="http://irstea-dbpedia/alignment/"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	 xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:align="http://knowledgeweb.semanticweb.org/heterogeneity/alignment#"
+	 xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	 xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ex="http://example.org"
+	 xmlns:dbo="http://dbpedia.org/ontology/"
+	 xmlns:irstea="http://ontology.irstea.fr/AgronomicTaxon#"
+	 xmlns:proton="http://proton.semanticweb.org/"
+         xmlns:edoal="http://ns.inria.org/edoal/1.0/#">
+  
+  <Alignment rdf:about="http://irstea-dbpedia/alignment/"> 
+    <xml>yes</xml>
+    <dc:creator>http://www.scharffe.fr/foaf.rdf</dc:creator>
+    <dc:date>2015/09/08</dc:date>
+    <method>manual</method>
+    <purpose>patterns-mapping</purpose>
+    <level>2EDOAL</level>
+    <type>**</type>    
+    <onto1>
+      <Ontology rdf:about="&irstea;">
+      <formalism>
+	<Formalism align:uri="http://www.w3.org/TR/owl-guide/"
+		   align:name="owl" />
+      </formalism>
+      </Ontology>
+    </onto1> 
+    <onto2>
+      <Ontology rdf:about="&dbo;">
+      <location>http://dbpedia.org</location>
+      <formalism>
+	<Formalism align:uri="http://www.wsmo.org/wsml/wsml-syntax/wsml-dl"
+		   align:name="wsml" />
+      </formalism>
+      </Ontology>
+    </onto2>
+	
+    <map>
+      <Cell rdf:about="Taxon">
+	<entity1><edoal:Class rdf:about="&irstea;Taxon"/></entity1>
+        <entity2><edoal:Class rdf:about="&dbo;Species"/></entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+
+	
+	
+    <map>
+    <Cell rdf:about="Kingdom">
+	<entity1><edoal:Class rdf:about="&irstea;KingdomRank"/></entity1>
+	<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType="Collection">
+	      <edoal:Class rdf:about="&dbo;Species"/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about="&dbo;kingdom"/>
+					</edoal:inverse>
+			</edoal:Relation>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource="&edoal;greater-than"/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>
+	<measure rdf:datatype='&xsd;float'>1.</measure>
+	<relation>Equivalence</relation>
+    </Cell>
+    </map>
+	
+	<map>
+    <Cell rdf:about="Phylum">
+	<entity1><edoal:Class rdf:about="&irstea;PhylumRank"/></entity1>
+	<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType="Collection">
+	      <edoal:Class rdf:about="&dbo;Species"/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about="&dbo;phylum"/>
+					</edoal:inverse>
+			</edoal:Relation>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource="&edoal;greater-than"/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>
+	<measure rdf:datatype='&xsd;float'>1.</measure>
+	<relation>Equivalence</relation>
+    </Cell>
+    </map>
+	
+	<map>
+    <Cell rdf:about="Classis">
+	<entity1><edoal:Class rdf:about="&irstea;ClassRank"/></entity1>
+	<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType="Collection">
+	      <edoal:Class rdf:about="&dbo;Species"/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about="&dbo;classis"/>
+					</edoal:inverse>
+			</edoal:Relation>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource="&edoal;greater-than"/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>
+	<measure rdf:datatype='&xsd;float'>1.</measure>
+	<relation>Equivalence</relation>
+    </Cell>
+    </map>
+	
+	<map>
+    <Cell rdf:about="Order">
+	<entity1><edoal:Class rdf:about="&irstea;OrderRank"/></entity1>
+	<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType="Collection">
+	      <edoal:Class rdf:about="&dbo;Species"/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about="&dbo;order"/>
+					</edoal:inverse>
+			</edoal:Relation>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource="&edoal;greater-than"/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>
+	<measure rdf:datatype='&xsd;float'>1.</measure>
+	<relation>Equivalence</relation>
+    </Cell>
+    </map>
+	
+	<map>
+    <Cell rdf:about="Family">
+	<entity1><edoal:Class rdf:about="&irstea;FamilyRank"/></entity1>
+	<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType="Collection">
+	      <edoal:Class rdf:about="&dbo;Species"/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about="&dbo;family"/>
+					</edoal:inverse>
+			</edoal:Relation>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource="&edoal;greater-than"/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>
+	<measure rdf:datatype='&xsd;float'>1.</measure>
+	<relation>Equivalence</relation>
+    </Cell>
+    </map>
+	
+	<map>
+    <Cell rdf:about="Genus">
+	<entity1><edoal:Class rdf:about="&irstea;GenusRank"/></entity1>
+	<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType="Collection">
+	      <edoal:Class rdf:about="&dbo;Species"/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about="&dbo;genus"/>
+					</edoal:inverse>
+			</edoal:Relation>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource="&edoal;greater-than"/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>
+	<measure rdf:datatype='&xsd;float'>1.</measure>
+	<relation>Equivalence</relation>
+    </Cell>
+    </map>
+	<!-->
+	<map>
+    <Cell rdf:about="Genus">
+	<entity1><edoal:Class rdf:about="&irstea;GenusRank"/></entity1>
+	<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType="Collection">
+	      <edoal:Class rdf:about="&dbo;Species"/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation>
+						<edoal:and rdf:parseType="Collection">
+						<edoal:Relation>
+						<edoal:inverse>
+						<edoal:Relation>
+						<edoal:inverse>
+						<edoal:Relation>
+						<edoal:compose rdf:parseType="Collection">
+							<edoal:Relation rdf:about="&dbo;kingdom"/>
+							
+							<edoal:Relation rdf:about="&dbo;phylum"/>
+							<edoal:Relation rdf:about="&dbo;canard"/>
+							<edoal:Relation rdf:about="&dbo;lalilala"/>
+						</edoal:compose>
+						</edoal:Relation>
+						</edoal:inverse>
+						</edoal:Relation>
+						</edoal:inverse>
+						</edoal:Relation>
+						<edoal:Relation>
+						<edoal:not>
+							<edoal:Relation rdf:about="&dbo;ddddd"/>
+						</edoal:not>
+						</edoal:Relation>
+						</edoal:and>						
+			</edoal:Relation>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource="&edoal;greater-than"/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	 
+			<edoal:Class>
+			<edoal:not>
+			<edoal:Class rdf:about="&dbo;laclasskifopa"/>
+			</edoal:not>
+			</edoal:Class>
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>
+	<measure rdf:datatype='&xsd;float'>1.</measure>
+	<relation>Equivalence</relation>
+    </Cell>
+    </map>
+	<!-->
+	
+	<map>
+    <Cell rdf:about="Species">
+	<entity1><edoal:Class rdf:about="&irstea;SpecyRank"/></entity1>
+	<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType="Collection">
+	      <edoal:Class rdf:about="&dbo;Species"/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation rdf:about="&dbo;genus"/>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource="&edoal;greater-than"/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>
+	<measure rdf:datatype='&xsd;float'>1.</measure>
+	<relation>SubsumedBy</relation>
+    </Cell>
+    </map>
+	<map>
+    <Cell rdf:about="Variety">
+	<entity1><edoal:Class rdf:about="&irstea;VarietyRank"/></entity1>
+	<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType="Collection">
+	      <edoal:Class rdf:about="&dbo;Species"/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation rdf:about="&dbo;genus"/>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource="&edoal;greater-than"/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>
+	<measure rdf:datatype='&xsd;float'>1.</measure>
+	<relation>SubsumedBy</relation>
+    </Cell>
+    </map>
+	
+	<map>
+	<Cell rdf:about="hasHigherRank">
+	<entity1><edoal:Relation rdf:about="&irstea;hasHigherRank"/></entity1>
+       <entity2>
+		<edoal:Relation>
+			<edoal:or rdf:parseType="Collection">
+				<edoal:Relation rdf:about="&dbo;kingdom"/>
+				<edoal:Relation rdf:about="&dbo;phylum"/>
+				<edoal:Relation rdf:about="&dbo;classis"/>
+				<edoal:Relation rdf:about="&dbo;order"/>		
+				<edoal:Relation rdf:about="&dbo;family"/>
+				<edoal:Relation rdf:about="&dbo;genus"/>
+			</edoal:or>
+		</edoal:Relation>
+	</entity2>
+     <measure rdf:datatype="&xsd;float">1.0</measure>
+     <relation>SubsumedBy</relation>
+     </Cell>
+    </map>
+	<!-->
+	<map>
+    <Cell rdf:about="d">
+	<entity1><edoal:Relation rdf:about="&irstea;hasLowerRank"/></entity1>
+        <entity2>
+		<edoal:Relation>
+		<edoal:or rdf:parseType="Collection">
+		<edoal:Relation>
+			<edoal:compose rdf:parseType="Collection">
+				<edoal:Relation rdf:about="&dbo;kingdom"/>
+				<edoal:Relation rdf:about="&dbo;phylum"/>
+				<edoal:Relation rdf:about="&dbo;canard"/>
+				<edoal:Relation rdf:about="&dbo;lalilala"/>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about="&dbo;classis"/>
+					</edoal:inverse>
+				</edoal:Relation>
+			</edoal:compose>
+		</edoal:Relation>
+		<edoal:Relation rdf:about="&dbo;family"/>
+		</edoal:or>
+		</edoal:Relation>
+		</entity2>
+        <measure rdf:datatype="&xsd;float">1.0</measure>
+        <relation>Equivalence</relation>
+      </Cell>
+    </map>
+	</!-->
+
+	<map>
+	<Cell rdf:about="hasLowerRank">
+	<entity1><edoal:Relation rdf:about="&irstea;hasLowerRank"/></entity1>
+       <entity2>
+		<edoal:Relation>
+			<edoal:or rdf:parseType="Collection">
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about="&dbo;kingdom"/>
+					</edoal:inverse>
+				</edoal:Relation>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about="&dbo;phylum"/>
+					</edoal:inverse>
+				</edoal:Relation>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about="&dbo;classis"/>
+					</edoal:inverse>
+				</edoal:Relation>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about="&dbo;order"/>
+					</edoal:inverse>
+				</edoal:Relation>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about="&dbo;family"/>
+					</edoal:inverse>
+				</edoal:Relation>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about="&dbo;genus"/>
+					</edoal:inverse>
+				</edoal:Relation>
+			</edoal:or>
+		</edoal:Relation>
+	</entity2>
+     <measure rdf:datatype="&xsd;float">1.0</measure>
+     <relation>SubsumedBy</relation>
+     </Cell>
+    </map>
+	
+
+   
+  </Alignment>
+ </rdf:RDF>

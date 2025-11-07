@@ -1,0 +1,8 @@
+PREFIX :<http://cmt#>
+
+SELECT ?person WHERE
+{
+?person a :Chairman.
+?papier :hasAuthor ?person.
+?papier a :Paper.
+}
