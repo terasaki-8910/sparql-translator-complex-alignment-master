@@ -1,5 +1,5 @@
 dataset,alignment_file,query_file,status,input_query,output_query,expected_query,error_info
-conference,alignment.edoal,query_1.sparql,Failure,"PREFIX : <http://ekaw#>
+conference,alignment.edoal,query_1.sparql,Success,"PREFIX : <http://ekaw#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 SELECT ?reviewer WHERE {
 ?paper :hasReviewer ?reviewer.
@@ -9,9 +9,8 @@ SELECT ?reviewer WHERE {
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 SELECT ?rank WHERE {
-?paper :hasReviewer ?reviewer.
- ?paper rdf:type :Accepted_Paper.
- }","PREFIX : <http://ekaw#> 
+?paper <http://ekaw#hasReviewer> ?reviewer. ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ekaw#Accepted_Paper>. }
+","PREFIX : <http://ekaw#> 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 
 SELECT ?reviewer WHERE {
@@ -30,9 +29,8 @@ SELECT ?author WHERE {
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 SELECT ?rank WHERE {
-?author <http://confOf#writes> ?paper.
- ?paper rdf:type :Regular_Paper.
- }","PREFIX : <http://ekaw#> 
+?author <http://confOf#writes> ?paper. ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ekaw#Regular_Paper>. }
+","PREFIX : <http://ekaw#> 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 
 SELECT ?author WHERE {
@@ -40,7 +38,7 @@ SELECT ?author WHERE {
 
 ?paper rdf:type <http://cmt#PaperFullVersion>. 
 }",
-conference,alignment.edoal,query_3.sparql,Failure,"PREFIX :<http://cmt#>
+conference,alignment.edoal,query_3.sparql,Success,"PREFIX :<http://cmt#>
 
 SELECT ?person WHERE
 {
@@ -50,10 +48,8 @@ SELECT ?person WHERE
 }","PREFIX : <http://cmt#>
 
 SELECT ?rank WHERE {
-?person rdf:type :Chairman.
- ?papier :hasAuthor ?person.
- ?papier rdf:type :Paper.
- }","PREFIX : <http://cmt#> 
+?person <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Chairman>. ?papier <http://cmt#hasAuthor> ?person. ?papier <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Paper>. }
+","PREFIX : <http://cmt#> 
 
 
 SELECT ?person WHERE
@@ -68,7 +64,7 @@ SELECT ?person WHERE
 
 ?papier a <http://ekaw#Paper>. 
 }",
-conference,alignment.edoal,query_4.sparql,Failure,"PREFIX : <http://ekaw#>
+conference,alignment.edoal,query_4.sparql,Success,"PREFIX : <http://ekaw#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 SELECT ?author WHERE {
 ?paper :writtenBy ?author.
@@ -77,9 +73,8 @@ SELECT ?author WHERE {
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 SELECT ?rank WHERE {
-?paper :writtenBy ?author.
- ?paper rdf:type :Regular_Paper.
- }","PREFIX : <http://ekaw#> 
+?paper <http://ekaw#writtenBy> ?author. ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ekaw#Regular_Paper>. }
+","PREFIX : <http://ekaw#> 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 
 SELECT ?author WHERE {
@@ -99,10 +94,8 @@ SELECT ?person 	WHERE {
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 SELECT ?rank WHERE {
-?person <http://confOf#writes> ?paper.
- ?paper rdf:type <http://confOf#Paper>.
- ?person rdf:type :Early-Registered_Participant.
- }","PREFIX : <http://ekaw#> 
+?person <http://confOf#writes> ?paper. ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://confOf#Paper>. ?person <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ekaw#Early-Registered_Participant>. }
+","PREFIX : <http://ekaw#> 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 
 
@@ -125,10 +118,8 @@ SELECT ?person 	WHERE {
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 SELECT ?rank WHERE {
-?person <http://confOf#writes> ?paper.
- ?person rdf:type :Late-Registered_Participant.
- ?paper rdf:type <http://confOf#Poster>.
- }"," PREFIX : <http://ekaw#> 
+?person <http://confOf#writes> ?paper. ?person <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ekaw#Late-Registered_Participant>. ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://confOf#Poster>. }
+"," PREFIX : <http://ekaw#> 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 
 SELECT ?person 	WHERE {
@@ -166,9 +157,8 @@ PREFIX agrovoc: <http://aims.fao.org/aos/agrovoc/>
 PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
 
 SELECT ?rank WHERE {
-?specy rdf:type agro:Taxon.
- ?taxon agro:prefVernacularName ?label.
-   FILTER((regex ?label ""^triticum$"" ""i""))}","PREFIX dbo: <http://dbpedia.org/ontology/>
+?specy <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ontology.irstea.fr/agronomictaxon/core#Taxon>. ?taxon <http://ontology.irstea.fr/agronomictaxon/core#prefVernacularName> ?label.   FILTER((regex ?label ""^triticum$"" ""i""))}
+","PREFIX dbo: <http://dbpedia.org/ontology/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
@@ -218,10 +208,8 @@ PREFIX agrovoc: <http://aims.fao.org/aos/agrovoc/>
 PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
 
 SELECT ?rank WHERE {
-?taxon agro:prefScientificName ?label.
- ?taxon rdf:type ?rank.
- ?rank rdfs:subClassOf agro:Taxon.
-  FILTER((regex ?label ""^triticum$"" ""i""))}","PREFIX dbo: <http://dbpedia.org/ontology/>
+?taxon <http://ontology.irstea.fr/agronomictaxon/core#prefScientificName> ?label. ?taxon <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?rank. ?rank <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://ontology.irstea.fr/agronomictaxon/core#Taxon>.  FILTER((regex ?label ""^triticum$"" ""i""))}
+","PREFIX dbo: <http://dbpedia.org/ontology/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
@@ -268,9 +256,8 @@ PREFIX agrovoc: <http://aims.fao.org/aos/agrovoc/>
 PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
 
 SELECT ?rank WHERE {
-?taxon agro:prefVernacularName ?label.
-  ?parent rdf:type agro:KingdomRank.
-  FILTER((regex ?label ""^wheat$"" ""i""))}","PREFIX dbo: <http://dbpedia.org/ontology/>
+?taxon <http://ontology.irstea.fr/agronomictaxon/core#prefVernacularName> ?label.  ?parent <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ontology.irstea.fr/agronomictaxon/core#KingdomRank>.  FILTER((regex ?label ""^wheat$"" ""i""))}
+","PREFIX dbo: <http://dbpedia.org/ontology/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
@@ -319,10 +306,8 @@ PREFIX agrovoc: <http://aims.fao.org/aos/agrovoc/>
 PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
 
 SELECT ?rank WHERE {
-?taxon rdf:type agro:Taxon.
- ?taxon agro:hasScientificName ?label.
- ?taxon agro:hasVernacularName ?commonName.
-  FILTER((&& (regex ?label ""^triticum$"" ""i"") (= (lang ?commonName) ""fr"")))}","PREFIX dbo: <http://dbpedia.org/ontology/>
+?taxon <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ontology.irstea.fr/agronomictaxon/core#Taxon>. ?taxon <http://ontology.irstea.fr/agronomictaxon/core#hasScientificName> ?label. ?taxon <http://ontology.irstea.fr/agronomictaxon/core#hasVernacularName> ?commonName.  FILTER((&& (regex ?label ""^triticum$"" ""i"") (= (lang ?commonName) ""fr"")))}
+","PREFIX dbo: <http://dbpedia.org/ontology/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
@@ -382,10 +367,8 @@ PREFIX agrovoc: <http://aims.fao.org/aos/agrovoc/>
 PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
 
 SELECT ?rank WHERE {
-?taxon rdf:type agro:Taxon.
- ?taxon agro:prefScientificName ?label.
- ?taxon agro:prefVernacularName ?commonName.
-  FILTER((&& (regex ?label ""^triticum$"" ""i"") (= (lang ?commonName) ""en"")))}","PREFIX dbo: <http://dbpedia.org/ontology/>
+?taxon <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ontology.irstea.fr/agronomictaxon/core#Taxon>. ?taxon <http://ontology.irstea.fr/agronomictaxon/core#prefScientificName> ?label. ?taxon <http://ontology.irstea.fr/agronomictaxon/core#prefVernacularName> ?commonName.  FILTER((&& (regex ?label ""^triticum$"" ""i"") (= (lang ?commonName) ""en"")))}
+","PREFIX dbo: <http://dbpedia.org/ontology/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
@@ -435,10 +418,8 @@ PREFIX agrovoc: <http://aims.fao.org/aos/agrovoc/>
 PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
 
 SELECT ?rank WHERE {
-?taxon agro:prefVernacularName ?label.
- ?taxon agro:hasLowerRank ?specy.
- ?specy rdf:type agro:SpecyRank.
-  FILTER((regex ?label ""^wheat$"" ""i""))}","PREFIX dbo: <http://dbpedia.org/ontology/>
+?taxon <http://ontology.irstea.fr/agronomictaxon/core#prefVernacularName> ?label. ?taxon <http://ontology.irstea.fr/agronomictaxon/core#hasLowerRank> ?specy. ?specy <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ontology.irstea.fr/agronomictaxon/core#SpecyRank>.  FILTER((regex ?label ""^wheat$"" ""i""))}
+","PREFIX dbo: <http://dbpedia.org/ontology/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
@@ -487,10 +468,8 @@ PREFIX agrovoc: <http://aims.fao.org/aos/agrovoc/>
 PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
 
 SELECT ?rank WHERE {
-?taxon rdfs:label ?label.
- ?taxon rdf:type ?rank.
- ?rank rdfs:subClassOf dbo:Species.
-  FILTER((regex ?label ""^triticum$"" ""i""))}",,
+?taxon <http://www.w3.org/2000/01/rdf-schema#label> ?label. ?taxon <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?rank. ?rank <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://dbpedia.org/ontology/Species>.  FILTER((regex ?label ""^triticum$"" ""i""))}
+",,
 agro-db,alignment.edoal,query_2.sparql,Success,"PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -517,9 +496,8 @@ PREFIX agrovoc: <http://aims.fao.org/aos/agrovoc/>
 PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
 
 SELECT ?rank WHERE {
-?taxon rdfs:label ?label.
-  ?parent rdf:type agro:KingdomRank.
-  FILTER((regex ?label ""^wheat$"" ""i""))}",,
+?taxon <http://www.w3.org/2000/01/rdf-schema#label> ?label.  ?parent <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ontology.irstea.fr/agronomictaxon/core#KingdomRank>.  FILTER((regex ?label ""^wheat$"" ""i""))}
+",,
 agro-db,alignment.edoal,query_3.sparql,Success,"PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -546,10 +524,8 @@ PREFIX agrovoc: <http://aims.fao.org/aos/agrovoc/>
 PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
 
 SELECT ?rank WHERE {
-?taxon rdf:type dbo:Species.
- ?taxon rdfs:label ?label.
- ?taxon rdfs:label ?commonName.
-  FILTER((&& (regex ?label ""^triticum$"" ""i"") (= (lang ?commonName) ""fr"")))}",,
+?taxon <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Species>. ?taxon <http://www.w3.org/2000/01/rdf-schema#label> ?label. ?taxon <http://www.w3.org/2000/01/rdf-schema#label> ?commonName.  FILTER((&& (regex ?label ""^triticum$"" ""i"") (= (lang ?commonName) ""fr"")))}
+",,
 agro-db,alignment.edoal,query_4.sparql,Success,"PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -576,10 +552,8 @@ PREFIX agrovoc: <http://aims.fao.org/aos/agrovoc/>
 PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
 
 SELECT ?rank WHERE {
-?taxon rdf:type dbo:Species.
- ?taxon rdfs:label ?label.
- ?taxon rdfs:label ?commonName.
-  FILTER((&& (regex ?label ""^triticum$"" ""i"") (= (lang ?commonName) ""en"")))}",,
+?taxon <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Species>. ?taxon <http://www.w3.org/2000/01/rdf-schema#label> ?label. ?taxon <http://www.w3.org/2000/01/rdf-schema#label> ?commonName.  FILTER((&& (regex ?label ""^triticum$"" ""i"") (= (lang ?commonName) ""en"")))}
+",,
 agro-db,alignment.edoal,query_5.sparql,Success,"PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -606,10 +580,8 @@ PREFIX agrovoc: <http://aims.fao.org/aos/agrovoc/>
 PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
 
 SELECT ?rank WHERE {
-?taxon rdfs:label ?label.
- ?taxon agro:hasLowerRank ?specy.
- ?specy rdf:type agro:SpecyRank.
-  FILTER((regex ?label ""^wheat$"" ""i""))}",,
+?taxon <http://www.w3.org/2000/01/rdf-schema#label> ?label. ?taxon <http://ontology.irstea.fr/agronomictaxon/core#hasLowerRank> ?specy. ?specy <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ontology.irstea.fr/agronomictaxon/core#SpecyRank>.  FILTER((regex ?label ""^wheat$"" ""i""))}
+",,
 taxons,alignment.edoal,query_1.sparql,Success,"PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -626,8 +598,8 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX irstea: <http://ontology.irstea.fr/AgronomicTaxon#>
 
 SELECT ?rank WHERE {
-?x rdf:type irstea:SpecyRank.
- }","PREFIX irstea: <http://ontology.irstea.fr/AgronomicTaxon#> 
+?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ontology.irstea.fr/AgronomicTaxon#SpecyRank>. }
+","PREFIX irstea: <http://ontology.irstea.fr/AgronomicTaxon#> 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
@@ -659,10 +631,8 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX irstea: <http://ontology.irstea.fr/AgronomicTaxon#>
 
 SELECT ?rank WHERE {
-?x rdf:type dbo:Species.
- ?y rdf:type irstea:FamilyRank.
- ?x irstea:hasHigherRank ?y.
- }","PREFIX irstea: <http://ontology.irstea.fr/AgronomicTaxon#> 
+?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Species>. ?y <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ontology.irstea.fr/AgronomicTaxon#FamilyRank>. ?x <http://ontology.irstea.fr/AgronomicTaxon#hasHigherRank> ?y. }
+","PREFIX irstea: <http://ontology.irstea.fr/AgronomicTaxon#> 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
@@ -700,8 +670,8 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX irstea: <http://ontology.irstea.fr/AgronomicTaxon#>
 
 SELECT ?rank WHERE {
-?x rdf:type irstea:KingdomRank.
- }","PREFIX irstea: <http://ontology.irstea.fr/AgronomicTaxon#> 
+?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ontology.irstea.fr/AgronomicTaxon#KingdomRank>. }
+","PREFIX irstea: <http://ontology.irstea.fr/AgronomicTaxon#> 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
@@ -732,8 +702,8 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX irstea: <http://ontology.irstea.fr/AgronomicTaxon#>
 
 SELECT ?rank WHERE {
-?x rdf:type irstea:OrderRank.
- }","PREFIX irstea: <http://ontology.irstea.fr/AgronomicTaxon#> 
+?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ontology.irstea.fr/AgronomicTaxon#OrderRank>. }
+","PREFIX irstea: <http://ontology.irstea.fr/AgronomicTaxon#> 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
@@ -764,8 +734,8 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX irstea: <http://ontology.irstea.fr/AgronomicTaxon#>
 
 SELECT ?rank WHERE {
-?x rdf:type irstea:GenusRank.
- }","PREFIX irstea: <http://ontology.irstea.fr/AgronomicTaxon#> 
+?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ontology.irstea.fr/AgronomicTaxon#GenusRank>. }
+","PREFIX irstea: <http://ontology.irstea.fr/AgronomicTaxon#> 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 

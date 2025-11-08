@@ -1,5 +1,6 @@
 from .ast_walker import AstWalker
 from ..parser.edoal_parser import Alignment, Cell, IdentifiedEntity
+from ..common.logger import get_logger
 
 class SparqlRewriter(AstWalker):
     """
@@ -9,6 +10,8 @@ class SparqlRewriter(AstWalker):
     def __init__(self, alignment: Alignment):
         # URIのマッピングを効率的に検索できるよう、辞書に変換しておく
         self.mapping = self._create_mapping(alignment)
+        # ロガーを初期化（append モードでファイルに出力される設定）
+        self.logger = get_logger('sparql_rewriter', verbose=False)
 
     def _create_mapping(self, alignment: Alignment) -> dict:
         """
@@ -33,6 +36,12 @@ class SparqlRewriter(AstWalker):
 
         if isinstance(target_entity, IdentifiedEntity):
             print(f"  [Rewrite] Simple URI rewrite: {uri_to_check} -> {target_entity.uri}")
+            # print は残しつつログにも出力（append）
+            try:
+                self.logger.info(f"[Rewrite] Simple URI rewrite: {uri_to_check} -> {target_entity.uri}")
+            except Exception:
+                # ログ出力に失敗しても処理を継続する
+                pass
             return {**node, 'value': target_entity.uri}
         
         return node
@@ -54,6 +63,10 @@ class SparqlRewriter(AstWalker):
             # ターゲットが単純なURIでない場合（＝複雑なエンティティ）
             if not isinstance(target_entity, IdentifiedEntity):
                 print(f"  [Rewrite] Complex rewrite for object: {o['value']}")
+                try:
+                    self.logger.info(f"[Rewrite] Complex rewrite for object: {o['value']}")
+                except Exception:
+                    pass
                 # TODO: ここで target_entity の内容に基づいて
                 # 新しいグラフパターン（複数のトリプルなど）を生成するロジックを実装
                 # 今回はプレースホルダーとして元のトリプルを返す

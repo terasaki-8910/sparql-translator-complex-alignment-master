@@ -1,0 +1,63 @@
+2025-11-08 18:41:39,260 [INFO] main: Processing query: query_1.sparql
+2025-11-08 18:43:17,428 [INFO] main: Processing query: query_2.sparql
+2025-11-08 18:43:18,571 [INFO] sparql_rewriter: [Rewrite] Simple URI rewrite: http://ekaw#authorOf -> http://confOf#writes
+2025-11-08 18:43:23,610 [INFO] main: Processing query: query_3.sparql
+2025-11-08 18:49:42,782 [INFO] main: Processing query: query_4.sparql
+2025-11-08 18:49:43,955 [INFO] main: Processing query: query_5.sparql
+2025-11-08 18:49:44,657 [INFO] sparql_rewriter: [Rewrite] Simple URI rewrite: http://ekaw#authorOf -> http://confOf#writes
+2025-11-08 18:49:44,657 [INFO] sparql_rewriter: [Rewrite] Simple URI rewrite: http://ekaw#Paper -> http://confOf#Paper
+2025-11-08 18:49:44,657 [INFO] sparql_rewriter: [Rewrite] Complex rewrite for object: http://ekaw#Early-Registered_Participant
+2025-11-08 18:49:44,657 [INFO] main: Processing query: query_6.sparql
+2025-11-08 18:49:45,777 [INFO] main: Processing query: query_1.sparql
+2025-11-08 18:49:46,457 [INFO] main: Processing query: query_2.sparql
+2025-11-08 18:49:47,517 [INFO] sparql_rewriter: [Rewrite] Simple URI rewrite: http://ekaw#authorOf -> http://confOf#writes
+2025-11-08 18:49:47,519 [INFO] main: Processing query: query_3.sparql
+2025-11-08 18:49:48,217 [INFO] main: Processing query: query_4.sparql
+2025-11-08 18:49:49,273 [INFO] main: Processing query: query_5.sparql
+2025-11-08 18:49:50,321 [INFO] sparql_rewriter: [Rewrite] Simple URI rewrite: http://ekaw#authorOf -> http://confOf#writes
+2025-11-08 18:49:50,322 [INFO] sparql_rewriter: [Rewrite] Simple URI rewrite: http://ekaw#Paper -> http://confOf#Paper
+2025-11-08 18:49:50,322 [INFO] sparql_rewriter: [Rewrite] Complex rewrite for object: http://ekaw#Early-Registered_Participant
+2025-11-08 18:49:50,323 [INFO] main: Processing query: query_6.sparql
+2025-11-08 18:49:51,394 [INFO] sparql_rewriter: [Rewrite] Simple URI rewrite: http://ekaw#authorOf -> http://confOf#writes
+2025-11-08 18:49:51,394 [INFO] sparql_rewriter: [Rewrite] Complex rewrite for object: http://ekaw#Late-Registered_Participant
+2025-11-08 18:49:51,394 [INFO] sparql_rewriter: [Rewrite] Simple URI rewrite: http://ekaw#Poster_Paper -> http://confOf#Poster
+2025-11-08 18:49:51,403 [INFO] main: Processing query: query_0.sparql
+2025-11-08 18:49:52,489 [INFO] sparql_rewriter: [Rewrite] Complex rewrite for object: http://ontology.irstea.fr/agronomictaxon/core#Taxon
+2025-11-08 18:49:52,493 [INFO] main: Processing query: query_1.sparql
+2025-11-08 18:49:53,173 [INFO] sparql_rewriter: [Rewrite] Complex rewrite for object: http://ontology.irstea.fr/agronomictaxon/core#Taxon
+2025-11-08 18:49:53,173 [INFO] main: Processing query: query_2.sparql
+2025-11-08 18:49:54,192 [INFO] sparql_rewriter: [Rewrite] Complex rewrite for object: http://ontology.irstea.fr/agronomictaxon/core#KingdomRank
+2025-11-08 18:49:54,194 [INFO] main: Processing query: query_3.sparql
+2025-11-08 18:49:55,285 [INFO] sparql_rewriter: [Rewrite] Complex rewrite for object: http://ontology.irstea.fr/agronomictaxon/core#Taxon
+2025-11-08 18:49:55,286 [INFO] main: Processing query: query_4.sparql
+2025-11-08 18:49:56,357 [INFO] sparql_rewriter: [Rewrite] Complex rewrite for object: http://ontology.irstea.fr/agronomictaxon/core#Taxon
+2025-11-08 18:49:56,358 [INFO] main: Processing query: query_5.sparql
+2025-11-08 18:49:57,074 [INFO] sparql_rewriter: [Rewrite] Complex rewrite for object: http://ontology.irstea.fr/agronomictaxon/core#SpecyRank
+2025-11-08 18:49:57,077 [INFO] main: Processing query: query_1.sparql
+2025-11-08 18:49:58,112 [INFO] sparql_rewriter: [Rewrite] Simple URI rewrite: http://ontology.irstea.fr/agronomictaxon/core#prefScientificName -> http://www.w3.org/2000/01/rdf-schema#label
+2025-11-08 18:49:58,112 [INFO] sparql_rewriter: [Rewrite] Simple URI rewrite: http://ontology.irstea.fr/agronomictaxon/core#Taxon -> http://dbpedia.org/ontology/Species
+2025-11-08 18:49:58,113 [INFO] main: Processing query: query_2.sparql
+2025-11-08 18:49:59,188 [INFO] sparql_rewriter: [Rewrite] Simple URI rewrite: http://ontology.irstea.fr/agronomictaxon/core#prefVernacularName -> http://www.w3.org/2000/01/rdf-schema#label
+2025-11-08 18:49:59,189 [INFO] sparql_rewriter: [Rewrite] Complex rewrite for object: http://ontology.irstea.fr/agronomictaxon/core#KingdomRank
+2025-11-08 18:49:59,191 [INFO] main: Processing query: query_3.sparql
+2025-11-08 18:50:00,282 [INFO] sparql_rewriter: [Rewrite] Simple URI rewrite: http://ontology.irstea.fr/agronomictaxon/core#Taxon -> http://dbpedia.org/ontology/Species
+2025-11-08 18:50:00,282 [INFO] sparql_rewriter: [Rewrite] Simple URI rewrite: http://ontology.irstea.fr/agronomictaxon/core#hasScientificName -> http://www.w3.org/2000/01/rdf-schema#label
+2025-11-08 18:50:00,282 [INFO] sparql_rewriter: [Rewrite] Simple URI rewrite: http://ontology.irstea.fr/agronomictaxon/core#hasVernacularName -> http://www.w3.org/2000/01/rdf-schema#label
+2025-11-08 18:50:00,283 [INFO] main: Processing query: query_4.sparql
+2025-11-08 18:50:01,367 [INFO] sparql_rewriter: [Rewrite] Simple URI rewrite: http://ontology.irstea.fr/agronomictaxon/core#Taxon -> http://dbpedia.org/ontology/Species
+2025-11-08 18:50:01,367 [INFO] sparql_rewriter: [Rewrite] Simple URI rewrite: http://ontology.irstea.fr/agronomictaxon/core#prefScientificName -> http://www.w3.org/2000/01/rdf-schema#label
+2025-11-08 18:50:01,367 [INFO] sparql_rewriter: [Rewrite] Simple URI rewrite: http://ontology.irstea.fr/agronomictaxon/core#prefVernacularName -> http://www.w3.org/2000/01/rdf-schema#label
+2025-11-08 18:50:01,368 [INFO] main: Processing query: query_5.sparql
+2025-11-08 18:50:02,460 [INFO] sparql_rewriter: [Rewrite] Simple URI rewrite: http://ontology.irstea.fr/agronomictaxon/core#prefVernacularName -> http://www.w3.org/2000/01/rdf-schema#label
+2025-11-08 18:50:02,460 [INFO] sparql_rewriter: [Rewrite] Complex rewrite for object: http://ontology.irstea.fr/agronomictaxon/core#SpecyRank
+2025-11-08 18:50:02,467 [INFO] main: Processing query: query_1.sparql
+2025-11-08 18:50:03,161 [INFO] sparql_rewriter: [Rewrite] Complex rewrite for object: http://ontology.irstea.fr/AgronomicTaxon#SpecyRank
+2025-11-08 18:50:03,162 [INFO] main: Processing query: query_2.sparql
+2025-11-08 18:50:04,184 [INFO] sparql_rewriter: [Rewrite] Simple URI rewrite: http://ontology.irstea.fr/AgronomicTaxon#Taxon -> http://dbpedia.org/ontology/Species
+2025-11-08 18:50:04,185 [INFO] sparql_rewriter: [Rewrite] Complex rewrite for object: http://ontology.irstea.fr/AgronomicTaxon#FamilyRank
+2025-11-08 18:50:04,186 [INFO] main: Processing query: query_3.sparql
+2025-11-08 18:50:05,269 [INFO] sparql_rewriter: [Rewrite] Complex rewrite for object: http://ontology.irstea.fr/AgronomicTaxon#KingdomRank
+2025-11-08 18:50:05,270 [INFO] main: Processing query: query_4.sparql
+2025-11-08 18:50:05,948 [INFO] sparql_rewriter: [Rewrite] Complex rewrite for object: http://ontology.irstea.fr/AgronomicTaxon#OrderRank
+2025-11-08 18:50:05,948 [INFO] main: Processing query: query_5.sparql
+2025-11-08 18:50:06,967 [INFO] sparql_rewriter: [Rewrite] Complex rewrite for object: http://ontology.irstea.fr/AgronomicTaxon#GenusRank

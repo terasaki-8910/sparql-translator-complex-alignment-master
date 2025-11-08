@@ -1,10 +1,12 @@
 import os
 import csv
 import traceback
+from datetime import datetime
 from sparql_translator.src.parser.edoal_parser import EdoalParser
 from sparql_translator.src.parser.sparql_ast_parser import SparqlAstParser
 from sparql_translator.src.rewriter.sparql_rewriter import SparqlRewriter
 from sparql_translator.src.rewriter.ast_serializer import AstSerializer
+from sparql_translator.src.common.logger import get_logger
 
 def process_dataset(dataset_path, sparql_parser):
     """
@@ -35,7 +37,15 @@ def process_dataset(dataset_path, sparql_parser):
         if not query_filepath.endswith(".sparql"):
             continue
 
+        # 画面表示はそのまま残す（ユーザー指示）。加えてログにも書き込む。
         print(f"  - Processing query: {query_filename}")
+        try:
+            # ログは append モードになるよう logger を利用
+            logger = get_logger('main', verbose=False)
+            logger.info(f"Processing query: {query_filename}")
+        except Exception:
+            # ログ失敗でも処理は継続
+            pass
         
         with open(query_filepath, 'r', encoding='utf-8') as f:
             input_query = f.read()
@@ -55,6 +65,31 @@ def process_dataset(dataset_path, sparql_parser):
             rewritten_ast = rewriter.walk(source_ast)
             output_query = serializer.serialize(rewritten_ast)
             status = "Success"
+            # --- ログを確認して、Processing query の後にログ出力が存在しない場合は Failure にする ---
+            try:
+                # ログファイルの場所はプロジェクト内の sparql_translator/log/YYYY-MM-DD.log
+                project_dir = os.path.dirname(os.path.abspath(__file__))
+                log_dir = os.path.join(project_dir, 'sparql_translator', 'log')
+                log_file = os.path.join(log_dir, datetime.now().strftime('%Y-%m-%d') + '.log')
+                marker = f"Processing query: {query_filename}"
+                if os.path.exists(log_file):
+                    with open(log_file, 'r', encoding='utf-8') as lf:
+                        content = lf.read()
+                    idx = content.rfind(marker)
+                    # マーカーが見つかり、かつそのマーカーの後に非空白の文字列が無ければ Failure
+                    if idx == -1:
+                        # マーカー自体がログに見つからない場合は変換が行われていないとみなす
+                        status = "Failure"
+                    else:
+                        after = content[idx + len(marker):].strip()
+                        if after == "":
+                            status = "Failure"
+                else:
+                    # ログファイルが存在しない場合も Failure とみなす
+                    status = "Failure"
+            except Exception:
+                # ログ確認に失敗しても処理自体は続け、既定の status を使用する
+                pass
         except Exception:
             error_info = traceback.format_exc()
             print(f"    -> Failed to translate: {error_info.splitlines()[-1]}")
