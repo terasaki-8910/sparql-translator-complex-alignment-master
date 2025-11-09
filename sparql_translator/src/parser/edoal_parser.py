@@ -271,7 +271,7 @@ if __name__ == '__main__':
             print(f"  Measure:  {cell.measure}")
         print("=" * 30)
     else:
-        Alignment_file = "/Users/masa669/Documents/linkeddata/sparql-translator-complex-alignment-master/om2016/taxon/taxons.edoal"
+        Alignment_file = "/Users/masa669/Documents/linkeddata/sparql-translator-complex-alignment-master/sparql_translator/test_data/taxons/alignment/alignment.edoal"
         parser = EdoalParser(Alignment_file)
         alignment_result = parser.parse()
         print(f"Ontology 1: {alignment_result.onto1}")
