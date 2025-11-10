@@ -13,6 +13,12 @@ Python の dataclass にマッピングする簡易パーサを実装してい�
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
 from typing import List, Any, Optional
+import csv
+import os
+import re
+import xml.etree.ElementTree as ET
+from dataclasses import dataclass, field
+from typing import List, Any, Optional
 
 # 基底クラス
 @dataclass
@@ -254,10 +260,152 @@ class EdoalParser:
         # 上記に該当しない複合エンティティは汎用の IdentifiedEntity として返す
         return IdentifiedEntity(uri=f"Complex Entity: {tag}")
 
+# parseしたAlignmentとEDOAL内部の構造を比較するための関数
+def compare_alignment_and_edoal(alignment: Alignment, edoal_parser: EdoalParser, output_csv_path: str = "comparison_output.csv"):
+    """パースした Alignment オブジェクトと元の EDOAL XML の構造を比較するデバッグ用関数
+        CSVファイルに、各セルの比較を出力する。
+    """
+    import os
 
+    # EDOAL ファイルを読み込んでテキストとして取得
+    with open(edoal_parser.file_path, 'r', encoding='utf-8') as f:
+        edoal_text = f.read()
+
+    # EDOAL XML から Cell 要素を取得
+    edoal_cells = edoal_parser.root.findall('.//align:Cell', edoal_parser.namespaces)
+
+    # 比較結果を CSV に書き出す
+    with open(output_csv_path, 'w', newline='', encoding='utf-8') as csvfile:
+        fieldnames = [
+            'Cell_Index', 'Parsed_Cell_About', 'EDOAL_Cell_About', 'EDOAL_Cell_XML',
+            'Parsed_Entity1_URI', 'EDOAL_Entity1_URI', 'EDOAL_Entity1_XML',
+            'Parsed_Entity2_Structure', 'EDOAL_Entity2_XML',
+            'Parsed_Alignment',
+            'Parsed_Relation', 'EDOAL_Relation',
+            'Parsed_Measure', 'EDOAL_Measure',
+            'Entity1_Match', 'Entity2_Match', 'Relation_Match', 'Measure_Match'
+        ]
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+
+        for i, parsed_cell in enumerate(alignment.cells):
+            if i < len(edoal_cells):
+                edoal_cell = edoal_cells[i]
+
+                # Cell の about 属性と XML
+                parsed_about = f"Cell {i+1}"
+                edoal_about = edoal_cell.get(f"{{{edoal_parser.namespaces['rdf']}}}about", "N/A")
+
+                # EDOAL XML から Cell のテキストを抽出 (インデント調整)
+                edoal_cell_xml = extract_xml_section(edoal_text, '<Cell', '</Cell>', about_attr=edoal_about).strip()
+
+                # Entity1 の比較
+                parsed_entity1_uri = getattr(parsed_cell.entity1, 'uri', str(parsed_cell.entity1))
+                edoal_entity1_elem = edoal_cell.find('align:entity1', edoal_parser.namespaces)
+                edoal_entity1_xml = extract_xml_section(edoal_text, '<entity1>', '</entity1>', cell_index=i).strip()
+                # 簡易的に URI を抽出
+                edoal_entity1_uri = "N/A"
+                if edoal_entity1_elem is not None and len(edoal_entity1_elem) > 0:
+                    inner_elem = edoal_entity1_elem[0]
+                    edoal_entity1_uri = inner_elem.get(f"{{{edoal_parser.namespaces['rdf']}}}about", "Complex Structure")
+
+                entity1_match = parsed_entity1_uri == edoal_entity1_uri
+
+                # Entity2 の比較 (複雑な構造のため、XML文字列を比較)
+                parsed_entity2_str = str(parsed_cell.entity2)
+                edoal_entity2_elem = edoal_cell.find('align:entity2', edoal_parser.namespaces)
+                edoal_entity2_xml = extract_xml_section(edoal_text, '<entity2>', '</entity2>', cell_index=i).strip()
+                # 簡易マッチング: URI が一致するか、または構造の基本部分
+                entity2_match = False
+                if hasattr(parsed_cell.entity2, 'uri'):
+                    parsed_uri = parsed_cell.entity2.uri
+                    # EDOAL XML から URI を抽出 (簡易)
+                    if edoal_entity2_elem is not None:
+                        inner_elem = edoal_entity2_elem.find('.//*[@rdf:about]', edoal_parser.namespaces)
+                        if inner_elem is not None:
+                            edoal_uri = inner_elem.get(f"{{{edoal_parser.namespaces['rdf']}}}about")
+                            entity2_match = parsed_uri == edoal_uri
+                        else:
+                            entity2_match = "Complex" in parsed_entity2_str and "Complex" in edoal_entity2_xml
+                else:
+                    entity2_match = "Complex" in parsed_entity2_str and "Complex" in edoal_entity2_xml
+
+                # Relation の比較
+                parsed_relation = parsed_cell.relation
+                edoal_relation_elem = edoal_cell.find('align:relation', edoal_parser.namespaces)
+                edoal_relation = edoal_relation_elem.text if edoal_relation_elem is not None else "N/A"
+                relation_match = parsed_relation == edoal_relation
+
+                # Measure の比較
+                parsed_measure = parsed_cell.measure
+                edoal_measure_elem = edoal_cell.find('align:measure', edoal_parser.namespaces)
+                edoal_measure_text = edoal_measure_elem.text if edoal_measure_elem is not None else "0.0"
+                try:
+                    edoal_measure = float(edoal_measure_text)
+                except ValueError:
+                    edoal_measure = 0.0
+                measure_match = abs(parsed_measure - edoal_measure) < 1e-6
+
+                # パースした Alignment の内容
+                parsed_alignment = str(parsed_cell)
+
+                # CSV に書き込み
+                writer.writerow({
+                    'Cell_Index': i + 1,
+                    'Parsed_Cell_About': parsed_about,
+                    'EDOAL_Cell_About': edoal_about,
+                    'EDOAL_Cell_XML': edoal_cell_xml,
+                    'Parsed_Entity1_URI': parsed_entity1_uri,
+                    'EDOAL_Entity1_URI': edoal_entity1_uri,
+                    'EDOAL_Entity1_XML': edoal_entity1_xml,
+                    'Parsed_Entity2_Structure': parsed_entity2_str,
+                    'EDOAL_Entity2_XML': edoal_entity2_xml,
+                    'Parsed_Alignment': parsed_alignment,
+                    'Parsed_Relation': parsed_relation,
+                    'EDOAL_Relation': edoal_relation,
+                    'Parsed_Measure': parsed_measure,
+                    'EDOAL_Measure': edoal_measure,
+                    'Entity1_Match': entity1_match,
+                    'Entity2_Match': entity2_match,
+                    'Relation_Match': relation_match,
+                    'Measure_Match': measure_match
+                })
+
+    print(f"Comparison output saved to {output_csv_path}")
+
+def extract_xml_section(full_text: str, start_tag: str, end_tag: str, about_attr: str = None, cell_index: int = None) -> str:
+    """EDOAL テキストから特定の XML セクションを抽出するヘルパー関数"""
+    import re
+
+    if about_attr:
+        # Cell の場合、rdf:about 属性で特定 (alignment.edoal の構造に合わせる)
+        # 実際のファイル構造に合わせたパターン
+        pattern = rf'(\s*<Cell[^>]*rdf:about="{re.escape(about_attr)}"[^>]*>.*?</Cell>)'
+        match = re.search(pattern, full_text, re.DOTALL)
+        if match:
+            return match.group(1).strip()
+
+    elif cell_index is not None:
+        # entity1/entity2 の場合、出現順で特定
+        # 実際のファイル構造に合わせたパターン
+        if 'entity1' in start_tag:
+            pattern = r'(\s*<entity1>.*?</entity1>)'
+        elif 'entity2' in start_tag:
+            pattern = r'(\s*<entity2>.*?</entity2>)'
+        else:
+            return "N/A"
+
+        matches = list(re.finditer(pattern, full_text, re.DOTALL))
+        if cell_index < len(matches):
+            return matches[cell_index].group(1).strip()
+
+    return "N/A"
+
+
+# 使用例: テストデータを使用して比較
 if __name__ == '__main__':
-    if len(sys.argv) > 1:
-        parser = EdoalParser(sys.argv[1])
+    def compare_alignment(file_path):
+        parser = EdoalParser(file_path=file_path)
         alignment_result = parser.parse()
         print(f"Ontology 1: {alignment_result.onto1}")
         print(f"Ontology 2: {alignment_result.onto2}")
@@ -270,19 +418,24 @@ if __name__ == '__main__':
             print(f"  Relation: {cell.relation}")
             print(f"  Measure:  {cell.measure}")
         print("=" * 30)
-    else:
-        Alignment_file = "/Users/masa669/Documents/linkeddata/sparql-translator-complex-alignment-master/sparql_translator/test_data/taxons/alignment/alignment.edoal"
-        parser = EdoalParser(Alignment_file)
-        alignment_result = parser.parse()
-        print(f"Ontology 1: {alignment_result.onto1}")
-        print(f"Ontology 2: {alignment_result.onto2}")
-        print(f"Found {len(alignment_result.cells)} correspondences.")
-        print("=" * 30)
-        for i, cell in enumerate(alignment_result.cells):
-            print(f"--- Cell {i+1} ---")
-            print(f"  Entity 1: {cell.entity1}")
-            print(f"  Entity 2: {cell.entity2}")
-            print(f"  Relation: {cell.relation}")
-            print(f"  Measure:  {cell.measure}")
-        print("=" * 30)
+            # 比較関数を呼び出し
+        dataset_name = os.path.basename(os.path.dirname(os.path.dirname(alignment_file)))
+        parent = os.path.basename(os.path.dirname(alignment_file))
+        base = os.path.splitext(os.path.basename(alignment_file))[0]
+        output_csv = f"res/{dataset_name + '_' if parent else ''}{base}_comparison.csv"
+        compare_alignment_and_edoal(alignment_result, parser, output_csv)
 
+    # デフォルトのテストファイルをリストアップ
+    test_files = [
+        "/Users/masa669/Documents/linkeddata/sparql-translator-complex-alignment-master/sparql_translator/test_data/agro-db/alignment/alignment.edoal",
+        "/Users/masa669/Documents/linkeddata/sparql-translator-complex-alignment-master/sparql_translator/test_data/agronomic-voc/alignment/alignment.edoal",
+        "/Users/masa669/Documents/linkeddata/sparql-translator-complex-alignment-master/sparql_translator/test_data/conference/alignment/alignment.edoal",
+        "/Users/masa669/Documents/linkeddata/sparql-translator-complex-alignment-master/sparql_translator/test_data/taxons/alignment/alignment.edoal"
+    ]
+
+    if len(sys.argv) > 1:
+        alignment_file = sys.argv[1]
+        compare_alignment(alignment_file)
+    else:
+        for alignment_file in test_files:
+            compare_alignment(alignment_file)

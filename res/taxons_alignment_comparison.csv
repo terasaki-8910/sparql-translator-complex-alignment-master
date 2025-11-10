@@ -1,0 +1,423 @@
+Cell_Index,Parsed_Cell_About,EDOAL_Cell_About,EDOAL_Cell_XML,Parsed_Entity1_URI,EDOAL_Entity1_URI,EDOAL_Entity1_XML,Parsed_Entity2_Structure,EDOAL_Entity2_XML,Parsed_Alignment,Parsed_Relation,EDOAL_Relation,Parsed_Measure,EDOAL_Measure,Entity1_Match,Entity2_Match,Relation_Match,Measure_Match
+1,Cell 1,Taxon,"<Cell rdf:about=""Taxon"">
+	<entity1><edoal:Class rdf:about=""&irstea;Taxon""/></entity1>
+        <entity2><edoal:Class rdf:about=""&dbo;Species""/></entity2>
+        <measure rdf:datatype=""&xsd;float"">1.0</measure>
+        <relation>Equivalence</relation>
+      </Cell>",http://ontology.irstea.fr/AgronomicTaxon#Taxon,http://ontology.irstea.fr/AgronomicTaxon#Taxon,"<entity1><edoal:Class rdf:about=""&irstea;Taxon""/></entity1>",Class(uri='http://dbpedia.org/ontology/Species'),"<entity2><edoal:Class rdf:about=""&dbo;Species""/></entity2>","Cell(entity1=Class(uri='http://ontology.irstea.fr/AgronomicTaxon#Taxon'), entity2=Class(uri='http://dbpedia.org/ontology/Species'), relation='Equivalence', measure=1.0)",Equivalence,Equivalence,1.0,1.0,True,True,True,True
+2,Cell 2,Kingdom,"<Cell rdf:about=""Kingdom"">
+	<entity1><edoal:Class rdf:about=""&irstea;KingdomRank""/></entity1>
+	<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType=""Collection"">
+	      <edoal:Class rdf:about=""&dbo;Species""/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about=""&dbo;kingdom""/>
+					</edoal:inverse>
+			</edoal:Relation>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource=""&edoal;greater-than""/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>
+	<measure rdf:datatype='&xsd;float'>1.</measure>
+	<relation>Equivalence</relation>
+    </Cell>",http://ontology.irstea.fr/AgronomicTaxon#KingdomRank,http://ontology.irstea.fr/AgronomicTaxon#KingdomRank,"<entity1><edoal:Class rdf:about=""&irstea;KingdomRank""/></entity1>","LogicalConstructor(operator='and', operands=[Class(uri='http://dbpedia.org/ontology/Species')])","<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType=""Collection"">
+	      <edoal:Class rdf:about=""&dbo;Species""/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about=""&dbo;kingdom""/>
+					</edoal:inverse>
+			</edoal:Relation>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource=""&edoal;greater-than""/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>","Cell(entity1=Class(uri='http://ontology.irstea.fr/AgronomicTaxon#KingdomRank'), entity2=LogicalConstructor(operator='and', operands=[Class(uri='http://dbpedia.org/ontology/Species')]), relation='Equivalence', measure=1.0)",Equivalence,Equivalence,1.0,1.0,True,False,True,True
+3,Cell 3,Phylum,"<Cell rdf:about=""Phylum"">
+	<entity1><edoal:Class rdf:about=""&irstea;PhylumRank""/></entity1>
+	<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType=""Collection"">
+	      <edoal:Class rdf:about=""&dbo;Species""/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about=""&dbo;phylum""/>
+					</edoal:inverse>
+			</edoal:Relation>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource=""&edoal;greater-than""/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>
+	<measure rdf:datatype='&xsd;float'>1.</measure>
+	<relation>Equivalence</relation>
+    </Cell>",http://ontology.irstea.fr/AgronomicTaxon#PhylumRank,http://ontology.irstea.fr/AgronomicTaxon#PhylumRank,"<entity1><edoal:Class rdf:about=""&irstea;PhylumRank""/></entity1>","LogicalConstructor(operator='and', operands=[Class(uri='http://dbpedia.org/ontology/Species')])","<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType=""Collection"">
+	      <edoal:Class rdf:about=""&dbo;Species""/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about=""&dbo;phylum""/>
+					</edoal:inverse>
+			</edoal:Relation>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource=""&edoal;greater-than""/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>","Cell(entity1=Class(uri='http://ontology.irstea.fr/AgronomicTaxon#PhylumRank'), entity2=LogicalConstructor(operator='and', operands=[Class(uri='http://dbpedia.org/ontology/Species')]), relation='Equivalence', measure=1.0)",Equivalence,Equivalence,1.0,1.0,True,False,True,True
+4,Cell 4,Classis,"<Cell rdf:about=""Classis"">
+	<entity1><edoal:Class rdf:about=""&irstea;ClassRank""/></entity1>
+	<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType=""Collection"">
+	      <edoal:Class rdf:about=""&dbo;Species""/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about=""&dbo;classis""/>
+					</edoal:inverse>
+			</edoal:Relation>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource=""&edoal;greater-than""/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>
+	<measure rdf:datatype='&xsd;float'>1.</measure>
+	<relation>Equivalence</relation>
+    </Cell>",http://ontology.irstea.fr/AgronomicTaxon#ClassRank,http://ontology.irstea.fr/AgronomicTaxon#ClassRank,"<entity1><edoal:Class rdf:about=""&irstea;ClassRank""/></entity1>","LogicalConstructor(operator='and', operands=[Class(uri='http://dbpedia.org/ontology/Species')])","<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType=""Collection"">
+	      <edoal:Class rdf:about=""&dbo;Species""/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about=""&dbo;classis""/>
+					</edoal:inverse>
+			</edoal:Relation>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource=""&edoal;greater-than""/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>","Cell(entity1=Class(uri='http://ontology.irstea.fr/AgronomicTaxon#ClassRank'), entity2=LogicalConstructor(operator='and', operands=[Class(uri='http://dbpedia.org/ontology/Species')]), relation='Equivalence', measure=1.0)",Equivalence,Equivalence,1.0,1.0,True,False,True,True
+5,Cell 5,Order,"<Cell rdf:about=""Order"">
+	<entity1><edoal:Class rdf:about=""&irstea;OrderRank""/></entity1>
+	<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType=""Collection"">
+	      <edoal:Class rdf:about=""&dbo;Species""/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about=""&dbo;order""/>
+					</edoal:inverse>
+			</edoal:Relation>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource=""&edoal;greater-than""/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>
+	<measure rdf:datatype='&xsd;float'>1.</measure>
+	<relation>Equivalence</relation>
+    </Cell>",http://ontology.irstea.fr/AgronomicTaxon#OrderRank,http://ontology.irstea.fr/AgronomicTaxon#OrderRank,"<entity1><edoal:Class rdf:about=""&irstea;OrderRank""/></entity1>","LogicalConstructor(operator='and', operands=[Class(uri='http://dbpedia.org/ontology/Species')])","<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType=""Collection"">
+	      <edoal:Class rdf:about=""&dbo;Species""/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about=""&dbo;order""/>
+					</edoal:inverse>
+			</edoal:Relation>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource=""&edoal;greater-than""/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>","Cell(entity1=Class(uri='http://ontology.irstea.fr/AgronomicTaxon#OrderRank'), entity2=LogicalConstructor(operator='and', operands=[Class(uri='http://dbpedia.org/ontology/Species')]), relation='Equivalence', measure=1.0)",Equivalence,Equivalence,1.0,1.0,True,False,True,True
+6,Cell 6,Family,"<Cell rdf:about=""Family"">
+	<entity1><edoal:Class rdf:about=""&irstea;FamilyRank""/></entity1>
+	<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType=""Collection"">
+	      <edoal:Class rdf:about=""&dbo;Species""/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about=""&dbo;family""/>
+					</edoal:inverse>
+			</edoal:Relation>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource=""&edoal;greater-than""/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>
+	<measure rdf:datatype='&xsd;float'>1.</measure>
+	<relation>Equivalence</relation>
+    </Cell>",http://ontology.irstea.fr/AgronomicTaxon#FamilyRank,http://ontology.irstea.fr/AgronomicTaxon#FamilyRank,"<entity1><edoal:Class rdf:about=""&irstea;FamilyRank""/></entity1>","LogicalConstructor(operator='and', operands=[Class(uri='http://dbpedia.org/ontology/Species')])","<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType=""Collection"">
+	      <edoal:Class rdf:about=""&dbo;Species""/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about=""&dbo;family""/>
+					</edoal:inverse>
+			</edoal:Relation>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource=""&edoal;greater-than""/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>","Cell(entity1=Class(uri='http://ontology.irstea.fr/AgronomicTaxon#FamilyRank'), entity2=LogicalConstructor(operator='and', operands=[Class(uri='http://dbpedia.org/ontology/Species')]), relation='Equivalence', measure=1.0)",Equivalence,Equivalence,1.0,1.0,True,False,True,True
+7,Cell 7,Genus,"<Cell rdf:about=""Genus"">
+	<entity1><edoal:Class rdf:about=""&irstea;GenusRank""/></entity1>
+	<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType=""Collection"">
+	      <edoal:Class rdf:about=""&dbo;Species""/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about=""&dbo;genus""/>
+					</edoal:inverse>
+			</edoal:Relation>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource=""&edoal;greater-than""/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>
+	<measure rdf:datatype='&xsd;float'>1.</measure>
+	<relation>Equivalence</relation>
+    </Cell>",http://ontology.irstea.fr/AgronomicTaxon#GenusRank,http://ontology.irstea.fr/AgronomicTaxon#GenusRank,"<entity1><edoal:Class rdf:about=""&irstea;GenusRank""/></entity1>","LogicalConstructor(operator='and', operands=[Class(uri='http://dbpedia.org/ontology/Species')])","<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType=""Collection"">
+	      <edoal:Class rdf:about=""&dbo;Species""/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about=""&dbo;genus""/>
+					</edoal:inverse>
+			</edoal:Relation>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource=""&edoal;greater-than""/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>","Cell(entity1=Class(uri='http://ontology.irstea.fr/AgronomicTaxon#GenusRank'), entity2=LogicalConstructor(operator='and', operands=[Class(uri='http://dbpedia.org/ontology/Species')]), relation='Equivalence', measure=1.0)",Equivalence,Equivalence,1.0,1.0,True,False,True,True
+8,Cell 8,Species,"<Cell rdf:about=""Species"">
+	<entity1><edoal:Class rdf:about=""&irstea;SpecyRank""/></entity1>
+	<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType=""Collection"">
+	      <edoal:Class rdf:about=""&dbo;Species""/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation rdf:about=""&dbo;genus""/>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource=""&edoal;greater-than""/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>
+	<measure rdf:datatype='&xsd;float'>1.</measure>
+	<relation>SubsumedBy</relation>
+    </Cell>",http://ontology.irstea.fr/AgronomicTaxon#SpecyRank,http://ontology.irstea.fr/AgronomicTaxon#SpecyRank,"<entity1><edoal:Class rdf:about=""&irstea;GenusRank""/></entity1>","LogicalConstructor(operator='and', operands=[Class(uri='http://dbpedia.org/ontology/Species')])","<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType=""Collection"">
+	      <edoal:Class rdf:about=""&dbo;Species""/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation>
+						<edoal:and rdf:parseType=""Collection"">
+						<edoal:Relation>
+						<edoal:inverse>
+						<edoal:Relation>
+						<edoal:inverse>
+						<edoal:Relation>
+						<edoal:compose rdf:parseType=""Collection"">
+							<edoal:Relation rdf:about=""&dbo;kingdom""/>
+							
+							<edoal:Relation rdf:about=""&dbo;phylum""/>
+							<edoal:Relation rdf:about=""&dbo;canard""/>
+							<edoal:Relation rdf:about=""&dbo;lalilala""/>
+						</edoal:compose>
+						</edoal:Relation>
+						</edoal:inverse>
+						</edoal:Relation>
+						</edoal:inverse>
+						</edoal:Relation>
+						<edoal:Relation>
+						<edoal:not>
+							<edoal:Relation rdf:about=""&dbo;ddddd""/>
+						</edoal:not>
+						</edoal:Relation>
+						</edoal:and>						
+			</edoal:Relation>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource=""&edoal;greater-than""/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	 
+			<edoal:Class>
+			<edoal:not>
+			<edoal:Class rdf:about=""&dbo;laclasskifopa""/>
+			</edoal:not>
+			</edoal:Class>
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>","Cell(entity1=Class(uri='http://ontology.irstea.fr/AgronomicTaxon#SpecyRank'), entity2=LogicalConstructor(operator='and', operands=[Class(uri='http://dbpedia.org/ontology/Species')]), relation='SubsumedBy', measure=1.0)",SubsumedBy,SubsumedBy,1.0,1.0,True,False,True,True
+9,Cell 9,Variety,"<Cell rdf:about=""Variety"">
+	<entity1><edoal:Class rdf:about=""&irstea;VarietyRank""/></entity1>
+	<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType=""Collection"">
+	      <edoal:Class rdf:about=""&dbo;Species""/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation rdf:about=""&dbo;genus""/>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource=""&edoal;greater-than""/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>
+	<measure rdf:datatype='&xsd;float'>1.</measure>
+	<relation>SubsumedBy</relation>
+    </Cell>",http://ontology.irstea.fr/AgronomicTaxon#VarietyRank,http://ontology.irstea.fr/AgronomicTaxon#VarietyRank,"<entity1><edoal:Class rdf:about=""&irstea;SpecyRank""/></entity1>","LogicalConstructor(operator='and', operands=[Class(uri='http://dbpedia.org/ontology/Species')])","<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType=""Collection"">
+	      <edoal:Class rdf:about=""&dbo;Species""/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation rdf:about=""&dbo;genus""/>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource=""&edoal;greater-than""/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>","Cell(entity1=Class(uri='http://ontology.irstea.fr/AgronomicTaxon#VarietyRank'), entity2=LogicalConstructor(operator='and', operands=[Class(uri='http://dbpedia.org/ontology/Species')]), relation='SubsumedBy', measure=1.0)",SubsumedBy,SubsumedBy,1.0,1.0,True,False,True,True
+10,Cell 10,hasHigherRank,"<Cell rdf:about=""hasHigherRank"">
+	<entity1><edoal:Relation rdf:about=""&irstea;hasHigherRank""/></entity1>
+       <entity2>
+		<edoal:Relation>
+			<edoal:or rdf:parseType=""Collection"">
+				<edoal:Relation rdf:about=""&dbo;kingdom""/>
+				<edoal:Relation rdf:about=""&dbo;phylum""/>
+				<edoal:Relation rdf:about=""&dbo;classis""/>
+				<edoal:Relation rdf:about=""&dbo;order""/>		
+				<edoal:Relation rdf:about=""&dbo;family""/>
+				<edoal:Relation rdf:about=""&dbo;genus""/>
+			</edoal:or>
+		</edoal:Relation>
+	</entity2>
+     <measure rdf:datatype=""&xsd;float"">1.0</measure>
+     <relation>SubsumedBy</relation>
+     </Cell>",http://ontology.irstea.fr/AgronomicTaxon#hasHigherRank,http://ontology.irstea.fr/AgronomicTaxon#hasHigherRank,"<entity1><edoal:Class rdf:about=""&irstea;VarietyRank""/></entity1>","LogicalConstructor(operator='or', operands=[Relation(uri='http://dbpedia.org/ontology/kingdom')])","<entity2> 
+	  <edoal:Class>
+	    <edoal:and rdf:parseType=""Collection"">
+	      <edoal:Class rdf:about=""&dbo;Species""/>
+			<edoal:AttributeOccurenceRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation rdf:about=""&dbo;genus""/>
+		</edoal:onAttribute>
+		<edoal:comparator rdf:resource=""&edoal;greater-than""/>
+  		<edoal:value>0</edoal:value>
+	      </edoal:AttributeOccurenceRestriction>	  
+	    </edoal:and>
+	  </edoal:Class>
+        </entity2>","Cell(entity1=Relation(uri='http://ontology.irstea.fr/AgronomicTaxon#hasHigherRank'), entity2=LogicalConstructor(operator='or', operands=[Relation(uri='http://dbpedia.org/ontology/kingdom')]), relation='SubsumedBy', measure=1.0)",SubsumedBy,SubsumedBy,1.0,1.0,True,False,True,True
+11,Cell 11,hasLowerRank,"<Cell rdf:about=""hasLowerRank"">
+	<entity1><edoal:Relation rdf:about=""&irstea;hasLowerRank""/></entity1>
+       <entity2>
+		<edoal:Relation>
+			<edoal:or rdf:parseType=""Collection"">
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about=""&dbo;kingdom""/>
+					</edoal:inverse>
+				</edoal:Relation>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about=""&dbo;phylum""/>
+					</edoal:inverse>
+				</edoal:Relation>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about=""&dbo;classis""/>
+					</edoal:inverse>
+				</edoal:Relation>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about=""&dbo;order""/>
+					</edoal:inverse>
+				</edoal:Relation>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about=""&dbo;family""/>
+					</edoal:inverse>
+				</edoal:Relation>
+				<edoal:Relation>
+					<edoal:inverse>
+						<edoal:Relation rdf:about=""&dbo;genus""/>
+					</edoal:inverse>
+				</edoal:Relation>
+			</edoal:or>
+		</edoal:Relation>
+	</entity2>
+     <measure rdf:datatype=""&xsd;float"">1.0</measure>
+     <relation>SubsumedBy</relation>
+     </Cell>",http://ontology.irstea.fr/AgronomicTaxon#hasLowerRank,http://ontology.irstea.fr/AgronomicTaxon#hasLowerRank,"<entity1><edoal:Relation rdf:about=""&irstea;hasHigherRank""/></entity1>","LogicalConstructor(operator='or', operands=[PathConstructor(operator='inverse', operands=[Relation(uri='http://dbpedia.org/ontology/kingdom')])])","<entity2>
+		<edoal:Relation>
+			<edoal:or rdf:parseType=""Collection"">
+				<edoal:Relation rdf:about=""&dbo;kingdom""/>
+				<edoal:Relation rdf:about=""&dbo;phylum""/>
+				<edoal:Relation rdf:about=""&dbo;classis""/>
+				<edoal:Relation rdf:about=""&dbo;order""/>		
+				<edoal:Relation rdf:about=""&dbo;family""/>
+				<edoal:Relation rdf:about=""&dbo;genus""/>
+			</edoal:or>
+		</edoal:Relation>
+	</entity2>","Cell(entity1=Relation(uri='http://ontology.irstea.fr/AgronomicTaxon#hasLowerRank'), entity2=LogicalConstructor(operator='or', operands=[PathConstructor(operator='inverse', operands=[Relation(uri='http://dbpedia.org/ontology/kingdom')])]), relation='SubsumedBy', measure=1.0)",SubsumedBy,SubsumedBy,1.0,1.0,True,False,True,True

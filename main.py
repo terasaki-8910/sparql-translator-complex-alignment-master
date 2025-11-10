@@ -8,6 +8,12 @@ from sparql_translator.src.rewriter.sparql_rewriter import SparqlRewriter
 from sparql_translator.src.rewriter.ast_serializer import AstSerializer
 from sparql_translator.src.common.logger import get_logger
 
+"""
+タスク
+AST ➡︎ SPARQL をPythonで行うのではなく、Jenaを使って行い、その結果をPythonで受け取るように変更する。
+"""
+
+
 def process_dataset(dataset_path, sparql_parser):
     """
     単一のデータセットに対する変換処理を行う。
