@@ -32,7 +32,16 @@ class AstWalker:
         new_node = {}
         for key, value in node.items():
             if isinstance(value, list):
-                new_node[key] = [self._walk_node(item) for item in value]
+                # リストの各要素を処理し、結果がリストの場合は展開する
+                new_list = []
+                for item in value:
+                    result = self._walk_node(item)
+                    # 結果がリストの場合は展開（flatten）
+                    if isinstance(result, list):
+                        new_list.extend(result)
+                    else:
+                        new_list.append(result)
+                new_node[key] = new_list
             elif isinstance(value, dict):
                 new_node[key] = self._walk_node(value)
             else:

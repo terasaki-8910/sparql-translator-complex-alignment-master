@@ -3,6 +3,7 @@
 <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
 <!ENTITY ekaw "http://ekaw#">
 <!ENTITY confOf "http://confOf#">
+<!ENTITY cmt "http://cmt#">
 <!ENTITY proton "http://proton.semanticweb.org/">
 <!ENTITY edoal "http://ns.inria.org/edoal/1.0/#">
 ]>
@@ -57,6 +58,53 @@
 		</entity2>
 	<measure rdf:datatype='&xsd;float'>1.</measure>
 	<relation>Equivalence</relation>
+	  </Cell>
+	</map>
+	
+	<map>
+      <Cell rdf:about="Accepted_Paper">
+		<entity1>
+			<edoal:Class rdf:about="&ekaw;Accepted_Paper"/>
+		</entity1>
+        <entity2>
+		<edoal:Class>
+	    <edoal:and rdf:parseType="Collection">
+	      <edoal:Class rdf:about="&cmt;Paper"/>
+		  <edoal:AttributeDomainRestriction>
+			<edoal:onAttribute>
+				<edoal:Relation rdf:about="&cmt;hasDecision"/>
+			</edoal:onAttribute>
+			<edoal:class>
+				<edoal:Class rdf:about="&cmt;Acceptance"/>
+			</edoal:class>
+		</edoal:AttributeDomainRestriction>
+		</edoal:and>
+		</edoal:Class>		
+		</entity2>
+		<measure rdf:datatype="&xsd;float">1.0</measure>
+		<relation>Equivalence</relation>
+	  </Cell>
+	</map>
+	
+	<map>
+      <Cell rdf:about="Chairman">
+		<entity1>
+			<edoal:Class rdf:about="&cmt;Chairman"/>
+		</entity1>
+        <entity2>
+		<edoal:Class>
+			<edoal:or rdf:parseType="Collection">
+			  <edoal:Class rdf:about="&ekaw;Demo_Chair"/>
+			  <edoal:Class rdf:about="&ekaw;OC_Chair"/>
+			  <edoal:Class rdf:about="&ekaw;PC_Chair"/>
+			  <edoal:Class rdf:about="&ekaw;Session_Chair"/>
+			  <edoal:Class rdf:about="&ekaw;Tutorial_Chair"/>
+			  <edoal:Class rdf:about="&ekaw;Workshop_Chair"/>
+			</edoal:or>
+		</edoal:Class>		
+		</entity2>
+		<measure rdf:datatype="&xsd;float">1.0</measure>
+		<relation>Equivalence</relation>
 	  </Cell>
 	</map>
 	

@@ -23,6 +23,13 @@ application {
     mainClass = 'sparql_parser_java.SparqlAstParser'
 }
 
+// シリアライザー用のタスクを追加
+task runSerializer(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'sparql_serializer_java.SparqlAstSerializer'
+    standardInput = System.in
+}
+
 // Javaのバージョンを指定
 java {
     toolchain {

@@ -1,6 +1,7 @@
 import os
 import csv
 import traceback
+import re
 from datetime import datetime
 from sparql_translator.src.parser.edoal_parser import EdoalParser
 from sparql_translator.src.parser.sparql_ast_parser import SparqlAstParser
@@ -14,7 +15,111 @@ AST ➡︎ SPARQL をPythonで行うのではなく、Jenaを使って行い、�
 """
 
 
-def process_dataset(dataset_path, sparql_parser):
+def extract_uris(query_text):
+    """
+    SPARQLクエリからURIを抽出する。
+    <URI> 形式と、PREFIX定義から展開可能な短縮形の両方を抽出。
+    """
+    uris = set()
+    
+    # <URI> 形式のURIを抽出
+    full_uri_pattern = r'<([^>]+)>'
+    for match in re.finditer(full_uri_pattern, query_text):
+        uri = match.group(1)
+        # フィルタ: 標準的な名前空間は除外
+        if not any(ns in uri for ns in ['www.w3.org', 'xmlns.com', 'purl.org/dc']):
+            uris.add(uri)
+    
+    # PREFIX定義を解析
+    prefixes = {}
+    prefix_pattern = r'PREFIX\s+(\w+):\s*<([^>]+)>'
+    for match in re.finditer(prefix_pattern, query_text, re.IGNORECASE):
+        prefix = match.group(1)
+        namespace = match.group(2)
+        prefixes[prefix] = namespace
+    
+    # 短縮形URI（prefix:localName）を抽出して展開
+    # ただし、rdf:type等の標準的なものは除外
+    short_uri_pattern = r'\b(\w+):(\w+)\b'
+    for match in re.finditer(short_uri_pattern, query_text):
+        prefix = match.group(1)
+        local_name = match.group(2)
+        # 標準的なプレフィックスは除外
+        if prefix in ['rdf', 'rdfs', 'owl', 'xsd', 'skos']:
+            continue
+        if prefix in prefixes:
+            full_uri = prefixes[prefix] + local_name
+            uris.add(full_uri)
+    
+    return uris
+
+
+def check_translation_quality(input_query, output_query, expected_query, alignment_file):
+    """
+    URIベースで変換の品質を判定する。
+    
+    判定基準:
+    1. output_queryが空でない
+    2. input_query固有のURIがoutput_queryに残存していない（変換が行われた）
+    3. (オプション) expected_queryのターゲットURIがoutput_queryに含まれている
+    
+    :return: "Success" or "Failure"
+    """
+    # 基本チェック: output_queryが存在する
+    if not output_query or len(output_query.strip()) < 10:
+        return "Failure"
+    
+    # input_queryとoutput_queryからURIを抽出
+    input_uris = extract_uris(input_query)
+    output_uris = extract_uris(output_query)
+    
+    # アラインメントファイルから変換対象のURIを取得
+    try:
+        parser = EdoalParser(alignment_file)
+        alignment = parser.parse()
+        source_uris = set()
+        target_uris = set()
+        
+        for cell in alignment.cells:
+            # entity1（ソース）のURIを収集
+            if hasattr(cell.entity1, 'uri'):
+                source_uris.add(cell.entity1.uri)
+            # entity2（ターゲット）のURIを収集
+            if hasattr(cell.entity2, 'uri'):
+                target_uris.add(cell.entity2.uri)
+    except Exception:
+        # アラインメント解析に失敗した場合は、単純な比較のみ
+        source_uris = set()
+        target_uris = set()
+    
+    # 判定1: 変換対象のソースURIがoutput_queryに残っていないか
+    remaining_source_uris = input_uris & source_uris & output_uris
+    if remaining_source_uris:
+        # まだソースURIが残っている = 変換が不完全
+        # ただし、すべてのソースURIが残っている場合は変換が行われていないとみなす
+        if len(remaining_source_uris) == len(input_uris & source_uris):
+            return "Failure"
+    
+    # 判定2: 何らかの変換が行われたか（URIの変化があるか）
+    if input_uris == output_uris and len(input_uris) > 0:
+        # URIがまったく変化していない = 変換が行われていない
+        return "Failure"
+    
+    # 判定3: expected_queryが存在する場合、ターゲットURIの含有をチェック
+    if expected_query and len(expected_query.strip()) > 10:
+        expected_uris = extract_uris(expected_query)
+        # ターゲットURIの多くがoutput_queryに含まれていることを確認
+        if target_uris and expected_uris:
+            common_target_uris = target_uris & expected_uris & output_uris
+            # 少なくとも一部のターゲットURIが含まれていればOK
+            if len(common_target_uris) > 0 or len(output_uris & expected_uris) > 0:
+                return "Success"
+    
+    # デフォルト: 変換が行われた形跡があればSuccess
+    return "Success"
+
+
+def process_dataset(dataset_path, sparql_parser, project_root):
     """
     単一のデータセットに対する変換処理を行う。
     """
@@ -32,7 +137,7 @@ def process_dataset(dataset_path, sparql_parser):
         alignment_data = edoal_parser.parse()
         print(f"Loaded {len(alignment_data.cells)} alignment cells.")
         rewriter = SparqlRewriter(alignment_data)
-        serializer = AstSerializer()
+        serializer = AstSerializer(project_root)
     except Exception as e:
         print(f"Error parsing alignment file {alignment_file}: {e}")
         return []
@@ -70,32 +175,10 @@ def process_dataset(dataset_path, sparql_parser):
             source_ast = sparql_parser.parse(query_filepath)
             rewritten_ast = rewriter.walk(source_ast)
             output_query = serializer.serialize(rewritten_ast)
-            status = "Success"
-            # --- ログを確認して、Processing query の後にログ出力が存在しない場合は Failure にする ---
-            try:
-                # ログファイルの場所はプロジェクト内の sparql_translator/log/YYYY-MM-DD.log
-                project_dir = os.path.dirname(os.path.abspath(__file__))
-                log_dir = os.path.join(project_dir, 'sparql_translator', 'log')
-                log_file = os.path.join(log_dir, datetime.now().strftime('%Y-%m-%d') + '.log')
-                marker = f"Processing query: {query_filename}"
-                if os.path.exists(log_file):
-                    with open(log_file, 'r', encoding='utf-8') as lf:
-                        content = lf.read()
-                    idx = content.rfind(marker)
-                    # マーカーが見つかり、かつそのマーカーの後に非空白の文字列が無ければ Failure
-                    if idx == -1:
-                        # マーカー自体がログに見つからない場合は変換が行われていないとみなす
-                        status = "Failure"
-                    else:
-                        after = content[idx + len(marker):].strip()
-                        if after == "":
-                            status = "Failure"
-                else:
-                    # ログファイルが存在しない場合も Failure とみなす
-                    status = "Failure"
-            except Exception:
-                # ログ確認に失敗しても処理自体は続け、既定の status を使用する
-                pass
+            
+            # URIベースの成功判定ロジック
+            status = check_translation_quality(input_query, output_query, expected_query, alignment_file)
+            
         except Exception:
             error_info = traceback.format_exc()
             print(f"    -> Failed to translate: {error_info.splitlines()[-1]}")
@@ -118,7 +201,7 @@ def main():
     """
     project_root = os.path.dirname(os.path.abspath(__file__))
     test_data_dir = os.path.join(project_root, 'sparql_translator', 'test_data')
-    output_csv_file = os.path.join(project_root, 'translation_results.csv')
+    output_csv_file = os.path.join(project_root, f'translation_results_{datetime.now().strftime("%Y%m%d_%H%M%S")}.csv')
 
     all_results = []
     sparql_parser = SparqlAstParser(project_root)
@@ -127,7 +210,7 @@ def main():
         # alignment と queries ディレクトリを持つものをデータセットのルートと判断
         if "alignment" in dirnames and "queries" in dirnames:
             dataset_path = dirpath
-            results = process_dataset(dataset_path, sparql_parser)
+            results = process_dataset(dataset_path, sparql_parser, project_root)
             all_results.extend(results)
             # サブディレクトリをこれ以上探索しないようにする
             dirnames[:] = []

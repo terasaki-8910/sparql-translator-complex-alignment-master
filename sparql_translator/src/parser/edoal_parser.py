@@ -99,6 +99,25 @@ class AttributeDomainRestriction(Restriction):
 
     """属性のドメインに関する制約（属性の対象がどのクラスに属するか等）"""
 
+@dataclass
+class AttributeOccurenceRestriction(Restriction):
+    comparator: str
+    value: Any
+
+    """属性の出現回数に対する制約（例: 'greater-than 0'で存在チェック）"""
+
+@dataclass
+class RelationDomainRestriction(EDOALEntity):
+    class_expression: EDOALEntity
+
+    """関係（Relation）のドメイン制約（主語がどのクラスに属するか）"""
+
+@dataclass
+class RelationCoDomainRestriction(EDOALEntity):
+    class_expression: EDOALEntity
+
+    """関係（Relation）のコドメイン制約（目的語がどのクラスに属するか）"""
+
 
 @dataclass
 class Cell:
@@ -242,16 +261,80 @@ class EdoalParser:
             on_attr_elem = element.find('edoal:onAttribute', self.namespaces)
             comparator_elem = element.find('edoal:comparator', self.namespaces)
             value_elem = element.find('edoal:value', self.namespaces)
+            
+            # valueの解析: LiteralまたはURIリファレンス
+            value = None
+            if value_elem is not None and len(value_elem) > 0:
+                value_child = value_elem[0]
+                value_tag = value_child.tag.split('}')[-1] if '}' in value_child.tag else value_child.tag
+                
+                if value_tag == 'Literal':
+                    # Literalの場合: edoal:string, edoal:type属性を取得
+                    value = {
+                        'string': value_child.get('{' + self.namespaces['edoal'] + '}string', ''),
+                        'type': value_child.get('{' + self.namespaces['edoal'] + '}type', '')
+                    }
+                elif value_tag in ['Class', 'Property', 'Relation', 'Instance']:
+                    # URIリファレンスの場合
+                    uri = value_child.get('{' + self.namespaces['rdf'] + '}about')
+                    if uri:
+                        value = {'uri': uri}
+                else:
+                    # その他の場合はエンティティとして解析
+                    value = self._parse_entity(value_child)
+            
             return AttributeValueRestriction(
                 on_attribute=self._parse_entity(on_attr_elem[0]) if on_attr_elem is not None and len(on_attr_elem) > 0 else None,
                 comparator=comparator_elem.get('{' + self.namespaces['rdf'] + '}resource') if comparator_elem is not None else None,
-                value=self._parse_entity(value_elem[0]) if value_elem is not None and len(value_elem) > 0 else None
+                value=value
+            )
+        
+        # AttributeOccurenceRestriction の解析
+        if tag == 'AttributeOccurenceRestriction':
+            on_attr_elem = element.find('edoal:onAttribute', self.namespaces)
+            comparator_elem = element.find('edoal:comparator', self.namespaces)
+            value_elem = element.find('edoal:value', self.namespaces)
+            
+            # valueの解析: 通常は数値（出現回数）
+            value = None
+            if value_elem is not None:
+                value_text = value_elem.text
+                if value_text:
+                    try:
+                        value = int(value_text)
+                    except ValueError:
+                        value = value_text
+            
+            return AttributeOccurenceRestriction(
+                on_attribute=self._parse_entity(on_attr_elem[0]) if on_attr_elem is not None and len(on_attr_elem) > 0 else None,
+                comparator=comparator_elem.get('{' + self.namespaces['rdf'] + '}resource') if comparator_elem is not None else None,
+                value=value
+            )
+        
+        # RelationDomainRestriction の解析
+        if tag == 'RelationDomainRestriction':
+            class_elem = element.find('edoal:class', self.namespaces)
+            return RelationDomainRestriction(
+                class_expression=self._parse_entity(class_elem[0]) if class_elem is not None and len(class_elem) > 0 else None
+            )
+        
+        # RelationCoDomainRestriction の解析
+        if tag == 'RelationCoDomainRestriction':
+            class_elem = element.find('edoal:class', self.namespaces)
+            return RelationCoDomainRestriction(
+                class_expression=self._parse_entity(class_elem[0]) if class_elem is not None and len(class_elem) > 0 else None
             )
 
         # 論理演算子やパス構成子 (and, or, compose, inverse, transitive, not)
         if tag in ['and', 'or', 'compose', 'inverse', 'transitive', 'not']:
              # rdf:parseType="Collection" の場合は要素の順序を保持して複数オペランドを解析
-             operands = [self._parse_entity(child) for child in element[0]] if len(element) > 0 and element[0].get('{' + self.namespaces['rdf'] + '}parseType') == 'Collection' else [self._parse_entity(element[0])]
+             # elementの直下の子要素をすべて走査する
+             operands = []
+             for child in element:
+                 parsed = self._parse_entity(child)
+                 if parsed is not None:
+                     operands.append(parsed)
+             
              if tag in ['and', 'or', 'not']:
                  return LogicalConstructor(operator=tag, operands=operands)
              else:
