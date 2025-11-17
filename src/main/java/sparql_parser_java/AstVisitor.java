@@ -4,6 +4,7 @@ import org.apache.jena.graph.Node;
 import org.apache.jena.graph.Triple;
 import org.apache.jena.sparql.core.TriplePath;
 import org.apache.jena.sparql.expr.Expr;
+import org.apache.jena.sparql.path.*;
 import org.apache.jena.sparql.syntax.*;
 
 import java.util.*;
@@ -46,6 +47,89 @@ public class AstVisitor implements ElementVisitor {
             map.put("type", "unknown");
             map.put("value", node.toString());
         }
+        return map;
+    }
+    
+    /**
+     * プロパティパスを構造化されたMapに変換
+     */
+    private Map<String, Object> pathToMap(Path path) {
+        Map<String, Object> map = new LinkedHashMap<>();
+        
+        if (path instanceof P_Link) {
+            // 単純なプロパティ（URIリンク）
+            P_Link link = (P_Link) path;
+            map.put("type", "link");
+            map.put("uri", link.getNode().getURI());
+        } else if (path instanceof P_Mod) {
+            // 修飾子付きパス（*, +, ?）
+            P_Mod mod = (P_Mod) path;
+            map.put("type", "mod");
+            map.put("subPath", pathToMap(mod.getSubPath()));
+            
+            long min = mod.getMin();
+            long max = mod.getMax();
+            
+            if (min == 0 && max == -1) {
+                map.put("modifier", "*");  // ZeroOrMore
+            } else if (min == 1 && max == -1) {
+                map.put("modifier", "+");  // OneOrMore
+            } else if (min == 0 && max == 1) {
+                map.put("modifier", "?");  // ZeroOrOne
+            } else {
+                map.put("modifier", "custom");
+                map.put("min", min);
+                map.put("max", max);
+            }
+        } else if (path.getClass().getSimpleName().equals("P_OneOrMore1") ||
+                   path.getClass().getSimpleName().equals("P_ZeroOrMore1") ||
+                   path.getClass().getSimpleName().equals("P_ZeroOrOne1")) {
+            // Jenaの最適化されたOneOrMore/ZeroOrMore/ZeroOrOneクラス
+            // これらはP_Modのサブクラスではないが、同等の機能を持つ
+            // リフレクションでsubPathを取得
+            try {
+                java.lang.reflect.Method getSubPathMethod = path.getClass().getMethod("getSubPath");
+                Path subPath = (Path) getSubPathMethod.invoke(path);
+                
+                map.put("type", "mod");
+                map.put("subPath", pathToMap(subPath));
+                
+                String className = path.getClass().getSimpleName();
+                if (className.equals("P_OneOrMore1")) {
+                    map.put("modifier", "+");
+                } else if (className.equals("P_ZeroOrMore1")) {
+                    map.put("modifier", "*");
+                } else if (className.equals("P_ZeroOrOne1")) {
+                    map.put("modifier", "?");
+                }
+            } catch (Exception e) {
+                // リフレクション失敗時は"complex"として扱う
+                map.put("type", "complex");
+                map.put("pathString", path.toString());
+            }
+        } else if (path instanceof P_Inverse) {
+            // 逆方向パス (^)
+            P_Inverse inv = (P_Inverse) path;
+            map.put("type", "inverse");
+            map.put("subPath", pathToMap(inv.getSubPath()));
+        } else if (path instanceof P_Seq) {
+            // シーケンス（パスの連結 /）
+            P_Seq seq = (P_Seq) path;
+            map.put("type", "seq");
+            map.put("left", pathToMap(seq.getLeft()));
+            map.put("right", pathToMap(seq.getRight()));
+        } else if (path instanceof P_Alt) {
+            // 選択（パスの選択肢 |）
+            P_Alt alt = (P_Alt) path;
+            map.put("type", "alt");
+            map.put("left", pathToMap(alt.getLeft()));
+            map.put("right", pathToMap(alt.getRight()));
+        } else {
+            // その他の複雑なパス
+            map.put("type", "complex");
+            map.put("pathString", path.toString());
+        }
+        
         return map;
     }
     
@@ -119,24 +203,26 @@ public class AstVisitor implements ElementVisitor {
 
     @Override
     public void visit(ElementPathBlock el) {
-        // ElementTriplesBlockと同様に、個々のトリプルパスを構造化する
+        // プロパティパスを含むトリプルパターンを処理
         Map<String, Object> map = new LinkedHashMap<>();
         map.put("type", "bgp"); // BGP (Basic Graph Pattern) として扱う
         List<Object> triples = new ArrayList<>();
+        
         for (TriplePath triplePath : el.getPattern()) {
-            // TriplePathをTripleに変換して処理 (単純なケース)
             if (triplePath.isTriple()) {
+                // 単純なトリプル
                 triples.add(tripleToMap(triplePath.asTriple()));
             } else {
-                // 複雑なパス（例: a/b*|c）は、ここでは単純にtoString()で表現
-                Map<String, Object> pathMap = new LinkedHashMap<>();
-                pathMap.put("type", "path");
-                pathMap.put("subject", nodeToMap(triplePath.getSubject()));
-                pathMap.put("path", triplePath.getPath().toString());
-                pathMap.put("object", nodeToMap(triplePath.getObject()));
-                triples.add(pathMap);
+                // プロパティパスを含むトリプル
+                Map<String, Object> pathTriple = new LinkedHashMap<>();
+                pathTriple.put("type", "path_triple");
+                pathTriple.put("subject", nodeToMap(triplePath.getSubject()));
+                pathTriple.put("path", pathToMap(triplePath.getPath()));
+                pathTriple.put("object", nodeToMap(triplePath.getObject()));
+                triples.add(pathTriple);
             }
         }
+        
         map.put("triples", triples);
         stack.push(map);
     }

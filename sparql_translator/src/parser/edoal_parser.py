@@ -153,10 +153,12 @@ class EdoalParser:
 
     Args:
         file_path: EDOAL (RDF/XML) ファイルのパス
+        verbose: デバッグログを出力するかどうか (デフォルト: False)
     """
-    def __init__(self, file_path):
+    def __init__(self, file_path, verbose=False):
         # ファイルパスを保持
         self.file_path = file_path
+        self.verbose = verbose
         # XML を読み込んで ElementTree を構築
         self.tree = ET.parse(file_path)
         self.root = self.tree.getroot()
@@ -334,6 +336,12 @@ class EdoalParser:
                  parsed = self._parse_entity(child)
                  if parsed is not None:
                      operands.append(parsed)
+             
+             # デバッグログ: パース結果を出力
+             if self.verbose:
+                 print(f"[DEBUG EdoalParser] Parsed {tag} with {len(operands)} operands:")
+                 for idx, op in enumerate(operands):
+                     print(f"  Operand {idx}: {type(op).__name__} - {op}")
              
              if tag in ['and', 'or', 'not']:
                  return LogicalConstructor(operator=tag, operands=operands)

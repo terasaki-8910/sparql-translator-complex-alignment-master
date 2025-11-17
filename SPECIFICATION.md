@@ -79,7 +79,8 @@ graph LR
     -   **RelationDomainRestriction:** リレーションの定義域制約
     -   **RelationCoDomainRestriction:** リレーションの値域制約
     -   **LogicalConstructor:** 論理演算子（and, or）による複数条件の組み合わせ
-    -   **PathConstructor:** パス構造（inverse: 逆方向プロパティ）
+    -   **PathConstructor:** パス構造（compose: プロパティ連鎖、inverse: 逆方向プロパティ）
+    -   **複合パターン:** `edoal:or` と `edoal:compose` のネスト構造（2025年11月17日対応）
 
 ### 3.4. クエリ書き換え層 (Rewriter)
 
@@ -102,6 +103,8 @@ graph LR
         -   `RelationDomainRestriction`: 定義域制約 → 主語側の型制約追加
         -   `RelationCoDomainRestriction`: 値域制約 → 目的語側の型制約追加
         -   `PathConstructor (inverse)`: 逆プロパティ → 主語・目的語を入れ替え
+        -   `PathConstructor (compose)`: プロパティ連鎖 → 中間変数を使った複数トリプル展開（2025年11月17日対応）
+-   **デバッグモード (verbose):** コンストラクタに `verbose=True` を渡すことで、パースと書き換えの詳細ログを出力可能（2025年11月17日追加）
 
 ### 3.5. ASTシリアライザー層 (Serializer)
 
@@ -218,6 +221,138 @@ sequenceDiagram
    -   agronomic-voc/query_0, query_2
    -   agro-db/query_2
    -   SPARQL 1.1のプロパティパス構文（`+`, `*`, `/` 等）の変換は未実装
+
+## 7.3. 新機能: edoal:or と edoal:compose の複合パターン対応 (2025年11月17日)
+
+### 7.3.1. 背景
+
+従来のリライター実装では、`edoal:or` (UNION) と `edoal:compose` (プロパティ連鎖) の複合パターンで以下の問題が発生していました：
+
+1. **PathConstructor の無視**: `_expand_complex_relation` メソッドが `IdentifiedEntity` のみ処理し、`PathConstructor` を無視
+2. **変数スコープの断絶**: compose 展開時に生成される中間変数が、元のクエリ変数と接続されず、FILTER句が機能しない
+
+### 7.3.2. 実装内容
+
+#### パーサー層の拡張 (`edoal_parser.py`)
+
+```python
+class EdoalParser:
+    def __init__(self, file_path, verbose=False):
+        self.verbose = verbose
+        # ...
+    
+    def _parse_entity(self, element):
+        # verbose=True 時にパース情報を出力
+        if self.verbose:
+            print(f"[DEBUG] Parsing {op} with {len(operands)} operands")
+```
+
+#### リライター層の拡張 (`sparql_rewriter.py`)
+
+**1. PathConstructor の型チェック追加:**
+
+```python
+def _expand_complex_relation(self, triple, relation):
+    if isinstance(relation, LogicalConstructor) and relation.op == 'or':
+        for operand in relation.operands:
+            if isinstance(operand, PathConstructor):
+                # compose / inverse の処理
+                if operand.op == 'compose':
+                    triples = self._expand_compose_path(...)
+                elif operand.op == 'inverse':
+                    # 主語・目的語を入れ替え
+```
+
+**2. 新メソッド `_expand_compose_path`:**
+
+プロパティ連鎖を中間変数で展開し、始点（subject_node）と終点（object_node）を保持：
+
+```python
+def _expand_compose_path(self, compose_constructor, subject_node, object_node):
+    properties = compose_constructor.operands
+    current_subject = subject_node  # 元の主語を起点
+    
+    for i, prop in enumerate(properties[:-1]):
+        temp_var = self._generate_temp_variable()
+        triples.append(create_triple(current_subject, prop.uri, temp_var))
+        current_subject = temp_var  # 次のトリプルの主語
+    
+    # 最後のプロパティは元の目的語に接続
+    last_prop = properties[-1]
+    triples.append(create_triple(current_subject, last_prop.uri, object_node))
+```
+
+### 7.3.3. 変換例
+
+**EDOAL マッピング:**
+```xml
+<edoal:or>
+  <edoal:entity rdf:about="http://example.org/name"/>
+  <edoal:compose>
+    <edoal:entity rdf:about="http://example.org/prefLabel"/>
+    <edoal:entity rdf:about="http://example.org/literalForm"/>
+  </edoal:compose>
+</edoal:or>
+```
+
+**元のクエリ:**
+```sparql
+SELECT ?taxon ?label
+WHERE {
+  ?taxon agro:scientificName ?label .
+  FILTER(regex(str(?label), "Wheat"))
+}
+```
+
+**変換後のクエリ:**
+```sparql
+SELECT ?taxon ?label
+WHERE {
+  {
+    ?taxon <http://example.org/name> ?label .
+  } UNION {
+    ?taxon <http://example.org/prefLabel> ?temp0 .
+    ?temp0 <http://example.org/literalForm> ?label .
+  }
+  FILTER(regex(str(?label), "Wheat"))
+}
+```
+
+**ポイント:**
+- ✅ UNION 構造が正しく生成
+- ✅ compose が `?taxon → ?temp0 → ?label` に展開
+- ✅ FILTER が元の変数 `?label` を正しく参照
+
+### 7.3.4. テスト結果
+
+実データ（`agronomic-voc/alignment.edoal` + クエリファイル）で検証：
+
+| テストケース | 検証項目 | 結果 |
+|------------|---------|-----|
+| query_1.sparql | UNION生成 + FILTER変数追跡 | ✅ 成功 |
+| query_4.sparql | 複数ブランチのUNION | ✅ 成功 |
+| query_5.sparql | compose連鎖 + 型チェック | ✅ 成功 |
+
+### 7.3.5. verbose モード
+
+デバッグ用に詳細ログを出力可能：
+
+```python
+# 詳細ログ出力
+parser = EdoalParser("alignment.edoal", verbose=True)
+rewriter = SparqlRewriter(ast, parser.cells, verbose=True)
+
+# 本番環境（ログ抑制）
+parser = EdoalParser("alignment.edoal", verbose=False)
+rewriter = SparqlRewriter(ast, parser.cells, verbose=False)
+```
+
+**出力例（verbose=True）:**
+```
+[DEBUG] Parsing 'or' with 5 operands
+[Info] Matched relation: agro:scientificName → (or with 5 operands)
+[Info] Creating UNION with 5 branches
+```
 
 ## 8. 既知の制限事項と将来の拡張
 

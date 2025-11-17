@@ -11,8 +11,11 @@ import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryFactory;
 import org.apache.jena.query.SortCondition;
 import org.apache.jena.sparql.core.Var;
+import org.apache.jena.sparql.core.TriplePath;
 import org.apache.jena.sparql.expr.Expr;
 import org.apache.jena.sparql.expr.ExprVar;
+import org.apache.jena.sparql.path.*;
+import org.apache.jena.sparql.sse.SSE;
 import org.apache.jena.sparql.syntax.*;
 
 import java.io.BufferedReader;
@@ -177,19 +180,91 @@ public class SparqlAstSerializer {
 
     /**
      * BGP (Basic Graph Pattern) ノードを再構築
+     * プロパティパスを含むトリプルにも対応
      */
-    private static ElementTriplesBlock reconstructBGP(JsonObject node) {
-        ElementTriplesBlock triplesBlock = new ElementTriplesBlock();
+    private static Element reconstructBGP(JsonObject node) {
+        // トリプルパスを含む可能性があるため、ElementPathBlockを使用
+        ElementPathBlock pathBlock = new ElementPathBlock();
+        boolean hasPath = false;
+        
         if (node.has("triples")) {
             JsonArray triples = node.getAsJsonArray("triples");
             for (JsonElement tripleElement : triples) {
                 if (tripleElement.isJsonObject()) {
-                    Triple triple = reconstructTriple(tripleElement.getAsJsonObject());
-                    triplesBlock.addTriple(triple);
+                    JsonObject tripleObj = tripleElement.getAsJsonObject();
+                    String tripleType = tripleObj.has("type") ? tripleObj.get("type").getAsString() : "triple";
+                    
+                    if ("path_triple".equals(tripleType)) {
+                        // プロパティパスを含むトリプル
+                        hasPath = true;
+                        Node subject = reconstructNode(tripleObj.getAsJsonObject("subject"));
+                        Path path = reconstructPath(tripleObj.getAsJsonObject("path"));
+                        Node object = reconstructNode(tripleObj.getAsJsonObject("object"));
+                        pathBlock.addTriplePath(new TriplePath(subject, path, object));
+                    } else {
+                        // 通常のトリプル
+                        Triple triple = reconstructTriple(tripleObj);
+                        pathBlock.addTriple(triple);
+                    }
                 }
             }
         }
-        return triplesBlock;
+        
+        return pathBlock;
+    }
+    
+    /**
+     * プロパティパスを再構築
+     */
+    private static Path reconstructPath(JsonObject pathJson) {
+        String type = pathJson.has("type") ? pathJson.get("type").getAsString() : "";
+        
+        switch (type) {
+            case "link":
+                // 単純なプロパティリンク
+                String uri = pathJson.get("uri").getAsString();
+                return new P_Link(NodeFactory.createURI(uri));
+                
+            case "mod":
+                // 修飾子付きパス (*, +, ?)
+                Path subPath = reconstructPath(pathJson.getAsJsonObject("subPath"));
+                String modifier = pathJson.get("modifier").getAsString();
+                
+                switch (modifier) {
+                    case "*":
+                        return new P_Mod(subPath, 0, -1);  // ZeroOrMore
+                    case "+":
+                        return new P_Mod(subPath, 1, -1);  // OneOrMore
+                    case "?":
+                        return new P_Mod(subPath, 0, 1);   // ZeroOrOne
+                    case "custom":
+                        long min = pathJson.get("min").getAsLong();
+                        long max = pathJson.get("max").getAsLong();
+                        return new P_Mod(subPath, min, max);
+                    default:
+                        throw new RuntimeException("Unknown path modifier: " + modifier);
+                }
+                
+            case "inverse":
+                // 逆方向パス (^)
+                Path invSubPath = reconstructPath(pathJson.getAsJsonObject("subPath"));
+                return new P_Inverse(invSubPath);
+                
+            case "seq":
+                // シーケンス (/)
+                Path left = reconstructPath(pathJson.getAsJsonObject("left"));
+                Path right = reconstructPath(pathJson.getAsJsonObject("right"));
+                return new P_Seq(left, right);
+                
+            case "alt":
+                // 選択 (|)
+                Path altLeft = reconstructPath(pathJson.getAsJsonObject("left"));
+                Path altRight = reconstructPath(pathJson.getAsJsonObject("right"));
+                return new P_Alt(altLeft, altRight);
+                
+            default:
+                throw new RuntimeException("Unknown path type: " + type);
+        }
     }
 
     /**
@@ -224,32 +299,23 @@ public class SparqlAstSerializer {
      * FILTERノードを再構築
      */
     private static ElementFilter reconstructFilter(JsonObject node) {
-        // FILTER の式は複雑なため、ここでは文字列として保存されたものを使用
-        // 実際には、式を完全に再構築する必要があるが、簡易実装として文字列パースを試みる
+        // FILTER の式はS式形式（Lisp形式）で保存されているので、SSE.parseExpr() を使用
         if (node.has("expression")) {
             String exprString = node.get("expression").getAsString();
-            // TODO: 式の完全な再構築が必要な場合はここを拡張
-            // 現状はJenaのパーサーを利用して簡易的に処理
+            
             try {
-                // ダミーのQueryを作成して式をパース
-                String dummyQuery = "SELECT * WHERE { FILTER(" + exprString + ") }";
-                Query q = QueryFactory.create(dummyQuery);
-                Element pattern = q.getQueryPattern();
-                // パターンからFILTERを抽出
-                if (pattern instanceof ElementGroup) {
-                    ElementGroup eg = (ElementGroup) pattern;
-                    for (Element e : eg.getElements()) {
-                        if (e instanceof ElementFilter) {
-                            return (ElementFilter) e;
-                        }
-                    }
-                }
-            } catch (Exception e) {
-                System.err.println("Warning: Could not parse FILTER expression: " + exprString);
+                // S式（例: "(regex ?label \"pattern\" \"i\")"）をJena Exprオブジェクトにパース
+                Expr expr = SSE.parseExpr(exprString);
+                return new ElementFilter(expr);
+            } catch (Exception ex) {
+                System.err.println("Error: Could not parse FILTER expression using SSE: " + exprString);
+                System.err.println("  Error: " + ex.getMessage());
+                throw new RuntimeException("Failed to parse FILTER expression: " + exprString, ex);
             }
         }
-        // パースできなかった場合はダミーのFILTERを返す
-        return new ElementFilter(new ExprVar("dummy"));
+        
+        // ここに到達することは想定外
+        throw new RuntimeException("FILTER node has no expression");
     }
 
     /**

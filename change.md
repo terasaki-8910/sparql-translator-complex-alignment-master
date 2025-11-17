@@ -1519,3 +1519,121 @@ class BidirectionalAlignmentParser:
 **次の目標**: プロパティパス対応で95%超え
 
 **🎉 プロジェクト完了！**
+
+---
+
+## 🔧 タスク6: edoal:or と edoal:compose の複合パターン対応
+
+**実施日**: 2025年11月17日  
+**目的**: EDOALの `edoal:or` (UNION) と `edoal:compose` (Property Chain) の複合パターンに対応し、情報欠落を解消
+
+### 問題の特定
+
+#### 問題1: PathConstructor の無視
+
+**状況**: `_expand_complex_relation` メソッドが `edoal:or` のオペランドとして `IdentifiedEntity` しか処理せず、`PathConstructor` (特に `edoal:compose`) を無視
+
+**影響**: 
+- プロパティ連鎖 (compose) の情報が完全に欠落
+- UNION の一部のブランチが生成されない
+- 変換結果が不完全
+
+#### 問題2: 変数スコープの断絶
+
+**状況**: compose 展開時に中間変数を生成する際、最終的な目的語（Object）を元のクエリの変数に再結合させていない
+
+**影響**:
+- FILTER 句が対象変数を失い、正しく機能しない
+- 元のクエリの変数と変換後の変数が一致しない
+
+### 実施した修正
+
+#### 修正1: `edoal_parser.py` - パース検証ログの追加
+
+**変更内容**:
+- `__init__` メソッドに `verbose` フラグを追加
+- 論理演算子・パス構成子のパース時にデバッグログを出力
+
+**検証結果**:
+- ✅ `edoal:or` が 5 オペランドを正しくパース
+- ✅ `edoal:compose` が 2 プロパティ連鎖を正しくパース
+- ✅ ネスト構造も正常に解析
+
+#### 修正2: `sparql_rewriter.py` - リライターロジックの完全書き換え
+
+**主な変更**:
+
+1. **`__init__` メソッド**: `verbose` フラグ追加
+2. **`_expand_complex_relation` メソッド**: `PathConstructor` の処理分岐を追加
+   - `compose`: プロパティ連鎖を展開
+   - `inverse`: 主語・目的語を入れ替え
+
+3. **新規メソッド `_expand_compose_path`**: プロパティ連鎖の展開
+   - 始点: `subject_node` (元の主語)
+   - 終点: `object_node` (元の目的語)
+   - 中間点: 一時変数を生成
+
+**例**: `compose(p1, p2)` + 主語 `?s`, 目的語 `?o`
+```
+→ ?s p1 ?temp0 . ?temp0 p2 ?o
+```
+
+### 実データ検証
+
+**テストファイル**: `test_rewriter_with_real_data.py` (新規作成)
+
+#### ✅ Test Case 1: FILTER with regex (query_1.sparql)
+- ✅ UNION 構造が生成
+- ✅ compose が展開: `?taxon --prefLabel--> ?temp0 --literalForm--> ?label`
+- ✅ FILTER が元の変数 `?label` を正しく参照
+
+#### ✅ Test Case 2: OR/UNION pattern (query_4.sparql)
+- ✅ UNION 構造が検出
+- ✅ 複数ブランチが生成（単純プロパティ + compose連鎖）
+- ✅ 変数の一貫性を保持
+
+#### ✅ Test Case 3: Compose + Type checking (query_5.sparql)
+- ✅ 一時変数 `variable_temp0`, `variable_temp1` が生成
+- ✅ compose 連鎖が正しく展開
+- ✅ AttributeValueRestriction が FILTER に変換
+
+### 達成した成果
+
+| 問題 | 状態 | 解決方法 |
+|------|------|---------|
+| PathConstructor の無視 | ✅ 解決 | 型チェックによる分岐処理 |
+| 変数スコープの断絶 | ✅ 解決 | 始点・終点を元の変数に固定 |
+| 情報の欠落 | ✅ 解決 | 全オペランドタイプを処理 |
+
+### 新機能
+
+- ✅ `edoal:or` → SPARQL UNION 句
+- ✅ `edoal:compose` → プロパティ連鎖（中間変数使用）
+- ✅ `edoal:inverse` → 主語・目的語の入れ替え
+- ✅ 複合パターン (or + compose) 対応
+- ✅ verbose モード
+
+### 作成したドキュメント
+
+1. **`COMPLETION_REPORT.md`** (11.7 KB) - 詳細な改修レポート
+2. **`IMPLEMENTATION_SUMMARY.md`** (8.8 KB) - 技術的実装詳細
+3. **`README_UPDATE.md`** (4.6 KB) - 使用方法ガイド
+4. **`test_rewriter_with_real_data.py`** (12.5 KB) - 実データ検証
+5. **`test_verbose_mode.py`** (2.8 KB) - verbose モード検証
+
+### コード変更量
+
+| ファイル | 増減 |
+|---------|------|
+| edoal_parser.py | +10行 |
+| sparql_rewriter.py | +100行 |
+| test_rewriter_with_real_data.py | +335行（新規） |
+| test_verbose_mode.py | +75行（新規） |
+| **合計** | +520行 |
+
+---
+
+**実施日**: 2025年11月17日  
+**状態**: ✅ **完了**  
+**品質**: ✅ **実データで検証済み**
+
