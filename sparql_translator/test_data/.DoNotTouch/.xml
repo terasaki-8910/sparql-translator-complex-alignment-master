@@ -1,3 +1,17 @@
 <Cell rdf:about="Chairman"> <entity1> <edoal:Class rdf:about="&cmt;Chairman" /> </entity1> <entity2> <edoal:Class> <edoal:or rdf:parseType="Collection"> <edoal:Class rdf:about="&ekaw;Demo_Chair" /> <edoal:Class rdf:about="&ekaw;OC_Chair" /> <edoal:Class rdf:about="&ekaw;PC_Chair" /> <edoal:Class rdf:about="&ekaw;Session_Chair" /> <edoal:Class rdf:about="&ekaw;Tutorial_Chair" /> <edoal:Class rdf:about="&ekaw;Workshop_Chair" /> </edoal:or> </edoal:Class> </entity2> <measure rdf:datatype="&xsd;float">1.0</measure> <relation>Equivalence</relation> </Cell>
 
 <Cell rdf:about="Species"> <entity1><edoal:Class rdf:about="&irstea;SpecyRank"/></entity1> <entity2> <edoal:Class> <edoal:and rdf:parseType="Collection"> <edoal:Class rdf:about="&dbo;Species"/> <edoal:AttributeOccurenceRestriction> <edoal:onAttribute> <edoal:Relation rdf:about="&dbo;genus"/> </edoal:onAttribute> <edoal:comparator rdf:resource="&edoal;greater-than"/> <edoal:value>0</edoal:value> </edoal:AttributeOccurenceRestriction> </edoal:and> </edoal:Class> </entity2> <measure rdf:datatype='&xsd;float'>1.</measure> <relation>SubsumedBy</relation> </Cell>
+
+<Cell rdf:about="prefVernacularName"> <entity1> <edoal:Property rdf:about="&irstea;prefVernacularName"/> </entity1> <entity2> <edoal:Property> <edoal:or rdf:parseType="Collection"> <edoal:Property rdf:about="&skos;prefLabel"/> <edoal:Property> <edoal:compose rdf:parseType="Collection"> <edoal:Relation rdf:about="&skosxl;prefLabel"/> <edoal:Property rdf:about="&skosxl;literalForm"/> </edoal:compose> </edoal:Property> </edoal:or> </edoal:Property> </entity2> <measure rdf:datatype="&xsd;float">1.0</measure> <relation>SubsumedBy</relation> </Cell>
+
+
+SELECT DISTINCT ?specy
+WHERE
+{ { {
+?taxon  skos:prefLabel ?label ;
+agro:hasLowerRank ?specy .
+?specy  agronto:hasTaxonomicRank  ?variable_temp4}
+FILTER ( ?variable_temp4 = agrovoc:c_331243 )
+}
+FILTER ( ?dummy )
+}

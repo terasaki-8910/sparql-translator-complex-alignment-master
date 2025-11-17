@@ -6,6 +6,11 @@ from ..parser.edoal_parser import (
 )
 from ..common.logger import get_logger
 
+"""
+タスク：クエリの変換パターンを関数に落とし込む
+
+"""
+
 class SparqlRewriter(AstWalker):
     """
     アラインメント情報に基づいてSPARQL ASTを書き換える。
