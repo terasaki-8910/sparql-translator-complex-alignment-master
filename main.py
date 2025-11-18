@@ -22,7 +22,6 @@ AST ➡︎ SPARQL をPythonで行うのではなく、Jenaを使って行い、�
 # ============================================================
 
 # geminiのAPIキー、無料版
-GEMINI_API_KEY = 'AIzaSyDm57Vs62Fvta9wUbRkPf1hx5qJNiyT2Dk'
 
 # LLM評価機能のオン/オフ
 ENABLE_LLM_EVALUATION = True
