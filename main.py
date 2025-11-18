@@ -11,7 +11,7 @@ from sparql_translator.src.parser.sparql_ast_parser import SparqlAstParser
 from sparql_translator.src.rewriter.sparql_rewriter import SparqlRewriter
 from sparql_translator.src.rewriter.ast_serializer import AstSerializer
 from sparql_translator.src.common.logger import get_logger
-
+from dotenv import load_dotenv
 """
 タスク
 AST ➡︎ SPARQL をPythonで行うのではなく、Jenaを使って行い、その結果をPythonで受け取るように変更する。
@@ -22,7 +22,8 @@ AST ➡︎ SPARQL をPythonで行うのではなく、Jenaを使って行い、�
 # ============================================================
 
 # geminiのAPIキー、無料版
-GEMINI_API_KEY = 'AIzaSyDm57Vs62Fvta9wUbRkPf1hx5qJNiyT2Dk'
+load_dotenv()
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 
 # LLM評価機能のオン/オフ
 ENABLE_LLM_EVALUATION = True

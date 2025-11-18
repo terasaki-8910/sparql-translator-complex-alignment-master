@@ -12,8 +12,11 @@ Gemini API接続テストプログラム
 import json
 import google.generativeai as genai
 
+import os
+from dotenv import load_dotenv
+load_dotenv()
 # APIキー
-GEMINI_API_KEY = 'AIzaSyDm57Vs62Fvta9wUbRkPf1hx5qJNiyT2Dk'
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 
 def test_api_configuration():
     """APIの設定をテスト"""
