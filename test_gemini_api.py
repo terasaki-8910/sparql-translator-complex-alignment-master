@@ -13,7 +13,6 @@ import json
 import google.generativeai as genai
 
 # APIキー
-GEMINI_API_KEY = 'AIzaSyDm57Vs62Fvta9wUbRkPf1hx5qJNiyT2Dk'
 
 def test_api_configuration():
     """APIの設定をテスト"""
