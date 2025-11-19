@@ -1,5 +1,0 @@
-PREFIX gbo: <http://gbo#>
-
-SELECT ?x WHERE {
-  ?x a gbo:Program .
-}

@@ -1,8 +1,0 @@
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX ontobase:<http://cmt#>
-
-SELECT ?author WHERE
-{
-?papier a ontobase:PaperFullVersion.
-?papier ontobase:hasAuthor ?author.
-}

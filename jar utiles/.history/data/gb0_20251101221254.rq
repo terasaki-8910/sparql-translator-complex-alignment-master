@@ -1,3 +1,0 @@
-SELECT ?x WHERE {
-  ?x a type:Place .
-}

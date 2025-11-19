@@ -1,6 +1,0 @@
-"parent"
-
-
-
-No result because even though:    dbr:Wheat dbo:Kingdom dbr:Plant is in DBpedia KB.
-dbr:Plant is not a dbo:Species (equiv. Taxon) in the KB while this specification was given in the alignments.

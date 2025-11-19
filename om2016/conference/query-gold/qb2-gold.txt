@@ -1,6 +1,0 @@
-PREFIX :<http://cmt#>
-
-SELECT ?author WHERE {
-?papier a :PaperFullVersion.
-?author :writePaper ?papier.
-}

@@ -1,0 +1,73 @@
+# Python関連
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDEとエディタ関連
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# プロジェクト固有の履歴ファイル
+sparql_translator/.history
+.history
+
+# ログファイル
+sparql_translator/log
+*.log
+logs/
+
+# 実行結果ファイル
+translation_results*.csv
+results/
+output/
+*_alignment_comparison.csv
+
+# アーカイブフォルダ
+archived/
+
+# 環境変数ファイル
+.env
+.env.local
+.env.*.local
+
+# Jupyter Notebook関連
+.ipynb_checkpoints
+
+# キャッシュとテンポラリファイル
+*.cache
+.cache/
+tmp/
+temp/
+
+# カバレッジレポート
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover

@@ -1,2 +1,0 @@
- "parent" ,
- "urn:absolute:ontology.irstea.fr/agronomicTaxon/ressource/goldStandard#plantae" ,

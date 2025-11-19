@@ -14,7 +14,10 @@ from sparql_translator.src.common.logger import get_logger
 from dotenv import load_dotenv
 """
 タスク
-AST ➡︎ SPARQL をPythonで行うのではなく、Jenaを使って行い、その結果をPythonで受け取るように変更する。
+done: AST ➡︎ SPARQL をPythonで行うのではなく、Jenaを使って行い、その結果をPythonで受け取るように変更する。
+インスタンス処理のアルゴリズム：現状パススルー
+UNIONクエリの分割
+Word2Vec等を使った曖昧マッチング
 """
 
 # ============================================================
@@ -26,7 +29,7 @@ load_dotenv()
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 
 # LLM評価機能のオン/オフ
-ENABLE_LLM_EVALUATION = True
+ENABLE_LLM_EVALUATION = False
 
 # テストデータのルートディレクトリ（相対パスまたは絶対パス）
 TEST_DATA_DIR = 'sparql_translator/test_data'

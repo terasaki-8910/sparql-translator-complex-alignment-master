@@ -1,9 +1,0 @@
-PREFIX :<http://confOf#>
-
-SELECT ?person WHERE
-{
- ?person :earlyRegistration true.
- ?person :writes ?papier.
-  ?papier a :Paper.
- 
-}

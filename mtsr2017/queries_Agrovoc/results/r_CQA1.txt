@@ -1,5 +1,0 @@
-parent
-http://aims.fao.org/aos/agrovoc/c_330074
-
-Nothing found when label was "wheat" so label "triticum" used instead.
-c_330074 = Plantae

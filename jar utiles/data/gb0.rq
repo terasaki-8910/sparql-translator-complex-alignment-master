@@ -1,6 +1,0 @@
-PREFIX gbo: <http://gbo#>
-
-SELECT ?x ?z WHERE {
-  ?x a gbo:Award ;
-    gbo:hasSponsor ?z .
-}
