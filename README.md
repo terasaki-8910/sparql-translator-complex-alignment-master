@@ -8,10 +8,10 @@
 
 ### 対応パターン
 
-✅ **edoal:or (UNION)**: 複数の代替パスを SPARQL UNION 句に変換  
-✅ **edoal:compose (Property Chain)**: プロパティ連鎖を中間変数を使った複数トリプルに展開  
-✅ **edoal:inverse**: プロパティの逆方向パスをサポート  
-✅ **複合パターン**: or の中に compose がネストされた構造も処理可能
+**edoal:or (UNION)**: 複数の代替パスを SPARQL UNION 句に変換  
+**edoal:compose (Property Chain)**: プロパティ連鎖を中間変数を使った複数トリプルに展開  
+**edoal:inverse**: プロパティの逆方向パスをサポート  
+**複合パターン**: or の中に compose がネストされた構造も処理可能
 
 ### 変換例
 
@@ -44,36 +44,6 @@ UNION
 }
 FILTER (regex(?label, "^triticum$", "i"))
 ```
-
-## 使用方法
-
-### 基本的な使用
-
-```python
-from sparql_translator.src.parser.edoal_parser import EdoalParser
-from sparql_translator.src.rewriter.sparql_rewriter import SparqlRewriter
-
-# アラインメントをパース
-parser = EdoalParser('alignment.edoal')
-alignment = parser.parse()
-
-# リライターを作成
-rewriter = SparqlRewriter(alignment)
-
-# ASTを変換
-rewritten_ast = rewriter.walk(original_ast)
-```
-
-### デバッグモード
-
-```python
-# デバッグログを有効化
-parser = EdoalParser('alignment.edoal', verbose=True)
-rewriter = SparqlRewriter(alignment, verbose=True)
-```
-
-## テスト
-
 ### 検証済みデータセット
 
 - agronomic-voc (農学語彙)
@@ -84,12 +54,6 @@ rewriter = SparqlRewriter(alignment, verbose=True)
 ### テストの実行
 
 ```bash
-# 実データを使った検証
-python3 test_rewriter_with_real_data.py
-
-# verboseモードのテスト
-python3 test_verbose_mode.py
-
 # 全データセットでの実行
 python3 main.py
 ```
