@@ -32,7 +32,7 @@ GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 ENABLE_LLM_EVALUATION = False
 
 # テストデータのルートディレクトリ（相対パスまたは絶対パス）
-TEST_DATA_DIR = 'test_data'
+TEST_DATA_DIR = 'data/alignment'
 
 # 処理対象のデータセットリスト（空の場合は自動検出）
 # 例: ['conference', 'taxons', 'agro-db', 'agronomic-voc']
