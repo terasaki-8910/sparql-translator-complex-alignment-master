@@ -76,7 +76,7 @@ if __name__ == '__main__':
     current_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.abspath(os.path.join(current_dir, '..', '..', '..'))
     
-    test_sparql_file = os.path.join(project_root, 'jar utiles/data/agro-db/IN1.sparql')
+    test_sparql_file = os.path.join(project_root, 'test_data/agro-db/queries/query_1.sparql')
 
     print(f"Project Root: {project_root}")
     print(f"Parsing SPARQL file: {test_sparql_file}")

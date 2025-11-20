@@ -49,9 +49,9 @@ public class SparqlAstParser {
 
             // クエリタイプを取得
             String queryType = query.isSelectType() ? "SELECT" :
-                              query.isConstructType() ? "CONSTRUCT" :
-                              query.isDescribeType() ? "DESCRIBE" :
-                              query.isAskType() ? "ASK" : "UNKNOWN";
+                                query.isConstructType() ? "CONSTRUCT" :
+                                query.isDescribeType() ? "DESCRIBE" :
+                                query.isAskType() ? "ASK" : "UNKNOWN";
 
             // DISTINCT フラグを取得
             Boolean isDistinct = query.isDistinct();

@@ -518,10 +518,10 @@ if __name__ == '__main__':
 
     # デフォルトのテストファイルをリストアップ
     test_files = [
-        "/Users/masa669/Documents/linkeddata/sparql-translator-complex-alignment-master/sparql_translator/test_data/agro-db/alignment/alignment.edoal",
-        "/Users/masa669/Documents/linkeddata/sparql-translator-complex-alignment-master/sparql_translator/test_data/agronomic-voc/alignment/alignment.edoal",
-        "/Users/masa669/Documents/linkeddata/sparql-translator-complex-alignment-master/sparql_translator/test_data/conference/alignment/alignment.edoal",
-        "/Users/masa669/Documents/linkeddata/sparql-translator-complex-alignment-master/sparql_translator/test_data/taxons/alignment/alignment.edoal"
+        "test_data/agro-db/alignment/alignment.edoal",
+        "test_data/conference/alignment/alignment.edoal",
+        "test_data/taxons/alignment/alignment.edoal",
+        "test_data/agronomic-voc/alignment/alignment.edoal"
     ]
 
     if len(sys.argv) > 1:

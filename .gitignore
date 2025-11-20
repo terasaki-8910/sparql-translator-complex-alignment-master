@@ -71,3 +71,6 @@ htmlcov/
 .coverage.*
 coverage.xml
 *.cover
+
+# テスト出力
+res/

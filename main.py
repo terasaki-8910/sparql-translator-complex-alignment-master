@@ -32,18 +32,18 @@ GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 ENABLE_LLM_EVALUATION = False
 
 # テストデータのルートディレクトリ（相対パスまたは絶対パス）
-TEST_DATA_DIR = 'sparql_translator/test_data'
+TEST_DATA_DIR = 'test_data'
 
 # 処理対象のデータセットリスト（空の場合は自動検出）
 # 例: ['conference', 'taxons', 'agro-db', 'agronomic-voc']
-DATASET_NAMES = []
+DATASET_NAMES = ['stresstest_cmt']
 
 # 出力CSVファイル名のプレフィックス
 OUTPUT_CSV_PREFIX = 'translation_results'
 
 # アラインメントファイルのディレクトリ名とファイル名
 ALIGNMENT_DIR_NAME = 'alignment'
-ALIGNMENT_FILE_NAME = 'alignment.edoal'
+ALIGNMENT_FILE_NAME = '*.edoal'  # .edoal拡張子を持つファイルを自動検出
 
 # クエリファイルのディレクトリ名
 QUERIES_DIR_NAME = 'queries'
@@ -269,21 +269,37 @@ def process_dataset(dataset_path, sparql_parser, project_root,
         sparql_parser: SPARQLパーサーインスタンス
         project_root: プロジェクトのルートパス
         alignment_dir_name: アラインメントディレクトリ名
-        alignment_file_name: アラインメントファイル名
+        alignment_file_name: アラインメントファイル名（ワイルドカード対応）
         queries_dir_name: クエリディレクトリ名
         expected_outputs_dir_name: 期待される出力ディレクトリ名
     
     Returns:
         変換結果のリスト
     """
-    alignment_file = os.path.join(dataset_path, alignment_dir_name, alignment_file_name)
+    alignment_dir = os.path.join(dataset_path, alignment_dir_name)
     queries_dir = os.path.join(dataset_path, queries_dir_name)
     expected_outputs_dir = os.path.join(dataset_path, expected_outputs_dir_name)
 
-    if not os.path.exists(alignment_file) or not os.path.exists(queries_dir):
+    # アラインメントファイルを検出
+    alignment_file = None
+    if os.path.exists(alignment_dir):
+        if alignment_file_name == '*.edoal':
+            # .edoal拡張子を持つファイルを検索
+            for filename in os.listdir(alignment_dir):
+                if filename.endswith('.edoal'):
+                    alignment_file = os.path.join(alignment_dir, filename)
+                    break
+        else:
+            # 特定のファイル名が指定されている場合
+            potential_file = os.path.join(alignment_dir, alignment_file_name)
+            if os.path.exists(potential_file):
+                alignment_file = potential_file
+    
+    if not alignment_file or not os.path.exists(queries_dir):
         return []
 
     print(f"\n--- Processing dataset: {os.path.basename(dataset_path)} ---")
+    print(f"Using alignment file: {os.path.basename(alignment_file)}")
     
     try:
         edoal_parser = EdoalParser(alignment_file)
