@@ -1,0 +1,12 @@
+SELECT distinct ?s ?o WHERE {  
+?s <http://ekaw#partOfEvent> ?o .  
+?o a <http://ekaw#Conference>.
+{
+?s a <http://ekaw#Track> .
+}union{
+?s a <http://ekaw#Tutorial> .
+}union{
+?s a <http://ekaw#Workshop> .
+}
+
+ }

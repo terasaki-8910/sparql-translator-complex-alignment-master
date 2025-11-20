@@ -1,0 +1,5 @@
+SELECT distinct ?s ?o WHERE {  
+?o <http://edas#hasRelatedDocument> ?s . 
+?o <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://edas#Reviewer> .  
+?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://edas#Review> .  
+ }

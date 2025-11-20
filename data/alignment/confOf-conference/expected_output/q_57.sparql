@@ -1,0 +1,4 @@
+SELECT distinct ?s ?o WHERE {  
+?o a <http://ekaw#Abstract> .  
+?s <http://ekaw#presentationOfPaper> ?o .
+ }

@@ -38,6 +38,11 @@ TEST_DATA_DIR = 'data/alignment'
 # 例: ['conference', 'taxons', 'agro-db', 'agronomic-voc']
 DATASET_NAMES = ['stresstest_cmt']
 
+# 排除対象のデータセットリスト（空の場合はなし）
+# 例: ['old_dataset', 'broken_dataset']
+EXCLUDE_DATASET_NAMES = []
+
+
 # 出力CSVファイル名のプレフィックス
 OUTPUT_CSV_PREFIX = 'translation_results'
 
@@ -387,7 +392,7 @@ def find_datasets(test_data_dir, alignment_dir_name=ALIGNMENT_DIR_NAME, queries_
     return datasets
 
 
-def get_dataset_paths(project_root, test_data_dir, dataset_names, 
+def get_dataset_paths(project_root, test_data_dir, dataset_names, exclude_dataset_names=None,
                       alignment_dir_name=ALIGNMENT_DIR_NAME,
                       queries_dir_name=QUERIES_DIR_NAME):
     """
@@ -397,6 +402,7 @@ def get_dataset_paths(project_root, test_data_dir, dataset_names,
         project_root: プロジェクトのルートパス
         test_data_dir: テストデータのディレクトリ（相対パスまたは絶対パス）
         dataset_names: データセット名のリスト（空の場合は自動検出）
+        exclude_dataset_names: 排除するデータセット名のリスト（オプション）
         alignment_dir_name: アラインメントディレクトリ名
         queries_dir_name: クエリディレクトリ名
     
@@ -413,10 +419,18 @@ def get_dataset_paths(project_root, test_data_dir, dataset_names,
         print(f"Warning: Test data directory not found: {abs_test_data_dir}")
         return []
     
+    # 排除リストを初期化
+    if exclude_dataset_names is None:
+        exclude_dataset_names = []
+    
     # データセット名が指定されている場合
     if dataset_names:
         dataset_paths = []
         for name in dataset_names:
+            # 排除リストにあればスキップ
+            if name in exclude_dataset_names:
+                print(f"Skipping excluded dataset: {name}")
+                continue
             path = os.path.join(abs_test_data_dir, name)
             if os.path.exists(path):
                 dataset_paths.append(path)
@@ -425,7 +439,20 @@ def get_dataset_paths(project_root, test_data_dir, dataset_names,
         return dataset_paths
     
     # データセット名が指定されていない場合は自動検出
-    return find_datasets(abs_test_data_dir, alignment_dir_name, queries_dir_name)
+    all_datasets = find_datasets(abs_test_data_dir, alignment_dir_name, queries_dir_name)
+    
+    # 排除リストに基づいてフィルタリング
+    if exclude_dataset_names:
+        filtered_datasets = []
+        for dataset_path in all_datasets:
+            dataset_name = os.path.basename(dataset_path)
+            if dataset_name in exclude_dataset_names:
+                print(f"Skipping excluded dataset: {dataset_name}")
+            else:
+                filtered_datasets.append(dataset_path)
+        return filtered_datasets
+    
+    return all_datasets
 
 
 def write_results_to_csv(results, output_csv_file):
@@ -492,6 +519,7 @@ def main():
         project_root, 
         TEST_DATA_DIR, 
         DATASET_NAMES,
+        EXCLUDE_DATASET_NAMES,
         ALIGNMENT_DIR_NAME,
         QUERIES_DIR_NAME
     )

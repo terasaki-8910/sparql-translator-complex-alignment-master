@@ -1,0 +1,6 @@
+PREFIX gbo: <http://gbo#>
+SELECT ?vessel ?operator
+WHERE {
+	?vessel a gbo:Vessel .
+	OPTIONAL { ?vessel gbo:hasOperator ?operator . }
+}

@@ -1,0 +1,7 @@
+PREFIX gbo: <http://gbo#>
+SELECT DISTINCT ?email
+WHERE {
+	?person a gbo:Person ;
+		gbo:hasEmailAddress ?email .
+}
+ORDER BY ?email

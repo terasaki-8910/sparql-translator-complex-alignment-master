@@ -1,0 +1,8 @@
+SELECT distinct ?s ?o WHERE {  
+{?s <http://edas#hasRelatedPaper> ?o .  }
+union{
+?s <http://edas#hasRelatedDocument> ?o . 
+?o a <http://edas#Review> .
+?s a <http://edas#Possible_Reviewer> . }
+
+ }

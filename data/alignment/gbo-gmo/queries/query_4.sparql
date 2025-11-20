@@ -1,0 +1,7 @@
+PREFIX gbo: <http://gbo#>
+SELECT ?agent
+WHERE {
+	{ ?cruise gbo:hasChiefScientist ?agent . }
+	UNION
+	{ ?cruise gbo:hasCoChiefScientist ?agent . }
+}

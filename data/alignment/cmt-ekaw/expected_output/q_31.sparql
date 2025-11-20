@@ -1,0 +1,5 @@
+SELECT distinct ?s ?o WHERE {  
+?s <http://conference#has_a_review> ?o2 . ?o2 <http://conference#has_authors> ?o .  
+?o <http://conference#was_a_member_of> ?o3. ?o3 a <http://conference#Program_committee> .
+
+ }

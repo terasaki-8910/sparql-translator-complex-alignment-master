@@ -11,3 +11,4 @@ SELECT DISTINCT ?x
 	?x dbo:genus ?variable_temp0. 
 
 }
+´

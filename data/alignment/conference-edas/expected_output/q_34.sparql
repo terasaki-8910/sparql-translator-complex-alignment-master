@@ -1,0 +1,7 @@
+SELECT distinct ?s WHERE {  
+{?s <http://ekaw#reviewerOfPaper> ?o2 . }
+union{
+?o2 <http://ekaw#reviewOfPaper> ?o3 . 
+?o2 <http://ekaw#reviewWrittenBy> ?s . 
+}
+ }

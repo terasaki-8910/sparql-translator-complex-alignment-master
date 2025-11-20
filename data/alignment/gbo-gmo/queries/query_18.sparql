@@ -1,0 +1,8 @@
+PREFIX gbo: <http://gbo#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?dive ?depth
+WHERE {
+	?dive a gbo:Dive ;
+		gbo:hasMaxDepth ?depth .
+	FILTER (?depth > 1000)
+}

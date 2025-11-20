@@ -1,0 +1,7 @@
+PREFIX gbo: <http://gbo#>
+SELECT ?dataset
+WHERE {
+	?dataset a gbo:Dataset .
+	OPTIONAL { ?dataset gbo:hasRepository ?repo . }
+	FILTER (!bound(?repo))
+}

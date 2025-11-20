@@ -1,0 +1,7 @@
+PREFIX gbo: <http://gbo#>
+SELECT ?cruise ?participant ?role
+WHERE {
+	?cruise gbo:hasParticipant ?participation .
+	?participation gbo:hasRoleType ?role ;
+		gbo:isPerformedBy ?participant .
+}

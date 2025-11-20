@@ -1,0 +1,7 @@
+PREFIX gbo: <http://gbo#>
+SELECT ?person ?familyName
+WHERE {
+	?person a gbo:Person ;
+		gbo:hasFamilyName ?familyName .
+	FILTER regex(?familyName, "Smith", "i")
+}

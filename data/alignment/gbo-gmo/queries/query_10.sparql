@@ -1,0 +1,10 @@
+PREFIX gbo: <http://gbo#>
+SELECT ?cruise ?startPortName ?endPortName
+WHERE {
+	?cruise gbo:hasStartPortCall ?startCall ;
+		gbo:hasEndPortCall ?endCall .
+	?startCall gbo:atPort ?startPlace .
+	?endCall gbo:atPort ?endPlace .
+	?startPlace gbo:hasTitle ?startPortName .
+	?endPlace gbo:hasTitle ?endPortName .
+}

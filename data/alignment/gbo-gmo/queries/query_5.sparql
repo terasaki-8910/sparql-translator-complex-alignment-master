@@ -1,0 +1,7 @@
+PREFIX gbo: <http://gbo#>
+SELECT ?program ?sponsor
+WHERE {
+	?program a gbo:Program ;
+		gbo:hasAward ?award .
+	?award gbo:hasSponsor ?sponsor .
+}

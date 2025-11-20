@@ -1,0 +1,8 @@
+PREFIX gbo: <http://gbo#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?cruise ?startDate
+WHERE {
+	?cruise a gbo:Cruise ;
+		gbo:hasStartDate ?startDate .
+	FILTER (?startDate > "2010-01-01T00:00:00"^^xsd:dateTime)
+}

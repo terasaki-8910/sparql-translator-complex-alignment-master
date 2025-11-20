@@ -1,0 +1,10 @@
+SELECT distinct ?s ?o WHERE {  
+?s <http://ekaw#topicCoveredBy> ?o .  
+{ ?o a <http://ekaw#Workshop> . }
+UNION {
+ ?o a <http://ekaw#Track> . 
+}
+UNION {
+ ?o a <http://ekaw#Tutorial> . 
+}
+ }
