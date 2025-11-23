@@ -1,0 +1,8 @@
+SELECT distinct ?s WHERE {  
+{
+?s a <http://ekaw#PC_Chair> .  
+}
+union{
+?s a <http://ekaw#OC_Chair> .  
+}
+ }

@@ -1,0 +1,24 @@
+SELECT distinct ?s ?o WHERE {  
+?s <http://www.w3.org/2000/01/rdf-schema#label> ?o .  
+{
+?s a <http://ekaw#Conference> .
+}
+union{
+?s a <http://ekaw#Conference_Proceedings> .
+}
+union{
+?s a <http://ekaw#Proceedings_Publisher> .
+}
+union{
+?s a <http://ekaw#Research_Topic> .
+}
+union{
+?s a <http://ekaw#Track> .
+}
+union{
+?s a <http://ekaw#Workshop> .
+}
+union{
+?s a <http://ekaw#Tutorial> .
+}
+ }

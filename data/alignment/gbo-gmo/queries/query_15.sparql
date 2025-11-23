@@ -1,0 +1,8 @@
+PREFIX gbo: <http://gbo#>
+SELECT ?digitalObj ?formatType
+WHERE {
+	?digitalObj a gbo:DigitalObject ;
+		gbo:hasFormat ?format .
+	?format gbo:hasFormatType ?formatType .
+	FILTER regex(?formatType, "PDF", "i")
+}

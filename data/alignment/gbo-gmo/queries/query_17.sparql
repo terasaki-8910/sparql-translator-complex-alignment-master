@@ -1,0 +1,8 @@
+PREFIX gbo: <http://gbo#>
+SELECT ?entity ?title
+WHERE {
+	{ ?entity a gbo:Dataset . }
+	UNION
+	{ ?entity a gbo:Document . }
+	?entity gbo:hasTitle ?title .
+}

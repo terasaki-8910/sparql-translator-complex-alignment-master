@@ -1,0 +1,14 @@
+PREFIX irstea: <http://ontology.irstea.fr/AgronomicTaxon#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+
+
+SELECT DISTINCT ?x
+ WHERE {
+	?x rdf:type dbo:Species. 
+	?x dbo:genus ?variable_temp0. 
+
+}
+´

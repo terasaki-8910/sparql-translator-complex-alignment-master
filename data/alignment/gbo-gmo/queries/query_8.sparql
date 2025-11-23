@@ -1,0 +1,7 @@
+PREFIX gbo: <http://gbo#>
+SELECT ?dive ?submersible ?pilot
+WHERE {
+	?dive a gbo:Dive ;
+		gbo:hasSubmersible ?submersible ;
+		gbo:hasPilot ?pilot .
+}

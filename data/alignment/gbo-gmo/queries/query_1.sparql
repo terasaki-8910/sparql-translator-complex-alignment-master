@@ -1,0 +1,7 @@
+PREFIX gbo: <http://gbo#>
+SELECT ?cruise ?vesselName
+WHERE {
+	?cruise a gbo:Cruise ;
+		gbo:hasVessel ?vessel .
+	?vessel gbo:hasTitle ?vesselName .
+}

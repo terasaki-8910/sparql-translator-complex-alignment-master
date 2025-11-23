@@ -1,0 +1,8 @@
+{
+  "name": "gbo-gmo",
+  "alignment_file": "data/alignment/ekaw-edas/alignment/gbo-gmo.edoal",
+  "queries_dir": "data/alignment/ekaw-edas/queries/",
+  "expected_output_dir": "",
+  "datasets": [],
+  "endpoints": {}
+}

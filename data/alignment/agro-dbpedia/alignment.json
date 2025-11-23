@@ -1,0 +1,10 @@
+{
+  "name": "agro-dbpedia",
+  "alignment_file": "data/alignment/agro-dbpedia/alignment/alignment.edoal",
+  "queries_dir": "data/alignment/agro-dbpedia/queries/",
+  "expected_output_dir": "",
+  "datasets": [],
+  "endpoints": {
+    "dbpedia": "http://dbpedia.org/sparql"
+  }
+}

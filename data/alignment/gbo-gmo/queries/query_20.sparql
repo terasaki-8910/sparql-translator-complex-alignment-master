@@ -1,0 +1,7 @@
+PREFIX gbo: <http://gbo#>
+SELECT ?person ?document ?publisher
+WHERE {
+	?document a gbo:Document ;
+		gbo:hasAuthor ?person ;
+		gbo:hasPublisher ?publisher .
+}

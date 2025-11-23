@@ -1,0 +1,10 @@
+SELECT distinct ?s ?o WHERE {  
+?s <http://confOf#starts_on> ?o . 
+?s a <http://confOf#Event> .
+minus{
+?s a <http://confOf#Conference> .
+}
+minus{
+?s a <http://confOf#Administrative_event> .
+}
+ }

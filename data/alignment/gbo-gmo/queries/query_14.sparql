@@ -1,0 +1,7 @@
+PREFIX gbo: <http://gbo#>
+SELECT ?person ?affiliation
+WHERE {
+	?person a gbo:Person ;
+		gbo:hasAffiliation ?affiliation .
+	?affiliation a gbo:Organization .
+}

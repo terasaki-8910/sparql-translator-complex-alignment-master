@@ -1,0 +1,7 @@
+PREFIX gbo: <http://gbo#>
+SELECT ?sample ?feature
+WHERE {
+	?sample a gbo:PhysicalSample ;
+		gbo:originatesFrom ?feature .
+	?feature a gbo:Feature .
+}

@@ -1,0 +1,9 @@
+SELECT distinct ?s WHERE {  
+{
+?s a <http://ekaw#Early-Registered_Participant> .  
+}
+union{
+?s a <http://ekaw#Late-Registered_Participant> .  
+
+}
+ }

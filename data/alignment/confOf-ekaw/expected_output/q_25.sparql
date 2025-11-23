@@ -1,0 +1,5 @@
+SELECT distinct ?s ?o WHERE {  
+?o <http://edas#relatedToPaper> ?o2 .
+?o2 <http://edas#relatesTo> ?s .
+?s a <http://edas#Conference> .
+ }

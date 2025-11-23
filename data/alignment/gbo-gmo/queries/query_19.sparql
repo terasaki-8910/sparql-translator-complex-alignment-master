@@ -1,0 +1,6 @@
+PREFIX gbo: <http://gbo#>
+SELECT ?sample ?stratUnit
+WHERE {
+	?sample gbo:hasStratigraphicUnit ?stratUnit .
+	?stratUnit a gbo:StratigraphicUnit .
+}

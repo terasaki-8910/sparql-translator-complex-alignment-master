@@ -1,0 +1,6 @@
+SELECT distinct ?s ?o WHERE {  
+?s <http://ekaw#heldIn> ?o .  
+minus {
+?s a <http://ekaw#Conference> .
+}
+ }

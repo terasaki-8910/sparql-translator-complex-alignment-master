@@ -1,0 +1,5 @@
+SELECT distinct ?s ?o WHERE {  
+?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ekaw#Conference> . 
+?s <http://ekaw#heldIn> ?o2 .
+?o2 <http://www.w3.org/2000/01/rdf-schema#label> ?o.
+ }

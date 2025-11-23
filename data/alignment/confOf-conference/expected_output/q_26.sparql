@@ -1,0 +1,10 @@
+SELECT distinct ?s WHERE {  
+{
+?s a <http://ekaw#Track> .
+}union{
+?s a <http://ekaw#Tutorial> .
+}union{
+?s a <http://ekaw#Workshop> .
+ }
+
+}

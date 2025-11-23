@@ -1,0 +1,11 @@
+{
+  "name": "taxons",
+  "alignment_file": "data/alignment/taxons/alignment/alignment.edoal",
+  "queries_dir": "data/alignment/taxons/queries/",
+  "expected_output_dir": "",
+  "datasets": [],
+  "endpoints": {
+    "uniprot": "https://sparql.uniprot.org/sparql",
+    "dbpedia": "http://dbpedia.org/sparql"
+  }
+}

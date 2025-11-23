@@ -26,7 +26,7 @@ load_dotenv()
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 
 # LLM評価機能のオン/オフ
-ENABLE_LLM_EVALUATION = True
+ENABLE_LLM_EVALUATION = False
 
 # テストデータのルートディレクトリ（相対パスまたは絶対パス）
 TEST_DATA_DIR = 'sparql_translator/test_data'
